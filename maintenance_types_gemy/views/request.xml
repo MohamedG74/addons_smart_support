@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_field_name" model="ir.ui.view">
+        <field name="name">newfield.inheritfield</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='request_date']" position="after">
+            <field name="x"  attrs="{'readonly': [('stage_id', '>', '1')]}"/>
+            <field name="details1"/>
+            <field name="html_code1"/>
+            <field name="upload_file1"/>
+            <field name="document_name1"/>
+        </xpath>
+        </field>
+    </record>
+</odoo>

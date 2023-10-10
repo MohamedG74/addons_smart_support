@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_page_contract" model="ir.ui.view">
+        <field name="name">hr.contract.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <notebook>
+                <page id="Contract_new" name="Contract_tab" string="Contract">
+                    <field name="contracto_ids" widget="section_and_note_one2many" mode="tree">
+                        <tree>
+                            <button name="action_view_info" string="View Infos" type="object" class="oe_highlight"/>
+                            <field name="contracto_id"/>
+                            <field name="contract_nams"/>
+                            <field name="doc_name" invisible="1"/>
+                            <field name="upload_doc" filename="doc_name"/>   
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="view_contract_id_form" model="ir.ui.view">
+        <field name="name">contract.data.form</field>
+        <field name="model">contract.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>this create new user</h1>
+                    <group>
+                        <field name="contracto_id"/>
+                        <field name="contract_nams"/>
+                        <field name="doc_name" invisible="1"/>
+                        <field name="upload_doc" filename="doc_name"/>  
+                    </group>
+                </sheet>   
+            </form>
+        </field>
+    </record>
+    
+</odoo>

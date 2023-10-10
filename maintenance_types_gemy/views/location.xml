@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_main_loca_form" model="ir.ui.view">
+        <field name="name">main.location.form</field>
+        <field name="model">main.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                
+                    <group>
+                        <field name = "id_"/>
+                        <field name = "name"/>
+                        <field name = "location_code"/>
+                        <field name = "address"/>
+                        <field name = "type_"/>
+                        <field name = "classify"/>
+                    </group> 
+                </sheet> 
+            </form>
+        </field>
+    </record>
+    <record id="view_main_loca_tree" model="ir.ui.view">
+        <field name="name">main.location.tree</field>
+        <field name="model">main.location</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "id_"/>
+                <field name = "name"/>
+                <field name = "location_code"/>
+                <field name = "type_"/>
+                <field name = "classify"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_main_loc" model="ir.actions.act_window">
+        <field name="name">Maintenance Location</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">main.location</field>
+        <field name="view_mode">tree,form</field>
+    </record> 
+    <menuitem id="menu_main_loc"
+          name="Maintenance Location"
+          parent="maintenance.menu_m_request"
+          action="action_main_loc"
+          sequence="11"/>
+</odoo>
+

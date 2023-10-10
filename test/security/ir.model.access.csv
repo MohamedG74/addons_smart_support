@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+test.access_contract_data,access_contract_data,test.model_contract_data,base.group_user,1,1,1,1

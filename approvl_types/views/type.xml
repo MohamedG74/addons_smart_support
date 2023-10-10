@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_field_test_in_approval" model="ir.ui.view">
+        <field name="name">odoo.test2</field>
+        <field name="model">approval.category</field>
+        <field name="inherit_id" ref="approvals.approval_category_view_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='has_location']" position="after">
+            <field name="test1" widget="radio" options="{'horizontal': true}"/>
+        </xpath>
+        </field>
+    </record>
+    <record id="view_field_test_in_request" model="ir.ui.view">
+        <field name="name">odoo.test4</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+        <field name="arch" type="xml">
+        <sheet>
+            <field name="test2" invisible="1"/>
+        </sheet>
+        <xpath expr="//field[@name='location']" position="after">
+            <field name="test3" attrs="{'invisible':[('test2','==','no')],'required': [('test2','==','required')]}"/>
+        </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mainten.access_maintenance_types,access_maintenance_types,mainten.model_maintenance_types,base.group_user,1,1,1,1
+
+

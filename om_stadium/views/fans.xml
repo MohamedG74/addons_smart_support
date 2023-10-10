@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record id="view_fan_id_form" model="ir.ui.view">
+        <field name="name">fan.id.form</field>
+        <field name="model">fan.id</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>this create new user</h1>
+                    <group>
+                        <field name = "fan_name"/>
+                        <field name = "is_child"/>
+                        <field name = "gender"/>
+                        <field name = "age"/>
+                        <field name = "capital_name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids" options="{'post_refresh':'recipients'}"/>
+                </div>    
+            </form>
+        </field>
+    </record>
+    <record id="view_fan_id_tree" model="ir.ui.view">
+        <field name="name">fan.id.tree</field>
+        <field name="model">fan.id</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "ref"/>
+                <field name = "fan_name"/>
+                <field name = "is_child"/>
+                <field name = "gender"/>
+                <field name = "age"/>
+            </tree>
+        </field>
+    </record> 
+    <record id="view_fan_id_search" model="ir.ui.view">
+        <field name="name">fan.id.search</field>
+        <field name="model">fan.id</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name = "ref"/>
+                <field name = "fan_name"/>
+                <field name = "is_child"/>
+                <field name = "gender"/>
+                <field name = "age"/>
+            </search>
+        </field>
+    </record>               
+    <record id="action_hospital_user" model="ir.actions.act_window">
+        <field name="name">Create Fan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fan.id</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+
+    <record id="action_hospital_fan" model="ir.actions.act_window">
+        <field name="name">View info id</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fan.id</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="om_stadium.view_fan_id_search"/>
+    </record> 
+    <menuitem id="menu_fans"
+          name="Create user"
+          parent="menu_operations"
+          action="action_hospital_user"
+          sequence="10"/>
+    <menuitem id="menu_info"
+          name="View info id"
+          parent="menu_operations"
+          action="action_hospital_fan"
+          sequence="10"/>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+om_stadium.access_fan_id,access_fan_id,om_stadium.model_fan_id,base.group_user,1,1,1,1

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+maintenance_types_gemy.access_maintenance_type,access_maintenance_type,maintenance_types_gemy.model_maintenance_type,base.group_user,1,1,1,1
+maintenance_types_gemy.access_main_location,access_main_location,maintenance_types_gemy.model_main_location,base.group_user,1,1,1,1
