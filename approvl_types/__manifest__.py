@@ -1,5 +1,5 @@
 {
-    'name': 'Approval Types 1',
+    'name': 'Approval changes',
     'version': '16.0.0.0',
     'category': '',
     'summary': '.',
