@@ -10,7 +10,7 @@
     'website': 'https://www.smartsupport.tech',
     'depends':['base','approvals','stock'],
     'data':[
-        'views/type.xml',
+        'views/subject.xml',
     ],
     'installable': True,
     'auto_install': True,
