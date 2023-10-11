@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-maintenance_types.access_maintenance_types,maintenance_types.access_maintenance_types,maintenance_types.model_maintenance_types,base.group_user,1,1,1,1
-
-maintenance_types.access_maintenance_locations,maintenance_types.access_maintenance_locations,maintenance_types.model_maintenance_locations,base.group_user,1,1,1,1
-
-maintenance_types.access_code_data,maintenance_types.access_code_data,maintenance_types.model_code_data,base.group_user,1,1,1,1
