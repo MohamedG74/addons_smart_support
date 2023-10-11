@@ -20,7 +20,7 @@
         </xpath>
         </field>
     </record>
-<!--    kanbantask-->
+<!--kanbantask-->
     <record id="view_field_in_kanban" model="ir.ui.view">
         <field name="name">kanban.view.inherit</field>
         <field name="model">approval.request</field>
@@ -31,7 +31,7 @@
         </xpath>
         </field>
     </record>
-<!--    #task mostafa-->
+
     <record id="view_vate_line" model="ir.ui.view">
         <field name="name">tes</field>
         <field name="model">approval.product.line</field>
