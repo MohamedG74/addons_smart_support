@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fields_in_product" model="ir.ui.view">
+        <field name="name">fields.products</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='product_tooltip']" position="after">
+            <field name="brand"/>
+            <field name="model_number"/>
+        </xpath>
+        </field>
+    </record>
+
+   <record id="view_fields_in_purchase_line" model="ir.ui.view">
+       <field name="name">fields.purchase</field>
+       <field name="model">purchase.order</field>
+       <field name="inherit_id" ref="purchase.purchase_order_form"/>
+       <field name="arch" type="xml">
+       <xpath expr="//field[@name='order_line']//field[@name='name']" position="after">
+            <field name="brand_ids"/>
+            <field name="model_num_ids"/>
+            <field name="cbm_ids"/>
+            <field name="status_ids"/>
+       </xpath>
+       </field>
+   </record>
+</odoo>

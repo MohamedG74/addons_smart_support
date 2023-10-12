@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo> 
     <record id="view_fan_id_form" model="ir.ui.view">
-        <field name="name">fan.id.form</field>
+        <field name="name">name.form</field>
         <field name="model">fan.id</field>
         <field name="arch" type="xml">
             <form>

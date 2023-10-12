@@ -51,10 +51,10 @@
                                    <li>
                                     ID:   <field name = "p_id"/>
                                    </li>
+                                    </strong>
                                     <li>
                                     Name: <field name="p_name"/>
                                     </li>
-                                    </strong>
                                     <li>
                                      Gender:   <field name="gender"/>
                                     </li>
