@@ -8,7 +8,7 @@
 """,
     'author': 'SmartSupport',
     'website': 'https://www.smartsupport.tech',
-    'depends':['base', 'sale_crm','crm'],
+    'depends':['base', 'sale_crm','crm','sale_renting_crm','sale_renting'],
     'data':[
 
         'views/crm_but.xml',
