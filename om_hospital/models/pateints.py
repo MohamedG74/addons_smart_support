@@ -11,7 +11,7 @@ class HospitalPateint(models.Model):
     gender=fields.Selection([('male','Male'),('female','Female'),('others','Others')],string='Gender',tracking=True)
     is_child=fields.Boolean(string="is_child ?",tracking=True)
     age=fields.Integer(string="Age",tracking=True)
-    p_id=fields.Char(string='id',default= lambda self:'New')
+    p_id=fields.Char(string='id',default= lambda self: "New")
     dr_pateint=fields.Many2one('hospital.doctor',string="Doctor")
 
     @api.model_create_multi
