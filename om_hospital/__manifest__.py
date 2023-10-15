@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/pateint.xml',
+        'views/doctor.xml',
     ],
     'installable': True,
     'auto_install': True,

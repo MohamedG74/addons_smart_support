@@ -12,7 +12,7 @@ class HospitalPateint(models.Model):
     is_child=fields.Boolean(string="is_child ?",tracking=True)
     age=fields.Integer(string="Age",tracking=True)
     p_id=fields.Char(string='id',default= lambda self:'New')
-
+    dr_pateint=fields.Many2one('hospital.doctor',string="Doctor")
 
     @api.model_create_multi
     def create(self,vals_list):

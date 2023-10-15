@@ -7,4 +7,9 @@
                     name="Patient"
                     parent="menu_hospital_root"
                     sequence="10"/>
+
+                    <menuitem id="menu_operations_doc"
+                    name="Doctor"
+                    parent="menu_hospital_root"
+                    sequence="10"/>
 </odoo>

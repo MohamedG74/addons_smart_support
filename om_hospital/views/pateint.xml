@@ -11,6 +11,7 @@
                         <field name = "is_child"/>
                         <field name = "gender"/>
                         <field name = "age"/>
+                        <field name = "dr_pateint"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -30,6 +31,7 @@
                 <field name = "is_child"/>
                 <field name = "gender"/>
                 <field name = "age"/>
+                <field name = "dr_pateint"/>
             </tree>
         </field>
     </record>
