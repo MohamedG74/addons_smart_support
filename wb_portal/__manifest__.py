@@ -14,13 +14,10 @@
     ],
 
     'assets':{
-
-    # 'web.assets_qweb': [
-    #       'wb_portal/static/src/js/wb_sample_button.xml',
-    #     ],
         'point_of_sale.assets':[
-          'wb_portal/static/src/xml/wb_sample_button.xml',
-          'wb_portal/static/src/js/wb_sample_button.js',
+          'wb_portal/static/src//**/*.xml',
+          'wb_portal/static/src/**/*.js',
+        
         ]
     }
     
