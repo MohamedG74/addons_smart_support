@@ -31,12 +31,13 @@ odoo.define("wb_portal.WBSampleButton",function(require){
                                 title:"Choose language",
                                 list:multi_lang_list
                        })
+                       if(multi_lang_list[1]){
                        console.log(confirmed,SelectedOption);
                        this.showPopup("ErrorPopup",{
                         title:"You should enter product",
                         body:"This is an maessage "
-
                        })
+                }
 
         }// end of event
 }//end of button class

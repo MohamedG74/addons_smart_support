@@ -3,7 +3,7 @@
     <t t-name="WBSampleButton" owl="1">
         <div class="control-button">
             <i class="fa fa-superpowers" role="img" aria-label="WB Sample buuton" title="WB Sample buuton"/>
-            Sample Button
+            عرض الطلبات
         </div>
     </t>
 </templates>

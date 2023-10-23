@@ -3,7 +3,7 @@
     <t t-name="WBClearAllButton" owl="1">
         <div class="control-button">
             <i class="fa fa-remove" role="img" aria-label="WB Clear buuton" title="WB Clear buuton"/>
-            Clear Button
+            الاسترداد
         </div>
     </t>
 </templates>

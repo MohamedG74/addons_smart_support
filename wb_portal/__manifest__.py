@@ -8,15 +8,18 @@
 """,
     'author': 'SmartSupport',
     'website': 'https://www.smartsupport.tech',
-    'depends':['base','point_of_sale'],
+    'depends':['base','web','point_of_sale'],
     'data':[
         
     ],
 
     'assets':{
         'point_of_sale.assets':[
-          'wb_portal/static/src//**/*.xml',
+          'wb_portal/static/src/pos/**/*.xml',
+          'wb_portal/static/src/pos/**/*.js',
+          'wb_portal/static/src/pos/**/*.scss',
           'wb_portal/static/src/**/*.js',
+          'wb_portal/static/src/**/*.xml',
         
         ]
     }
