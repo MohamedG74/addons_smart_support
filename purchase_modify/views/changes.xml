@@ -17,11 +17,11 @@
        <field name="model">purchase.order</field>
        <field name="inherit_id" ref="purchase.purchase_order_form"/>
        <field name="arch" type="xml">
-       <xpath expr="//field[@name='order_line']//field[@name='name']" position="after">
-            <field name="brand_ids"/>
-            <field name="model_num_ids"/>
-            <field name="cbm_ids"/>
-            <field name="status_ids"/>
+       <xpath expr="//field[@name='order_line']//field[@name='price_unit']" position="after">
+            <field name="disc_ids"/>
+            <field name="untaxed_ids" readonly="1"/>
+            <field name="disc_amount_ids" readonly="1"/>
+            <field name="custom_ids" readonly="1"/>
        </xpath>
        </field>
    </record>
