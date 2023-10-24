@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_fields_in_product" model="ir.ui.view">
-        <field name="name">fields.products</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_normal_form_view"/>
-        <field name="arch" type="xml">
-        <xpath expr="//field[@name='product_tooltip']" position="after">
-            <field name="brand"/>
-            <field name="model_number"/>
-        </xpath>
-        </field>
-    </record>
-
    <record id="view_fields_in_purchase_line" model="ir.ui.view">
        <field name="name">fields.purchase</field>
        <field name="model">purchase.order</field>
@@ -19,9 +7,6 @@
        <field name="arch" type="xml">
        <xpath expr="//field[@name='order_line']//field[@name='price_unit']" position="after">
             <field name="disc_ids"/>
-            <field name="untaxed_ids" readonly="1"/>
-            <field name="disc_amount_ids" readonly="1"/>
-            <field name="custom_ids" readonly="1"/>
        </xpath>
        </field>
    </record>
