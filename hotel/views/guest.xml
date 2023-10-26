@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hotel_guest_form" model="ir.ui.view">
+        <field name="name">hotel.guest.form</field>
+        <field name="model">hotel.guest</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>        
+                    <div class = "oe_title">
+                        <h1>
+                            <field name = "ref" readonly="1"/>
+                        </h1>    
+                    </div>
+                <separator/>
+                    <group>
+                        <field name = "name"/>
+                        <field name = "age"/>
+                        <field name = "phone_number"/>
+                        <field name = "category"/>
+                        <field name = "gender"/>
+                        <field name = "is_child"/>
+                        <field name = "capitalized_name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div> 
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hotel_guest_tree" model="ir.ui.view">
+        <field name="name">hotel.guest.tree</field>
+        <field name="model">hotel.guest</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name = "ref"/>
+                    <field name = "name"/>
+                    <field name = "age"/>
+                    <field name = "phone_number"/>
+                    <field name = "category"/>
+                    <field name = "gender"/>
+                    <field name = "is_child"/>
+                    <field name = "capitalized_name"/>
+                    
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_hotel_guest_search" model="ir.ui.view">
+        <field name="name">hotel.guest.search</field>
+        <field name="model">hotel.guest</field>
+        <field name="arch" type="xml">
+            <search>
+                    <field name = "name" filter_domain = "['|',('name','ilike',self),('ref','ilike',self)]"/>
+                    <field name = "age"/>
+                    <field name = "gender"/>
+                    <field name = "category"/>
+
+                    <filter name="filter_male" string = "Male" domain="[('gender', '=', 'male')]"/>
+                    <filter name="filter_female" string = "Female" domain="[('gender', '=', 'female')]"/>
+                    <separator/>
+
+                    <filter name="filter_is_child" string = "Is Child" domain="[('is_child', '=', 'True')]"/>
+                    <separator/>
+                    
+                    <filter name="filter_first_class" string="First Class" domain="[('category', '=', 'first class')]"/>
+                    <filter name="filter_second_class" string="Second Class" domain="[('category', '=', 'second class')]"/>
+                    <filter name="filter_third_class" string="Third Class" domain="[('category', '=', 'third class')]"/>
+
+                    <group expand="0" string="Group By...">
+                        <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                    </group>
+                    <separator/>
+                    
+                    <group expand="0" string="Group By...">
+                        <filter string="Category" name="group_by_category" context="{'group_by': 'category'}"/>
+                    </group>
+
+            </search>
+        </field>
+    </record>    
+
+    
+<!-- view guest button -->
+    <record id="action_hotel_guest" model="ir.actions.act_window">
+        <field name="name">View guests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.guest</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_guest"
+        name="Guest"
+        parent="menu_hotel"
+        action="action_hotel_guest"
+        sequence="10"/>
+
+
+<!-- view rooms button -->
+    <record id="action_hotel_rooms" model="ir.actions.act_window">
+        <field name="name">View Rooms</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hotel.guest</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="menu_rooms"
+        name="Rooms"
+        parent="menu_hotel"
+        action="action_hotel_rooms"
+        sequence="10"/>
+</odoo>

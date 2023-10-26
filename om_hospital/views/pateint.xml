@@ -19,10 +19,12 @@
                         <field name = "dr_pateint"/>
                     </group>
                 </sheet>
+                
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids" options="{'post_refresh':'recipients'}"/>
                 </div>
+               
             </form>
         </field>
     </record>
@@ -74,7 +76,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+    </record>
     <record id="action_hospital_pateint" model="ir.actions.act_window">
         <field name="name">View info</field>
         <field name="type">ir.actions.act_window</field>

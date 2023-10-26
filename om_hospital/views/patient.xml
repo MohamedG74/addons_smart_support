@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                <h1>This screen will create patient</h1>
+                    <group>
+                        <field name = "patient_name"/>
+                        <field name = "is_child"/>
+                        <field name = "gender"/>
+                        <field name = "disease_name"/>
+                        <field name = "notes"/>
+                        <field name = "age"/>
+                    </group>
+                </sheet>    
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "patient_name"/>
+                    <field name = "is_child"/>
+                    <field name = "gender"/>
+                    <field name = "disease_name"/>
+                    <field name = "notes"/>
+                    <field name = "age"/>
+            </tree>
+        </field>
+    </record>             
+    
+    <record id="action_hospital_patientone" model="ir.actions.act_window">
+        <field name="name">Create Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">View Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_patientsone"
+          name="Create Patient"
+          parent="menu_operations"
+          action="action_hospital_patientone"
+          sequence="10"/>
+
+    <menuitem id="menu_patients"
+          name="View Patient"
+          parent="menu_operations"
+          action="action_hospital_patient"
+          sequence="10"/>
+</odoo>

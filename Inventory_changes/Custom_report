@@ -1,0 +1,190 @@
+<t t-name="stock.report_picking">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="direction:ltr;">
+                           <h1 style="text-align:center;text-decoration:underline;text-decoration:bold">
+                                <span t-field="o.name"/>
+                           </h1>
+                            <div class="row">
+                                <div class="col-6">
+                                   <strong>Doc. date: </strong>
+                                   <span t-field="o.create_date"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                              <div class="col-6">
+                                <strong>Beneflcairy:</strong>
+                              </div>
+                              <div class="col-6">
+                                <strong>Direct No OTHERS 1: </strong>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <strong>Address: <span t-field="o.partner_id"/> </strong>
+                             
+                            </div>
+                            <div class="row">
+                                
+                                <!--<div class="col-auto" name="div_sched_date">-->
+                                <!--    <strong>Scheduled Date:</strong>-->
+                                <!--    <p t-field="o.scheduled_date"/>-->
+                                <!--</div>-->
+                            </div>
+                            <table class="table table-sm" t-if="o.move_line_ids or o.move_ids_without_package">
+                                <t t-set="has_barcode" t-value="any(move_line.product_id and move_line.product_id.sudo().barcode or move_line.package_id for move_line in o.move_line_ids)"/>
+                                <t t-set="has_serial_number" t-value="any(move_line.lot_id or move_line.lot_name for move_line in o.move_line_ids)" groups="stock.group_production_lot"/>
+                                <thead>
+                                    <tr>
+                                        <th name="th_Item">
+                                            <strong>Item Code</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Item Name</strong>
+                                        </th>
+                                        
+                                         <th>
+                                            <strong>Quantity (On Hand)</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Demand</strong>
+                                        </th>
+                                       
+                                        <th>
+                                            <strong>Done</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Notes</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.move_ids_without_package" t-as="ml">
+                                        <tr>
+                                           <td>
+                                                <span t-field="ml.x_studio_item_code"/><br/>
+                                            </td>
+                                            <td>
+                                                <span t-field="ml.product_id.display_name"/><br/>
+                                                <span t-field="ml.product_id.description_picking"/>
+                                            </td>
+                                            <td>
+                                                <!--<span t-if="o.state != 'done'" t-field="ml.reserved_uom_qty"/>-->
+                                                <span t-if="o.state != 'done'" t-field="ml.reserved_availability"/>
+                                                <span t-if="o.state == 'done'" t-field="ml.product_qty_available"/>
+                                            </td>
+                                            <td>
+                                                <!--<span t-if="o.state == 'done'" t-field="ml.product_uom_qty"/>-->
+                                                <span t-field="ml.product_uom_qty"/>
+                                            </td>
+                                            
+                                             <td>
+                                                <!--<span t-if="o.state == 'done'" t-field="ml.quantity_done"/>-->
+                                                <span t-field="ml.quantity_done"/>
+                                            </td>
+                                            
+                                            <td>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start">Purchase/Job No</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <td>
+                                    <span t-field="o.note"/>
+                                    <hr/>
+                                  </td>
+                                </tbody>
+                            </table>
+  
+                                <table class="table" style="margin-top:70px">
+                                  <thead>
+                                      <tr>
+                                          <th class="text-start">Requested By</th>
+                                          
+                                          <th class="text-start">Approval Manager</th>
+
+                                          <th class="text-start">Reciept By</th>
+                              
+                                          <th class="text-start">Store keeper</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <td>
+                                     <span t-field="o.create_uid"/>  
+
+                                      <br/>
+                                    </td>
+                                     <td>
+                                      <span t-field="o.app_manage"/> 
+                                      <br/>
+                                    </td>
+                                     <td>
+                                      <span t-field="o.create_uid"/>  
+                                      <br/>
+                                    </td>
+                                    <td>
+                                      <span t-field="o.waher_house"/>
+                                    </td>
+                                  </tbody>
+                                </table>
+                                <br/>
+                                <br/>
+                                <!-- last row last table-->
+                                <div class="row">
+                                  <div class="col-3" style="border:groove;">
+                                    <strong>Rev Date: </strong>
+                                  </div>
+                                  <div class="col-3" style="border:groove;">
+                                    <strong>Rev .No </strong>
+                                  </div> 
+                                  <div class="col-3" style="border:groove;">
+                                    <strong> </strong>
+                                  </div>
+                                  <div class="col-3" style="border:groove;">
+                                    <strong>Filling: </strong>
+                                  </div>
+                                </div>
+                                
+                            <table class="table table-sm" t-if="o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done']">
+                                <thead>
+                                    <tr>
+                                        <th name="th_package">Package</th>
+                                        <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">From</th>
+                                        <th name="th_pki_from" t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)" t-as="package">
+                                        <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>
+                                        <td name="td_pk_barcode">
+                                            <div t-field="package.package_id.name" t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;margin-left: -50px;'}"/><br/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_id"/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_dest_id"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <t t-set="no_reserved_product" t-value="o.move_ids.filtered(lambda x: x.product_uom_qty != x.reserved_availability and x.move_line_ids and x.state!='done')"/>
+                            <p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product"><i class="fa fa-exclamation-triangle"/>
+                                All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                            </p>
+                            
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>

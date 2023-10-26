@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem id="menu_hospital_root"
-        name="Hospital"
-        sequence="10"/>
-                    <menuitem id="menu_operations"
-                    name="Patient"
-                    parent="menu_hospital_root"
-                    sequence="10"/>
+        name="hospital"
+        sequence="10"
+        web_icon="om_hospital,static\description\icon.png"/>
 
-                    <menuitem id="menu_operations_doc"
-                    name="Doctor"
-                    parent="menu_hospital_root"
-                    sequence="10"/>
+        <menuitem id="menu_operations"
+            name="operations"
+            parent="menu_hospital_root"
+            sequence="10"/>
 </odoo>

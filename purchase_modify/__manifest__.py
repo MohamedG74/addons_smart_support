@@ -10,10 +10,7 @@
     'website': 'https://www.smartsupport.tech',
     'depends': ['base','sale','purchase'],
     'data': [
-        # 'data/sequence.xml',
-        # 'security/ir.model.access.csv',
        'views/changes.xml',
-        # 'views/pateint.xml',
     ],
     'installable': True,
     'auto_install': True,

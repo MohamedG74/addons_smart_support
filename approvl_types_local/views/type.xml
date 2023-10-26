@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="view_field_test_in_approval" model="ir.ui.view">-->
+<!--        <field name="name">odoo.test2</field>-->
+<!--        <field name="model">approval.category</field>-->
+<!--        <field name="inherit_id" ref="approvals.approval_category_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--        <xpath expr="//field[@name='has_location']" position="after">-->
+<!--            <field name="test1" widget="radio" options="{'horizontal': true}"/>-->
+<!--        </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+    <record id="view_field_test_in_request" model="ir.ui.view">
+        <field name="name">odoo.test7</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='request_owner_id']" position="before">
+            <field name="subj_id"/>
+        </xpath>
+        </field>
+    </record>
+<!--kanbantask-->
+    <record id="view_field_in_kanban" model="ir.ui.view">
+        <field name="name">kanban.view.inherit</field>
+        <field name="model">approval.request</field>
+        <field name="inherit_id" ref="approvals.approval_request_view_kanban"/>
+        <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('o_kanban_record_subtitle')]" position="before">
+            <field name="subj_id"/>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="view_vate_line" model="ir.ui.view">
+        <field name="name">tes</field>
+        <field name="model">approval.product.line</field>
+        <field name="inherit_id" ref="approvals.approval_product_line_view_tree"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='product_id']" position="after">
+            <field name="cate_ids_line"/>
+        </xpath>
+        <xpath expr="//field[@name='quantity']" position="after">
+            <field name="type_ids_line"/>
+        </xpath>
+        </field>
+    </record>
+    <!--reques manager field-->
+    <!--reques manager field-->
+    <record id="view_field_in_inventory" model="ir.ui.view">
+        <field name="name">invent_inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='origin']" position="after">
+            <field name="app_manage"/>
+            <field name="received_by"/>
+            <field name="waher_house"/>
+
+        </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hotel"
+          name="Hotel"
+          sequence="10"
+          web_icon="hotel,static\description\icon.png"
+          />
+    
+    <menuitem id="menu_guest"
+        name="Guest"
+        parent="menu_hotel"
+        sequence="10"/>
+
+    <menuitem id="menu_rooms"
+        name="Rooms"
+        parent="menu_guest"
+        sequence="10"/>
+           
+</odoo>

@@ -1,2 +1,1 @@
-from . import pateints
-from . import doctor
+from . import patient

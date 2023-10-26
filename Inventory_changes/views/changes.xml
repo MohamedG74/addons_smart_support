@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--reques manager field-->
+    <!--reques manager field-->
+    <record id="view_field_in_inventory" model="ir.ui.view">
+        <field name="name">invent_inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='origin']" position="after">
+            <field name="app_manage"/>
+            <field name="received_by"/>
+            <field name="waher_house"/>
+        </xpath>
+        </field>
+    </record>
+</odoo>

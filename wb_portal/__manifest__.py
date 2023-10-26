@@ -15,13 +15,11 @@
 
     'assets':{
         'point_of_sale.assets':[
-          'wb_portal/static/src/pos/**/*.xml',
-          'wb_portal/static/src/pos/**/*.js',
-          'wb_portal/static/src/pos/**/*.scss',
-          'wb_portal/static/src/**/*.js',
-          'wb_portal/static/src/**/*.xml',
+        'wb_portal/static/src/**/*.xml',
+        'wb_portal/static/src/**/*.js',
+        #   'wb_portal/static/src/pos/**/*.scss',
         
-        ]
+        ],
     }
     
 
