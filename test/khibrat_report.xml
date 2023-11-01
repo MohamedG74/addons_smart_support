@@ -1,0 +1,95 @@
+<t t-name="khibrat.report_khibrat_document">
+  <t t-foreach="docs" t-as="o">
+    <t t-call="web.external_layout_boxed_custom">
+          <header class="text-center">
+            <h1>
+              <strong>رقم الدعوى</strong> <span t-field="o.prosecution_number"/>
+            </h1>
+            </header> 
+            <hr/>
+            <br/>
+        <div class="page" style="direction:rtl;">
+          <div class="row">
+            <div class="col-4">
+              <strong>تاريخ القيد:</strong>
+                <span t-field="o.registration_date"/>
+            </div> 
+            <div class="col-4">
+                            <strong>التاريخ الهجرى:</strong>
+                <span t-field="o.hijri_date"/>
+            </div> 
+             <div class="col-4">
+                <strong>المرحلة: </strong><span t-field="o.stage"/>
+              </div>
+        </div>
+          <br/>
+          <br/>
+          <br/>
+            <div class="row">
+              <div class="col-6">
+                <strong>اسم العميل: </strong><span t-field="o.partner_id"/>
+              </div>
+              <div class="col-6">
+                <strong>الفرع: </strong><span t-field="o.branch"/>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-6">
+                <strong>حالة القضية: </strong><span t-field="o.case_status"/>
+              </div>
+            </div>
+          <hr/>
+          <hr/>
+        <div class="row">
+          <div class="text-end" t-if="o.client_or_defendant=='مُدعى'">
+            <strong style="font-size:large;text-align: center;">بيانات المدعى:</strong>
+              <t t-foreach="o.client_many2many_ids" t-as="d">
+                <br/>
+                <strong>الاسم: </strong> <span t-field="d.name"/>
+                <br/>
+                  <strong>رقم اثبات الشخصية: </strong> <span t-field="d.identity_card_number"/>
+              </t>
+          </div>
+        <!--المدعى عليييييييه-->
+          <div class="text-end" t-elif="o.client_or_defendant=='مُدعى عليه'">
+            <strong style="font-size:large;text-align: center;">بيانات المدعى عليه:</strong>
+            <t t-foreach="o.defendant_many2many_ids" t-as="d">
+              <br/>
+              <strong>الاسم: </strong> <span t-field="d.name"/>
+              <br/>
+               <strong>رقم اثبات الشخصية: </strong> <span t-field="d.identity_card_number"/>
+              </t>
+          </div>
+            <div class="col-6">
+          </div>
+          
+        </div>
+      </div>
+         <!--teeeeeeeeeeeeeeeeeeest-->
+          <div class="row">
+            <table class="table table-sm" t-if="o.client_or_defendant=='مُدعى' or o.client_or_defendant=='مُدعى عليه'" style="direction:rtl;border-style:solid;border-color:black">
+                                <thead>
+                                    <tr>
+                                        <th class="text-end" style="color:red;border-style:solid;border-color:black">
+                                            <strong>اسماء المحامين</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.client_many2many_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.lawyer_many2many_ids"/><br/>
+                                            </td>
+     
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+          
+        </div>
+      <!--end tesssssssssssssssst-->
+    </t>
+  </t>
+</t>

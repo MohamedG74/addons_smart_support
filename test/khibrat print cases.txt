@@ -1,0 +1,291 @@
+<t t-name="khibrat.report_khibrat_document">
+    <link href="https://fonts.cdnfonts.com/css/dejavu-sans" rel="stylesheet"/>
+  <t t-foreach="docs" t-as="o">
+          <div t-attf-class="header tajawalfont" t-att-style="report_header_style">
+            <div class="o_boxed_header" style="border-bottom: 5px solid #e9ecef; padding-bottom: 11px;margin-top:5px;">
+              <div class="row mb10">
+                  <div class="col-2 text-center mt4">
+                      <img src="https://i.imgur.com/fi0lVjG.png" style="max-height: 150px;" alt="Logo"/>
+                  </div>
+                  <div class="col-10 text-center mb4 mt4">
+                        <div name="company_address">
+                          <br/>
+                          <h2 style="color:black;">Khibrat for Law Firm and Legal Consultation <br/> شركة خبرات للمحاماة و الاستشارات القانونية</h2>
+                        </div>
+                  </div>
+                  
+              </div>
+            </div>
+          </div>
+<br/>
+      <div t-attf-class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+        <div class="invoice-body">
+          <t t-call="web.html_container">
+            <h2 class="text-center">بيانات القضية</h2>
+            <b><hr/></b>
+            <br/>
+            <h5>
+                    <div class="row">
+                      <div class="col-5" style="text-align:left">
+                              <div class="row" t-if="o.prosecution_number">
+                                  <div class="col-6 text-start" style="font-size: 15px">
+                                    <span t-field="o.prosecution_number"/>
+                                  </div>
+                                  
+                                  <div class="col-6 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                      :رقم الدعوى
+                                      </strong>
+                                  </div>
+                              </div>
+                              
+                              <div class="row" t-if="o.prosecution_type">
+                                  <div class="col-7 text-start" style="font-size: 15px">
+                                    <span t-field="o.prosecution_type"/>
+                                  </div>
+                                  
+                                  <div class="col-5 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :نوع الدعوى
+                                        </strong>
+                                  </div>
+                              </div>
+                              <div class="row" t-if="o.stage">
+                                  <div class="col-7 text-start" style="font-size: 15px">
+                                    <span t-esc="o.stage"/>
+                                  </div>
+                                  
+                                  <div class="col-5 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :المرحلة
+                                        </strong>
+                                  </div>
+                              </div>
+
+                              <div class="row" t-if="o.registration_date">
+                                  <div class="col-3 text-start" style="font-size: 15px">
+                                      <span t-esc="o.hijri_date"/>
+                                      <!--<span t-if="o.date_order != '/'" t-esc="o.date_order.strftime('%d/%m/%Y')"/>-->
+                                  </div>
+                                  
+                                  <div class="col-2 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :هجري
+                                        </strong>
+                                  </div>
+                                  
+                                  <!--<div class="col-2"/>-->
+                                  
+                                  <div class="col-4 text-center" style="font-size: 15px">
+                                      <span t-esc="o.registration_date.strftime('%d/%m/%Y')"/>
+                                  </div>
+                                  
+                                  <div class="col-3 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :تاريخ القيد
+                                        </strong>
+                                  </div>
+                                  
+                              </div>
+                        </div>
+                        
+                        
+                        <div class="col-2 text-center" style="font-size: 16px">
+                            
+                        </div>
+                        
+                        <div class="col-5" style="text-align:right">
+                              <div class="row" t-if="o.partner_id">
+                                  <div class="col-7 text-start" style="font-size: 15px">
+                                      <span t-field="o.partner_id"/>
+                                  </div>
+                                  <div class="col-5 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :الاسم
+                                      </strong>
+                                  </div>
+                              </div>
+                              
+                              <div class="row" t-if="o.client_or_defendant">
+                                  <div class="col-6 text-start" style="font-size: 15px">
+                                      <span t-esc="o.client_or_defendant"/>
+                                      <!--<span t-if="o.date_order != '/'" t-esc="o.date_order.strftime('%d/%m/%Y')"/>-->
+                                  </div>
+                                  
+                                  <div class="col-6 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :الصفة
+                                        </strong>
+                                  </div>
+                              </div>
+                              
+                              <div class="row" t-if="o.branch">
+                                  <div class="col-6 text-start" style="font-size: 13px">
+                                      <span t-field="o.branch"/>
+                                  </div>
+                                  
+                                  <div class="col-6 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                        :الفرع
+                                      </strong>
+                                  </div>
+                              </div>
+                              <div class="row" t-if="o.case_status">
+                                  <div class="col-6 text-start" style="font-size: 15px">
+                                      <span t-field="o.case_status"/>
+                                  </div>
+                                  
+                                  <div class="col-6 text-end" style="font-size: 15px">
+                                      <strong style="white-space:nowrap">
+                                      :حالة القضية
+                                      </strong>
+                                  </div>
+                              </div>
+
+                        </div>
+                    </div>
+                  </h5>
+                  
+                  <br/>
+                
+
+          </t>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row" style="direction:rtl;">
+          <div class="text-end" t-if="o.client_or_defendant=='مُدعى'">
+            <strong style="font-size:large;text-align: center;">بيانات المدعى:</strong>
+              <t t-foreach="o.client_many2many_ids" t-as="d">
+                <br/>
+                <strong>الاسم: </strong> <span t-field="d.name"/>
+                <br/>
+                  <strong>رقم اثبات الشخصية: </strong> <span t-field="d.identity_card_number"/>
+              </t>
+          </div>
+          <!--المدعى عليييييييه-->
+          <div class="text-end" t-elif="o.client_or_defendant=='مُدعى عليه'">
+            <strong style="font-size:large;text-align: center;">بيانات المدعى عليه:</strong>
+            <t t-foreach="o.defendant_many2many_ids" t-as="d">
+              <br/>
+              <strong>الاسم: </strong> <span t-field="d.name"/>
+              <br/>
+               <strong>رقم اثبات الشخصية: </strong> <span t-field="d.identity_card_number"/>
+              </t>
+          </div>
+        </div>
+        <!--جداول المحامين-->
+        <br/>
+        <br/>
+        <br/>
+         <div class="row" t-if="o.client_or_defendant=='مُدعى'">
+           <div class="col-5">
+            <table class="table table-sm" t-if="o.client_or_defendant=='مُدعى' or o.client_or_defendant=='مُدعى عليه'" style="direction:rtl;border-style:solid;border-color:black">
+                                <thead>
+                                    <tr>
+                                        <th class="text-end" style="border-style:solid;border-color:black;width:275px;">
+                                            <strong>اسماء المحامين</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.client_many2many_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.lawyer_many2many_ids"/><br/>
+                                            </td>
+     
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+          </div>
+            <div class="col-7">
+            <table class="table table-sm" t-if="o.client_or_defendant=='مُدعى' or o.client_or_defendant=='مُدعى عليه'" style="direction:rtl;border-style:solid;border-color:black">
+                                <thead>
+                                    <tr>
+                                        <th class="text-end" style="border-style:solid;border-color:black;width:275px;">
+                                            <strong>اسماء المستشارين</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.client_many2many_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.consultant_many2many_ids"/><br/>
+                                            </td>
+     
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+          
+        </div>
+        </div>
+        <div class="row" t-if="o.client_or_defendant=='مُدعى عليه'">
+           <div class="col-5">
+            <table class="table table-sm" t-if="o.client_or_defendant=='مُدعى' or o.client_or_defendant=='مُدعى عليه'" style="direction:rtl;border-style:solid;border-color:black">
+                                <thead>
+                                    <tr>
+                                        <th class="text-end" style="border-style:solid;border-color:black;width:275px;">
+                                            <strong>اسماء المحامين</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.defendant_many2many_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.lawyer_many2many_ids_defendant"/><br/>
+                                            </td>
+     
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+          </div>
+            <div class="col-7">
+            <table class="table table-sm" t-if="o.client_or_defendant=='مُدعى' or o.client_or_defendant=='مُدعى عليه'" style="direction:rtl;border-style:solid;border-color:black">
+                                <thead>
+                                    <tr>
+                                        <th class="text-end" style="border-style:solid;border-color:black;width:275px;">
+                                            <strong>اسماء المستشارين</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- In case you come across duplicated lines, ask NIM or LAP -->
+                                    <t t-foreach="o.defendant_many2many_ids" t-as="c">
+                                        <tr>
+                                            <td>
+                                                <span t-field="c.consultant_many2many_ids_defendant"/><br/>
+                                            </td>
+     
+                                        </tr>
+                                    </t>
+                                  </tbody>
+                            </table>
+          
+        </div>
+        </div>
+      
+      
+        <br/>
+        <br/>
+        <br/>
+       
+        <div t-attf-class="footer o_boxed_footer">
+            <div class="text-center">
+                <strong>WWW.Khibrat.com</strong>
+                <strong> @info1111111111111111111111111</strong>
+            </div>
+        </div>
+          
+          </div>
+          </t>
+</t>
