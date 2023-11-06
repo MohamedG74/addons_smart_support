@@ -1,0 +1,286 @@
+<templates>
+   <t t-name="TrialBalanceSub">
+       <div class="">
+           <div>
+               <center>
+                <h1 style="margin: 20px;">ميزان المراجعة </h1>
+               </center>
+           </div>
+           <div>
+               <div class="filter_view_pr"/>
+           </div>
+           <div>
+               <div class="table_view_pr" style="width: 95%; margin: auto;"/>
+           </div>
+       </div>
+   </t>
+   <t t-name="TrialBalanceSubFilterView">
+       <script src="/smart_custom_report/static/src/js/jquery.table2excel.js"></script>
+       <div class="print-btns">
+           <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-primary" id="xlsx">
+                       Export (XLSX)
+                   </button>
+               </div>
+          
+            </div>
+
+           <div class="sub_container_right">
+                <div class="form-group">
+                    <label class="" for="date_from">تاريخ البداية :</label>
+                    <div class="input-group date" id="date_from"
+                        data-target-input="nearest">
+                        <input type="text" name="date_from"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_from"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_from"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                   
+                    <label class="" for="date_to">تاريخ الانتهاء :</label>
+                    <div class="input-group date" id="date_to"
+                        data-target-input="nearest">
+                        <input type="text" name="date_to"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_to"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_to"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                   
+                    <label class="" for="account_name">الحساب :</label>
+                    <select id="selection_account_name" class="input-group account_name"
+                               aria-labelledby="dropdownMenuLink"
+                               name="account_name[]">
+                            <div role="separator" class="dropdown-divider"/>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="level">المستوي :</label>
+                    <select id="selection_level" class="input-group level"
+                               aria-labelledby="dropdownMenuLink"
+                               name="level[]">
+                            <div role="separator" class="dropdown-divider"/>
+                                <option value="all">فرعي
+                                </option>
+                                <option value="level_1">المستوي الأول
+                                </option>
+                                <option value="level_2">المستوي الثاني
+                                </option>
+                                <option value="level_3">المستوي الثالث
+                                </option>
+                                <option value="level_4">المستوي الرابع
+                                </option>
+                                <option value="level_5">المستوي الخامس
+                                </option>
+                                <option value="level_6">المستوي السادس
+                                </option>
+                                <option value="level_7">المستوي التحليلى
+                                </option>
+                       </select>
+                </div>
+
+
+               <!-- <div class="search-Result-Selection">
+                   <div class="dropdown">
+                       <a class="btn btn-secondary dropdown-togglereport-type"
+                          href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                           <span class="fa fa-book"/>
+                           <span class="low_case dropdown-toggle">الحساب :</span>
+                       </a>
+                       <select id="selection_account_name" class="dropdown-menu account_name"
+                               aria-labelledby="dropdownMenuLink"
+                               name="account_name[]">
+                            <div role="separator" class="dropdown-divider"/>
+                       </select>
+                       <span id="report_res_account_name"/>
+                   </div>
+               </div> -->
+
+               <!-- <div class="search-Result-Selection">
+                   <div class="dropdown">
+                       <a class="btn btn-secondary dropdown-togglereport-type"
+                          href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                           <span class="fa fa-book"/>
+                           <span class="low_case dropdown-toggle">المستوي :</span>
+                       </a>
+                       <select id="selection_level" class="dropdown-menu level"
+                               aria-labelledby="dropdownMenuLink"
+                               name="level[]">
+                            <div role="separator" class="dropdown-divider"/>
+                                <option value="all">فرعي
+                                </option>
+                                <option value="level_1">المستوي الأول
+                                </option>
+                                <option value="level_2">المستوي الثاني
+                                </option>
+                                <option value="level_3">المستوي الثالث
+                                </option>
+                                <option value="level_4">المستوي الرابع
+                                </option>
+                                <option value="level_5">المستوي الخامس
+                                </option>
+                                <option value="level_6">المستوي السادس
+                                </option>
+                       </select>
+                       <span id="report_res_level"/>
+                   </div>
+               </div> -->
+
+               <div class="search-Result-Selection">
+                    <label class="" for="report_code">كود الحساب :</label>
+                   <input type="text" class="form-control report_code" placeholder="كود الحساب" data-target="#report_code" t-att-name="report_code"/>
+               </div>
+
+               <div class="apply_filter">
+                   <button type="button" id="apply_filter"
+                           class="btn btn-primary">
+                       Apply
+                   </button>
+               </div>
+           </div>
+       </div>
+   </t>
+   <t t-name="TrialBalanceSubOrderTable">
+       <div>
+           <div class="table_main_view">
+               <table cellspacing="0" width="100%" id="table2excel" class="paginated table table-hover" style="direction: rtl">
+                   <thead>
+                       <tr class="table_pr_head">
+                           <th class="mon_fld">كود الحساب</th>
+                           <th class="mon_fld">اسم الحساب</th>
+                           <th class="mon_fld">افتتاحى مدين</th>
+                           <th class="mon_fld">افتتاحى دائن</th>
+                           <th class="mon_fld" style="background: #ff9595;color: #000;">حركة مدين</th>                           
+                           <th class="mon_fld" style="background: #ff9595;color: #000;">حركة دائن</th>                           
+                           <th class="mon_fld">مجاميع مدين</th>                           
+                           <th class="mon_fld">مجاميع دائن</th>                           
+                           <th class="mon_fld" style="background: #ff9595;color: #000;">رصيد مدين</th>                           
+                           <th class="mon_fld" style="background: #ff9595;color: #000;">رصيد دائن</th>                           
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <t t-set="sum_opening_debit" t-value="0"/>
+                       <t t-set="sum_opening_credit" t-value="0"/>
+                       <t t-set="sum_transactions_debit" t-value="0"/>
+                       <t t-set="sum_transactions_credit" t-value="0"/>
+                       <t t-set="sum_total_debit" t-value="0"/>
+                       <t t-set="sum_total_credit" t-value="0"/>
+                       <t t-set="sum_debit_balance" t-value="0"/>
+                       <t t-set="sum_credit_balance" t-value="0"/>
+
+                       <t t-foreach="report_lines"
+                          t-as="dynamic_item_balance">
+                           <tr style="border: 1.5px solid black;"
+                               class="pr-line"
+                               t-att-data-account-id="dynamic_item_balance['id']"
+                               t-attf-data-target=".a{{dynamic_item_balance['id']}}">
+                               <t t-if="dynamic_item_balance['code'] == '22030101010001'">                               
+                                    <t t-foreach="report_lines_previous" t-as="report_previous">
+                                        <t t-set="sum_opening_credit" t-value="sum_opening_credit +  report_previous['previous_earning']"/>
+                                        <t t-set="dynamic_item_balance['opening_credit']" t-value="dynamic_item_balance['opening_credit'] +  report_previous['previous_earning']"/>
+                                    </t>
+                                </t>
+                          
+
+                                <t t-set="sum_opening_debit" t-value="sum_opening_debit + dynamic_item_balance['opening_debit']"/>
+                                <t t-set="sum_opening_credit" t-value="sum_opening_credit + dynamic_item_balance['opening_credit']"/>
+                                <t t-set="sum_transactions_debit" t-value="sum_transactions_debit + dynamic_item_balance['transactions_debit']"/>
+                                <t t-set="sum_transactions_credit" t-value="sum_transactions_credit + dynamic_item_balance['transactions_credit']"/>
+                                <t t-set="sum_total_debit" t-value="sum_total_debit + dynamic_item_balance['total_debit']"/>
+                                <t t-set="sum_total_credit" t-value="sum_total_credit + dynamic_item_balance['total_credit']"/>
+                                <t t-set="sum_debit_balance" t-value="sum_debit_balance + dynamic_item_balance['debit_balance']"/>
+                                <t t-set="sum_credit_balance" t-value="sum_credit_balance + dynamic_item_balance['credit_balance']"/>
+                               <td>
+                                   <span>
+                                        <t t-esc="dynamic_item_balance['code']"/>
+                                    </span>
+                               </td>
+                               <td>
+                                   <span>
+                                        <t t-esc="dynamic_item_balance['name']"/>
+                                    </span>
+                               </td>
+                               <td>
+                                   <span class="currency">
+                                        <t t-esc="dynamic_item_balance['opening_debit']"/>
+                                    </span>
+                               </td>
+                               <td>
+                                   <span class="currency">
+                                        <t t-esc="dynamic_item_balance['opening_credit']"/>
+                                    </span>
+                               </td>
+                               <td style="text-align:center;background: #ff9595;color: #000;">
+                                   <span class="currency">
+                                       <t t-esc="dynamic_item_balance['transactions_debit']"/>
+                                   </span>
+                               </td>
+                               <td style="text-align:center;background: #ff9595;color: #000;">
+                                   <span class="currency">
+                                       <t t-esc="dynamic_item_balance['transactions_credit']"/>
+                                   </span>
+                               </td>
+                               <td style="text-align:center;">
+                                   <span class="currency">
+                                      <t t-esc="dynamic_item_balance['total_debit']"/>
+                                   </span>
+                               </td>
+                               <td style="text-align:center;">
+                                   <span class="currency">
+                                      <t t-esc="dynamic_item_balance['total_credit']"/>
+                                   </span>
+                               </td>
+                               <td style="text-align:center;background: #ff9595;color: #000;">
+                                   <span class="currency">
+                                       <t t-esc="dynamic_item_balance['debit_balance']"/>
+                                   </span>
+                               </td>
+                               <td style="text-align:center;background: #ff9595;color: #000;">
+                                   <span class="currency">
+                                       <t t-esc="dynamic_item_balance['credit_balance']"/>
+                                   </span>
+                               </td>
+                           </tr>
+                       </t>
+                        <tr>
+                            <td colspan="2">الاجمالى</td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_opening_debit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_opening_credit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_transactions_debit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_transactions_credit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_total_debit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_total_credit" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_debit_balance" /></td>
+                            <td style="text-align:center;" class='currency'><t t-esc="sum_credit_balance" /></td>
+                        </tr>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </t>
+</templates>

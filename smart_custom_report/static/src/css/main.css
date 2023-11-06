@@ -1,0 +1,83 @@
+div.pager {
+    margin: 0 auto;
+    display: block;
+    width: 400px;
+    text-align: center;
+}
+
+
+input.page-number-input {
+    width: 18%;
+    display: inline;
+    text-align: center;
+}
+
+input.pgnum {
+    width: 18%;
+    display: inline;
+    text-align: center;
+}
+
+
+div.pager span {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    background: #191919;
+    color: #ccc;
+    margin-right: 0.5em;
+}
+
+div.pager span.active {
+    background: #fff;
+    color:#191919;
+    font-weight:bold;
+    text-align:center;
+}
+html .o_web_client{
+    overflow-y: scroll !important;
+}
+html .o_web_client > .o_action_manager{
+    overflow: scroll;
+}
+table thead th {
+    color: #777;
+    background: rgba(0,0,0,.1);
+    border: 1px solid #ccc;
+    text-align: center;
+    text-transform: capitalize;
+}
+table tbody tr td {
+    color: #777;
+    background: rgba(0,0,0,.1);
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.sub_container_right{
+    float: right;
+    display: flex;
+    margin-right: 45px;
+    background: #ffffff;
+    margin-bottom: 20px;
+    direction: rtl;
+}
+.sub_container_left{
+    margin-left: 55px;
+    float: left;
+}
+.sub_container_right > div {
+    margin: 10px;
+}
+.fa-calendar{
+    font-size:19px !important;
+}
+#apply_filter{    
+    height: 50px;
+    width: 75px;
+}
+.select2-drop{
+    min-width: 200px;
+
+}
+
+

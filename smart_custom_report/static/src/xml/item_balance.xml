@@ -1,0 +1,229 @@
+<templates>
+   <t t-name="ItemBalance">
+       <div class="">
+           <div>
+               <center>
+                <h1 style="margin: 20px;">تقرير أرصدة الاصناف بالمستودعات</h1>
+               </center>
+           </div>
+           <div>
+               <div class="filter_view_pr"/>
+           </div>
+           <div>
+               <div class="table_view_pr" style="width: 95%; margin: auto;"/>
+           </div>
+       </div>
+   </t>
+   <t t-name="ItemBalanceFilterView">
+       <script src="/smart_custom_report/static/src/js/jquery.table2excel.js"></script>
+       <script src="/smart_custom_report/static/src/js/tabulator.js"></script>
+
+       <div class="print-btns">
+           <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-primary" id="xlsx">
+                       Export (XLSX)
+                   </button>
+               </div>
+          
+            </div>
+
+            <div class="sub_container_right">
+                <div class="form-group">
+                    <label class="" for="report_product">المنتج :</label>
+                    <select id="selectionproduct" class="input-group report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">All</option>
+                    </select>
+                </div>
+
+               <!-- <div class="search-Result-Selection">
+                   <div class="dropdown">
+                       <a class="btn btn-secondary dropdown-togglereport-type"
+                          href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                           <span class="fa fa-book"/>
+                           <span class="low_case dropdown-toggle">Product :</span>
+                       </a>
+                       <select id="selectionproduct" class="dropdown-menu report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                           <div role="separator" class="dropdown-divider"/>
+                           <option value="report_by_order" selected="">Report
+                               By
+                               Order
+                           </option>
+                           <option value="report_by_order_detail">Report By
+                               Order
+                               Detail
+                           </option>
+                           <option value="report_by_product">Report By
+                               Product
+                           </option>
+                       </select>
+                       <span id="report_res_product"/>
+                   </div>
+               </div> -->
+
+
+               <div class="form-group">
+                    <label class="" for="report_location">المستودع :</label>
+                    <select id="selectionw" class="input-group report_location"
+                               aria-labelledby="dropdownMenuLink"
+                               name="warehouse[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">All</option>
+                    </select>
+                </div>
+
+               <!-- <div class="search-Result-Selection">
+                   <div class="dropdown">
+                       <a class="btn btn-secondary dropdown-togglereport-type"
+                          href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                           <span class="fa fa-book"/>
+                           <span class="low_case dropdown-toggle">Warehouse :</span>
+                       </a>
+                       <select id="selectionw" class="dropdown-menu report_location"
+                               aria-labelledby="dropdownMenuLink"
+                               name="warehouse[]">
+                           <div role="separator" class="dropdown-divider"/>                           
+                       </select>
+                       <span id="report_res_location"/>
+                   </div>
+               </div> -->
+
+               <div class="form-group">
+                    <label class="" for="main_group">المجموعة الرئيسية :</label>
+                    <select id="selection_main_group" class="input-group main_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="main_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+               <div class="form-group">
+                    <label class="" for="second_group">المجموعة الفرعية :</label>
+                    <select id="selection_second_group" class="input-group second_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="second_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+
+               <div class="apply_filter">
+                   <button type="button" id="apply_filter"
+                           class="btn btn-primary">
+                       Apply
+                   </button>
+               </div>
+
+               <div class="button-container" style="direction: ltr; text-align: center;">
+                    <!-- Include Tabulator CSS -->        
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
+                        <option value="" class="select-items"></option> <!-- Empty selection -->
+                        <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
+                        <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
+                        <option value="invoice_type" class="select-items" style="text-align: center;">نوع الفاتورة</option> -->
+                        <!-- <option value="invoice_date" class="select-items" style="text-align: center;">تاريخ الفاتورة</option> -->
+                        <!-- <option value="partner_name" class="select-items" style="text-align: center;">اسم المورد</option> -->
+                        <!-- <option value="discount_percent" class="select-items" style="text-align: center;">نسبة الخصم</option> -->
+                        
+                        <option value="parent_category_name" class="select-items" style="text-align: center;">المجموعة الرئيسية</option>
+                        <option value="category_name" class="select-items" style="text-align: center;">المجموعة الفرعية</option>
+                        <option value="product_name" class="select-items" style="text-align: center;">اسم الصنف</option>
+                    </select>
+                </div>
+
+            </div>
+       </div>
+   </t>
+   <t t-name="ItemBalanceOrderTable">
+       <div>
+           <div class="table_main_view">
+               <table cellspacing="0" width="100%" id="table2excel" class="paginated table table-hover" style="direction: rtl">
+                   <thead>
+                       <tr class="table_pr_head">
+                           <th>الفرع</th>
+                           <th>المستودع</th>
+                           <th>المجموعة الرئيسية</th>
+                           <th class="mon_fld">المجموعة الفرعية</th>
+                           <th class="mon_fld">كود الصنف</th>
+                           <th class="mon_fld">اسم الصنف</th>
+                           <th class="mon_fld">الوحدة</th>
+                           <th class="mon_fld">الكمية</th>
+                           <th class="mon_fld">تاريخ إنشاء الصنف</th>
+                           <th class="mon_fld">عمر الصنف</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <t t-foreach="report_lines"
+                          t-as="dynamic_item_balance">
+                           <tr style="border: 1.5px solid black;"
+                               class="pr-line"
+                               t-att-data-account-id="dynamic_item_balance['id']"
+                               t-attf-data-target=".a{{dynamic_item_balance['id']}}">
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['operating_unit_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['warehouse_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['parent_category_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['category_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['default_code']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['product_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['uom_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['quantity']"/>
+                                   <!-- </span> -->
+                               </td>
+
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['create_date']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['age']"/>
+                                   <!-- </span> -->
+                               </td>
+                           </tr>
+                       </t>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </t>
+</templates>
