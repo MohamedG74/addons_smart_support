@@ -1,0 +1,208 @@
+<templates>
+   <t t-name="ItemsAnalysis">
+       <div class="">
+           <div>
+               <center>
+                <h1 style="margin: 20px;">تقرير المشتريات</h1>
+               </center>
+           </div>
+           <div>
+               <div class="filter_view_pr"/>
+           </div>
+           <div>
+               <div class="table_view_pr" style="width: 95%; margin: auto;"/>
+           </div>
+       </div>
+   </t>
+    <t t-name="ItemsAnalysisFilterView">
+        <script src="/smart_custom_report/static/src/js/jquery.table2excel.js"></script>
+        <script src="/smart_custom_report/static/src/js/tabulator.js"></script>
+        <script src="/smart_custom_report/static/src/js/sortable.js"></script>
+
+        <!-- <script src="/smart_custom_report/static/src/js/multiple_select.js"></script>  -->
+        <script src="/smart_custom_report/static/src/js/jquery_multiselect2.js"></script>
+        <script src="/smart_custom_report/static/src/js/excel_grouping.js"></script>
+
+
+       <div class="print-btns">        
+            <!-- <div class="o_cp_top_right">
+                <div class="o_cp_searchview d-flex flex-grow-1" role="search">
+                    <div class="o_searchview pb-1 align-self-center border-bottom flex-grow-1" role="search" aria-autocomplete="list">
+                        <i class="o_searchview_icon oi oi-search" role="img" aria-label="Search..." title="Search..."></i>
+                            <div class="o_searchview_input_container"><input type="text" class="o_searchview_input" accesskey="Q" placeholder="Search..." role="searchbox">
+                            </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-primary" id="download-xlsx">
+                       Export Grouping (XLSX)
+                   </button>
+               </div>
+            </div>
+
+
+           <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-primary" id="xlsx">
+                       Export (XLSX)
+                   </button>
+               </div>
+          
+            </div>
+
+           <div class="sub_container_right">
+               <div class="form-group">
+                    <label class="" for="date_from">تاريخ البداية :</label>
+                    <div class="input-group date" id="date_from"
+                        data-target-input="nearest">
+                        <input type="text" name="date_from"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_from"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_from"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">   
+                    <label class="" for="date_to">تاريخ الانتهاء :</label>
+                    <div class="input-group date" id="date_to"
+                        data-target-input="nearest">
+                        <input type="text" name="date_to"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_to"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_to"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="report_product">المنتج :</label>
+                    <select id="selectionproduct" class="input-group report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">الكل</option>
+                    </select>
+                </div>
+               <div class="form-group">
+                    <label class="" for="res_user">المستخدم :</label>
+                    <select id="selection_res_user" class="input-group res_user"
+                               aria-labelledby="dropdownMenuLink"
+                               name="res_user[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+               <div class="sub_container_right"
+                    style="width: 220px; margin-left: 28px;">
+                    <div id="totalRowCount"></div>
+                </div>
+               <div class="form-group">
+                    <label class="" for="main_group">المجموعة الرئيسية :</label>
+                    <select id="selection_main_group" class="input-group main_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="main_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+               <div class="form-group">
+                    <label class="" for="second_group">المجموعة الفرعية :</label>
+                    <select id="selection_second_group" class="input-group second_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="second_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+                <div class="search-Result-Selection" style="width:100px; display:none;">
+                    <label for="invoice_number">page number :</label>
+                   <input type="text" class="form-control pgnum" style="width:50px; !important"
+                    placeholder="" value="0"
+                    />
+               </div>
+               <div class="search-Result-Selection">
+                    <label class="" for="limited">عدد الصفوف في الصفحة</label>
+                   <input type="text" class="form-control limited" 
+                    placeholder="For Export Data" 
+                    data-target="#limited" value="25"
+                    t-att-name="limited"/>
+               </div>
+               <div class="apply_filter">
+                   <button type="button" id="apply_filter"
+                           class="btn btn-primary">
+                       Apply
+                   </button>
+               </div>
+           </div>
+       </div>
+   </t>
+   <t t-name="ItemsAnalysisOrderTable">
+       <div>
+           <div class="table_main_view">
+               <table cellspacing="0" width="100%" id="table2excel" class="paginated table table-hover" style="direction: rtl">
+                   <thead>
+                       <tr class="table_pr_head">
+                        <th class="mon_fld">المجموعة الرئيسية</th>
+                        <th class="mon_fld">كود الصنف</th>
+                        <th class="mon_fld">اسم الصنف</th>
+                        <th class="mon_fld">العمر</th>
+                        
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <t t-foreach="report_lines"
+                          t-as="dynamic_item_balance">
+                           <tr style="border: 1.5px solid black;"
+                               class="pr-line"
+                               t-att-data-account-id="dynamic_item_balance['id']"
+                               t-attf-data-target=".a{{dynamic_item_balance['id']}}">
+                                <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['parent_category_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                              
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['product_id']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['prodcut_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['age_days']"/>
+                                   <!-- </span> -->
+                               </td>
+                
+                           </tr>
+                       </t>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </t>
+</templates>
