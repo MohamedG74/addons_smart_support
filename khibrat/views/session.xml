@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_sessions_data_form_view" model="ir.ui.view">
+		<field name="name">sessions.data.form</field>
+		<field name="model">sessions.data</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="case_id"/>
+						<field name="stage_in_sessions"/>
+						<field name="sessions"/>
+						<field name="session_number"/>
+						<label for="session_date"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="session_date"/>
+							</div>
+							<div class= "col-2">
+								<label for="session_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="session_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="session_date"/>
+						<field name="session_date_hijri"/> -->
+
+						<field name="session_will_be_held"/>
+						<field name="session_many2many_clients" style="width: 1100px; overflow: scroll; display: block;"/>
+						<field name="session_many2many_defendants" style="width: 1100px; overflow: scroll; display: block;"/>
+						<field name="session_others"/>
+						<field name="session_many2many_interfering_related" style="width: 1100px; overflow: scroll; display: block;" attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+						<field name="session_many2many_entries_related" style="width: 1100px; overflow: scroll; display: block;" attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+						<field name="session_experts" widget="many2many_tags"  attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+						<field name="session_witness" widget="many2many_tags"  attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+						<field name="lawyers_attendees" widget="many2many_tags"/>
+						<field name="session_report"/>
+						<field name="session_conclusion"/>
+
+						<label for="next_session_date"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="next_session_date"/>
+							</div>
+							<div class= "col-2">
+								<label for="next_session_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="next_session_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="next_session_date"/>
+						<field name="next_session_date_hijri"/> -->
+
+						<field name="required_for_next_session"/>
+
+						<label for="session_notes"/>
+                        <div class="o_row">
+						<field name = "session_notes"/>
+							<button name="action_add_decision" string ="إضافة القرار" type= "object" class="oe_highlight"/>
+							<button name="action_add_session_report" string ="إضافة تقرير الجلسة" type= "object" class="oe_highlight"/>
+                        </div>
+					</group>
+					<notebook>
+						<page string ="القرار" name = "القرار">
+							<field name="another_decision_ids" widget='many2many' colspan="4" nolabel="1">
+								<tree editable="bottom">
+									<button name="action_decision" string ="عرض القرار" type= "object" class="oe_highlight"/>
+									<field name = "another_decision"/>
+									<!-- <field name = "appointment" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+									<field name = "phase" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+									<field name = "date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/> -->
+									<!-- <field name = "procedure" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/> -->
+									<!-- <field name = "registration_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "registration_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion_circle" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion_verdict" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion_verdict_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion_verdict_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+									<field name = "resupmtion_verdict_spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/> -->
+									<!-- <field name = "expert" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+									<field name = "expert_name" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/> -->
+									<control>
+										<create name="add_line_control" string=" "/>
+									</control>
+								</tree>
+								<form>
+									<group col="4">
+										<field name = "another_decision"/>
+										<field name="appointment" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+										<field name="phase" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+										<field name="date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+										<field name = "procedure" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "registration_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "registration_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion_circle" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion_verdict" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion_verdict_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion_verdict_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "resupmtion_verdict_spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+										<field name = "expert" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+										<field name = "expert_result" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+									</group>
+								</form>
+							</field>
+						</page>
+						<page string ="تقرير الجلسة" name = "تقرير الجلسة">
+							<field name="session_report_ids" widget='many2many' colspan="4" nolabel="1">
+								<tree editable="bottom">
+								<button name="action_email_report" string ="إرسال التقرير" type= "object" class="oe_highlight"/>
+								<button name="action_report" string ="عرض التقرير" type= "object" class="oe_highlight"/>
+								
+									<field name = "report_name"/>
+									<control>
+										<create name="add_line_control" string=" "/>
+									</control>
+								</tree>
+								<form>
+									<group col="4">
+										<field name = "report_name"/>
+									</group>
+								</form>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+				
+			</form>
+		</field>
+	</record>
+	<record id="view_sessions_data_tree_view" model="ir.ui.view">
+		<field name="name">sessions.data.tree</field>
+		<field name="model">sessions.data</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="case_id"/>
+				<field name="stage_in_sessions"/>
+				<field name="sessions"/>
+				<field name="session_number"/>				
+				<field name="session_date"/>
+				<field name="session_date_hijri"/>
+				<field name="session_will_be_held"/>
+				<field name="session_many2many_clients"/>
+				<field name="session_many2many_defendants"/>
+				<field name="session_others"/>
+				<field name="session_many2many_interfering_related" attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+				<field name="session_many2many_entries_related"  attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+				<!-- <field name="lawyers_attendees" widget="many2many_tags"/> -->
+				<field name="session_experts"  attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+				<field name="session_witness"  attrs="{'invisible': [('session_others', '=',  'other_not_exist')]}"/>
+				<field name="session_report"/>
+				<field name="session_conclusion"/>
+				<field name="required_for_next_session"/>
+				<field name="next_session_date"/>
+				<field name="session_notes"/>
+				<field name="session_decision"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_sessions_data" model="ir.actions.act_window">
+		<field name="name">الجلسات</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sessions.data</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+	
+	<!-- <record model="res.groups" id="group_khibrat_session">
+		<field name="name">Khibrat Session</field>
+		<field name="category_id" ref="khibrat.module_category_khibrat"/>
+		<field name="comment">Allows access to the Khibrat Session</field>
+		<field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+	</record> -->
+
+	<menuitem id="menu_sessions_in_sessions"
+        name="الجلسات"
+        parent= "menu_sessions"
+        action = "action_sessions_data"
+        sequence="1"/>
+</odoo>

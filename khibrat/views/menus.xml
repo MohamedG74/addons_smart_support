@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_khibrat"
+        name=" خبرات "
+        sequence="10"
+        web_icon="khibrat,static/description/icon.png"/>
+
+    <menuitem id="menu_clients_defendants"
+        name="أطراف الدعوى"
+        parent= "menu_khibrat"
+        sequence="20"/>
+    
+    <menuitem id="menu_lawyers_and_consultants"
+        name="المحامون و المستشارون"
+        parent= "menu_khibrat"
+        sequence="30"/>
+    
+    <menuitem id="menu_demands_and_final_demands"
+        name="الطلبات"
+        parent= "menu_khibrat"
+        sequence="31"/>
+
+    <menuitem id="menu_sessions"
+        name="الجلسات"
+        parent= "menu_khibrat"
+        sequence="90"/>
+    
+    <menuitem id="menu_others"
+        name="أطراف أخرى"
+        parent= "menu_khibrat"
+        sequence="110"/>
+    
+    <menuitem id="menu_judgment"
+        name="الأحكام"
+        parent= "menu_khibrat"
+        sequence="125"/>
+</odoo>

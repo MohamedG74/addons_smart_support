@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_view_form_gas" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.gas</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='journal_div']" position="after">
+                <label for="delivery_status"/>
+                <div name="delivery_status_div" class="d-flex" >
+                    <field name="delivery_status" />
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='quantity']" position="after">
+                <field name="deliverd" />
+                <field name="deliverd_remain" />
+            </xpath>
+            <xpath expr="//page[@name='aml_tab']" position="inside">
+                <field name="deliverd" invisible="1"/>
+                <field name="deliverd_remain" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

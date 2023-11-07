@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sh_pos_all_in_one_retail_configuration" model="ir.ui.view">
+        <field name="name">sh.product.suggestion.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="pos_technical_section" position="after">
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">Display Warehouse Stock</div>
+                    <div class="col-xs-6 col-md-6 o_setting_box" id="sh_wh_stock_module">
+                        <div class="o_setting_left_pane">
+                            <field name="pos_sh_display_stock" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_display_stock" />
+                            <div class="text-muted">
+                                Display Warehouse wise Product Quantity
+                            </div>
+                        </div>
+                        <!-- Stock Advance Configuration -->
+                        <div id="category_reference" attrs="{'invisible':['|',('pos_sh_display_stock','=',False),('pos_sh_show_qty_location','=',False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="pos_sh_update_real_time_qty" />
+                            </div>
+                            <div class="o_setting_right_pane" style="white-space: nowrap;">
+                                <label for="pos_sh_update_real_time_qty" />
+                                <div class="text-muted">
+                                    Update Quantity From Other POS Session
+                                </div>
+                            </div>
+                        </div>
+                        <div id="category_reference" attrs="{'invisible':['|','|',('pos_sh_display_stock','=',False),('pos_sh_show_qty_location','=',False),('pos_sh_update_real_time_qty','=',False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="pos_sh_update_quantity_cart_change" />
+                            </div>
+                            <div class="o_setting_right_pane" style="white-space: nowrap;">
+                                <label for="pos_sh_update_quantity_cart_change" />
+                                <div class="text-muted">
+                                    Note : This option will give empact on speed performance.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 o_setting_box" attrs="{'invisible':[('pos_sh_display_stock','=',False)]}">
+                        <div class="o_setting_left_pane"></div>
+                        <div class="o_setting_right_pane ">
+                            <label for="pos_sh_display_by" />
+                            <br />
+                            <field name="pos_sh_display_by" widget="radio" style="display: -webkit-inline-box;" />
+                        </div>
+
+                        <div class="o_setting_left_pane ">
+                            <field name="pos_sh_show_qty_location" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_show_qty_location" />
+                            <br />
+                        </div>
+                        <div class="o_setting_right_pane mt-3" attrs="{'invisible':[('pos_sh_show_qty_location','=',False)]}">
+                            <label for="pos_sh_pos_location" />
+                            <br />
+                            <div class="text-muted">
+                                Must be set when select Only show quantity in POS location
+                            </div>
+                            <field name="pos_sh_pos_location" widget="many2many_tag" attrs="{'required':[('pos_sh_show_qty_location','=',True)]}" />
+                            <div class="mt16">
+                                <label for="pos_sh_min_qty" />
+                                <field name="pos_sh_min_qty" />
+                                <div class="text-muted">
+                                    Deny order when available quantity lower than
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </field>
+    </record>
+</odoo>

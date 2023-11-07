@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_consultants_form_view" model="ir.ui.view">
+        <field name="name">consultants.data.form</field>
+        <field name="model">consultants.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name = "name"/>
+                        <field name = "identity_card"/>
+                        <field name = "identity_card_number"/>
+                        <label for="published_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="published_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="published_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="published_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "published_date"/>
+                        <field name = "published_date_hijri"/> -->
+
+                        <label for="ended_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="ended_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="ended_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="ended_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "ended_date"/>
+                        <field name = "ended_date_hijri"/> -->
+
+                        <field name = "address"/>
+                        <field name = "email"/>
+                        <field name = "phone_number"/>
+                        <field name = "commerial_register"/>
+                        <label for="commerial_register_start_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "commerial_register_start_date"/>
+                        <field name = "commerial_register_start_date_hijri"/> -->
+
+                        <label for="commerial_register_end_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "commerial_register_end_date"/>
+                        <field name = "commerial_register_end_date_hijri"/> -->
+                        
+                        <field name = "commerial_register_manager"/>
+                        
+                        <field name = "notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+</record>
+
+<record id="view_consultants_tree_view" model="ir.ui.view">
+        <field name="name">consultants.data.tree</field>
+        <field name="model">consultants.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "name"/>
+                <field name = "identity_card"/>
+                <field name = "identity_card_number"/>
+                <!-- <field name = "published_date"/>
+                <field name = "ended_date"/> -->
+                <field name = "address"/>
+                <field name = "email"/>
+                <field name = "phone_number"/>
+                <field name = "commerial_register"/>
+                <!-- <field name = "commerial_register_start_date"/>
+                <field name = "commerial_register_end_date"/>
+                <field name = "notes"/> -->
+            </tree>
+        </field>
+</record>
+
+<record id="action_consultants" model="ir.actions.act_window">
+        <field name="name">المستشارون</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">consultants.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_consultants"
+        name="المستشارون"
+        parent= "menu_lawyers_and_consultants"
+        action = "action_consultants"
+        sequence="2"/>
+</odoo>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_legalconsultations_studies_form_view" model="ir.ui.view">
+        <field name="name">legalconsultations.studies.form</field>
+        <field name="model">legalconsultations.studies</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone_number"/>
+                        <field name="email"/>
+                        <field name="identity_card_number"/>
+                        <field name="commerial_register"/>
+
+                        <label for="commerial_register_start_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+
+                        <label for="commerial_register_end_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+
+
+                        <field name="commerial_register_manager"/>
+
+
+                        <label for="consultation_request_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="consultation_request_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="consultation_request_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="consultation_request_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        
+                        
+                        <label for="consultation_delivery_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="consultation_delivery_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="consultation_delivery_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="consultation_delivery_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+
+                        <field name="consultation_type"/>
+                        <field name="consultation_category_1" attrs="{'invisible': [('consultation_type', 'not in',  'x_1')]}"/>
+                        <field name="consultation_category_2" attrs="{'invisible': [('consultation_type', 'not in',  'x_2')]}"/>
+                        <field name="consultation_category_3" attrs="{'invisible': [('consultation_type', 'not in',  'x_3')]}"/>
+                        <field name="consultation_category_4" attrs="{'invisible': [('consultation_type', 'not in',  'x_4')]}"/>
+                        <field name="consultation_document" widget="many2many_binary"/>
+                        <field name="consultation_fee"/>
+                    </group>
+                </sheet>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>  -->
+            </form>
+        </field>
+</record>
+
+<record id="view_legalconsultations_studies_tree_view" model="ir.ui.view">
+        <field name="name">legalconsultations.studies.tree</field>
+        <field name="model">legalconsultations.studies</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="email"/>
+                <field name="consultation_request_date"/>
+                <field name="consultation_delivery_date"/>
+                <field name="consultation_type"/>
+                <field name="consultation_fee"/>
+            </tree>
+        </field>
+</record>
+
+<record id="action_legalconsultations_studies" model="ir.actions.act_window">
+        <field name="name">الاستشارات القانونية و الدراسات</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">legalconsultations.studies</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_legalconsultations_studies"
+        name="الاستشارات القانونية و الدراسات"
+        parent= "menu_khibrat"
+        action = "action_legalconsultations_studies"
+        sequence="200"/>
+</odoo>

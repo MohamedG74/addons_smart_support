@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_final_judgment_form_view" model="ir.ui.view">
+		<field name="name">final.judgment.form</field>
+		<field name="model">final.judgment</field>
+		<field name="arch" type="xml">
+			<form create="false">
+				<sheet>
+					<group>
+						<field name="final_judgment_stage_id" invisible="1"/>
+						<field name="final_judgment_id" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+						<field name="final_judgment_type" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+						<field name="stage_in_final_judgment" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+                        
+						<label for="final_judgment_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="final_judgment_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="final_judgment_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="final_judgment_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="final_judgment_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية'))]}"/>
+						<field name="final_judgment_date_hijri" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية'))]}"/> -->
+						
+
+						<label for="final_judgment_received_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="final_judgment_received_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="final_judgment_received_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="final_judgment_received_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="final_judgment_received_date" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية'))]}"/>
+						<field name="final_judgment_received_date_hijri" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية'))]}"/> -->
+						
+						<field name="final_judgment_spoken" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+						<field name="final_judgment_attach_name" invisible="1" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+                        <field name="final_judgment_attach_file" filename="final_judgment_attach_name" widget="pdf_viewer" attrs="{'readonly': [('final_judgment_stage_id', 'in',  ('مرحلة الانتهاء','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية'))]}"/>
+					</group>
+					
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="view_final_judgment_tree_view" model="ir.ui.view">
+		<field name="name">final.judgment.tree</field>
+		<field name="model">final.judgment</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="final_judgment_id"/>
+				<field name="final_judgment_type"/>
+				<field name="stage_in_final_judgment"/>
+                <field name="final_judgment_date"/>
+                <field name="final_judgment_received_date"/>
+                <field name="final_judgment_spoken"/>
+				<field name="final_judgment_attach_name"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_final_judgment" model="ir.actions.act_window">
+		<field name="name">حكم العليا الاولى</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">final.judgment</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+	<menuitem id="menu_final_judgment"
+        name="الحكم العليا"
+        parent= "menu_judgment"
+        action = "action_final_judgment"
+        sequence="3"/>
+</odoo>

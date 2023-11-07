@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="credit_view_journal" model="ir.ui.view">
+            <field name="name">credit</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="model">account.journal</field>
+            <field name="arch" type="xml">
+                <xpath expr=".//field[@name='type']" position="after">
+                    <field name="credit_journal"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="journal_auto_create" model="account.journal">
+            <field name="name">Credits</field>
+<!--            <field name="type">cash</field>-->
+            <field name="code">CRDT</field>
+            <field name="credit_journal">True</field>
+        </record>
+
+    </data>
+</odoo>

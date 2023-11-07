@@ -12,7 +12,7 @@
     'support': 'support@smartsupport.tech',
     'version': '15.0.1.0.0',
     'images': [],
-    'depends': ['purchase','sale','base'],
+    'depends': ['purchase','sale','stock','base'],
     'data': [
         'views/sale_order.xml',
         'security/ir.model.access.csv',

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="PartnerLine" t-inherit="point_of_sale.PartnerLine" t-inherit-mode="extension" owl="1" priority="100" >
+        <xpath expr="//td[hasclass('partner-line-balance')]" position="replace">
+            <td class="partner-line-balance" t-if="getRole()">
+            </td>
+            <td t-if="getRole() == false" class="partner-line-balance" style="display:none;">
+            </td>
+        </xpath>
+	</t> 
+</templates>

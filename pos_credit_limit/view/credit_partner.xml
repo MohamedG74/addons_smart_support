@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="partner_credit_limit" model="ir.ui.view">
+            <field name="name">CreditLimit</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr=".//page[@name='accounting']//field[@name='bank_ids']" position="after">
+                    <group>
+                            <label for="credit_limit"/>
+                            <div class="p_settings_left_pane">
+                                    <field name="credit_limit" class="oe_inline" style="width: 50%"/>
+                            </div>
+                            <label for="block_days"/>
+                            <div class="p_settings_left_pane">
+                                    <field name="block_days" class="oe_inline" style="width: 50%"/>
+                            </div>
+                    </group>
+                    <group>
+                        <field name="credit_amount" readonly="1"/>
+                        <field name="credit_days" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

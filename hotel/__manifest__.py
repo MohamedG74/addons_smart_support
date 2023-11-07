@@ -10,7 +10,8 @@
         'security\ir.model.access.csv',
         'data\sequence.xml',
         'views\menu.xml',
-        'views\guest.xml'
+        'views\guest.xml',
+        'views\_room.xml',
         
     ]
 }

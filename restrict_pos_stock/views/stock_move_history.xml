@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock_move_history_show_prod_code" model="ir.ui.view">
+        <field name="name">stock_move_history_show_prod_code</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="field[@name='product_id']" position="before">
+                <field name="prod_code" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

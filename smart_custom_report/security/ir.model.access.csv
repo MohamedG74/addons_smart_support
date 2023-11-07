@@ -24,4 +24,4 @@ access_dynamic_trial_balance_sub,dynamic.trial.balance.sub,model_dynamic_trial_b
 
 
 
-access_dynamic_items_analysis,dynamic.items.analysis,model_dynamic_items_analysis,smart_custom_report.group_items_analysis,1,1,1,0
+access_dynamic_suggested_order,dynamic.suggested.order,model_dynamic_suggested_order,smart_custom_report.group_suggested_order,1,1,1,0

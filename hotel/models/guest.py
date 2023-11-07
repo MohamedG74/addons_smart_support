@@ -12,9 +12,8 @@ class HotelGuest(models.Model):
     category = fields.Selection([('first class', 'First Class'),('second class','Second Class'),('third class','Third Class')],string="category",tracking=True)
     gender = fields.Selection([('male', 'Male'),('female','Female')],string="Gender")
     is_child= fields.Boolean(string="Is Child?")
-    capitalized_name = fields.Char(string="capitalized Name", compute = '_compute_capitalized_name')
     ref = fields.Char(string="Id", default=lambda self: _('New')) #value of New must be default
-
+    room_id=fields.Many2one('hotel.room',string="Room ID")
     @api.onchange('age')   #decorator
     def _onchange_age(x):
         if x.age <= 5:
@@ -23,25 +22,28 @@ class HotelGuest(models.Model):
             x.is_child = False
 
 
-    @api.depends('name')
-    def _compute_capitalized_name(x):        
-        for records in x:
-            if records.name:
-                records.capitalized_name = records.name.upper()
-            else:
-                records.capitalized_name = " "
-
 
     @api.constrains('name','category')
     def _check_name_category_ischild(x):
         for records in x:
-            if not records.name or not records.category:
+            if not records.name:
                 raise ValidationError(_("chech your entered data"))
 
 
     @api.model_create_multi
     def create(self, value):
         for val in value:
-            val['phone_number'] = '11111121111'
+            val['phone_number'] = '1111111111'
             val['ref']= self.env['ir.sequence'].next_by_code('hotel.guest') 
         return super(HotelGuest, self).create(value)
+
+    def button_show(self):
+       
+        return{
+            'name': 'view rooms',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree',
+            'res_model': 'hotel.room',
+            # 'res_id': self.contracto_id,
+            'context': {'create': False}
+        }

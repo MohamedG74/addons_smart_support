@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sh_pos_all_in_one_retail_configuration" model="ir.ui.view">
+        <field name="name">sh.product.suggestion.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="pos_accounting_section" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Journals</span>
+                        <div class="text-muted">
+                            Default journals for return
+                        </div>
+                        <div class="content-group mt16">
+                            <div class="row" title="Whenever you close a session, one entry is generated in the following accounting journal for all the orders not invoiced. Invoices are recorded in accounting separately.">
+                                <label string="Orders" for="pos_journal_id" class="col-lg-3 o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="pos_return_journal_id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pos_technical_section" position="after">
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">Warehouse Selling Without Stock</div>
+                    <div class="col-xs-6 col-md-6 o_setting_box" id="sh_wh_stock_module">
+                        <div class="o_setting_left_pane">
+                            <field name="smart_without_stock" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="smart_without_stock" />
+                            <div class="text-muted">
+                                Allow Selling without stock?
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">POS Branch</div>
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                            <label for="operating_unit_id" />
+                            <div class="text-muted">
+                               Point of sale allowed Branch
+                            </div>
+                        </div>
+                        <div class="" style="margin-left: 36px;margin-top: 10px;">
+                            <field name="operating_unit_id" />
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+                
+                <!-- <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">Admin User</div>
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                            <label for="admin_user" />
+                            <div class="text-muted">
+                               
+                            </div>
+                        </div>
+                        <div class="" style="margin-left: 36px;margin-top: 10px;">
+                            <field name="admin_user" />
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- <h2>UOM Settings</h2> -->
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">Selling Unit Settings</div>
+
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="pos_select_uom_type" />:
+                            <div>
+                                <field name="pos_select_uom_type" widget="radio" style="width: 180px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container" attrs="{'invisible': [('pos_select_uom_type', '==', 'primary')]}">
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="pos_enable_price_to_display" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_enable_price_to_display" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

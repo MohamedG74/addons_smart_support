@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="pos_all_in_one_configuration" model="ir.ui.view">
+        <field name="name">pos.all.in.one.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="pos_technical_section" position="after">
+  
+                <!-- Order list Config -->
+                <h2 name="orders_history"></h2>
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">Order Screen Configuration</div>
+                    <div id="category_reference" class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="pos_sh_enable_order_list" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_enable_order_list" />
+                        </div>
+                    </div>
+
+                    <div id="category_reference" class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('pos_sh_enable_order_list','!=',True)]}">
+                        <div class="o_setting_left_pane">
+                            <field name="pos_sh_enable_re_order" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_enable_re_order" />
+                            <div class="text-muted">
+                                ReOrder POS Order From Order Screen
+                            </div>
+                        </div>
+                    </div>
+                    <div id="category_reference" class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('pos_sh_enable_order_list','!=',True)],'required': [('pos_sh_enable_order_list','=',True)]}">
+                        <div class="o_setting_left_pane"></div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_load_order_by" />
+                            <field name="pos_sh_load_order_by" />
+                        </div>
+                    </div>
+                    <div id="category_reference" class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('pos_sh_enable_order_list','!=',True)]}">
+                        <div class="o_setting_left_pane">
+                            <field name="pos_sh_enable_order_reprint" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_enable_order_reprint" />
+                            <div class="text-muted">
+                                Print Order Receipt From Order Screen
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': ['|',('pos_sh_load_order_by','!=','session_wise'),('pos_sh_enable_order_list','!=',True)]}">
+                        <div class="o_setting_left_pane"></div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_session_wise_option" />
+                            <div class="text-muted">
+                                Load Order of Current Session or Last No Of Session
+                            </div>
+                            <field name="pos_sh_session_wise_option" widget="radio" />
+                            <div attrs="{'invisible': ['|',('pos_sh_session_wise_option', '!=', 'last_no_session'),('pos_sh_load_order_by' ,'!=', 'session_wise')]}">
+                                <field name="pos_sh_last_no_session" style="width: 36px;" />
+                                <label for="pos_sh_last_no_session" style="font-weight: normal;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': ['|',('pos_sh_load_order_by','!=','day_wise'),('pos_sh_enable_order_list','!=',True)]}">
+                        <div class="o_setting_left_pane"></div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_day_wise_option" />
+                            <div class="text-muted">
+                                Load Order of Current Days or Last No Of Days
+                            </div>
+                            <field name="pos_sh_day_wise_option" widget="radio" />
+                            <div attrs="{'invisible': ['|',('pos_sh_day_wise_option', '!=', 'last_no_day'),('pos_sh_load_order_by' ,'!=', 'day_wise')]}">
+                                <field name="pos_sh_last_no_days" style="width: 36px;" />
+                                <label for="pos_sh_last_no_days" style="font-weight: normal;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="category_reference" class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('pos_sh_enable_order_list','!=',True)]}">
+                        <div class="o_setting_left_pane"></div>
+                        <div class="o_setting_right_pane">
+                            <label for="pos_sh_how_many_order_per_page" />
+                            <br />
+                            <field name="pos_sh_how_many_order_per_page" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">POS Order Return</div>
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="sh_allow_return" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="sh_allow_return" />
+                            <div class="content-group" attrs="{'invisible': [('sh_allow_return','=',False)]}">
+                                <div class="mt16">
+                                    <label for="sh_return_more_qty" class="o_light_label" />
+                                    <field name="sh_return_more_qty" />
+                                    <label for="sh_return_print_receipt" class="o_light_label" />
+                                    <field name="sh_return_print_receipt" />
+                                </div>
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="sh_return_days" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="sh_allow_exchange" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="sh_allow_exchange" />
+                            <div class="content-group" attrs="{'invisible': [('sh_allow_exchange','=',False)]}">
+                                <div class="mt16">
+                                    <label for="sh_exchange_print_receipt" class="o_light_label" />
+                                    <field name="sh_exchange_print_receipt" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container">
+                    <div style="font-size: 15px; font-weight: 600;">POS Order Branch Discount Limit</div>
+                    <div class="col-xs-12 col-md-12 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="sh_branch_discount" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="sh_branch_discount" />
+                           
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </field>
+    </record>
+</odoo>

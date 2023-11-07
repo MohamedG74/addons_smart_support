@@ -1,0 +1,175 @@
+/* arabic */
+@font-face {
+    font-family: 'Noto Sans Arabic';
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    src: url(https://fonts.gstatic.com/s/notosansarabic/v18/nwpxtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlhQ5l3sQWIHPqzCfyGyfuXqANwfKi0ZX.woff2) format('woff2');
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC, U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  
+  /* ===========v14============*/
+  .default-view {
+      flex-direction: column;
+  }
+  
+  .default-view .pos-receipt-container {
+      order: 2;
+  }
+  
+  .default-view .actions {
+      order: 1;
+  }
+  
+  .receipt-screen .default-view .pos-receipt-container {
+      flex: 0 1 100%;
+  }
+  
+  /* ============================= */
+  .screen .top-content .button.print-a4 {
+      left: 0px;
+      margin-left: 16px;
+  }
+  
+  hr.separator {
+      height: 1px;
+      background: #d2cece;
+      border: none;
+  }
+  
+  .text-right {
+      text-align: right;
+  }
+  
+  .text-center {
+      text-align: center;
+  }
+  
+  .screen .centered-content {
+      right: 0;
+      left: 0;
+      width: 100%;
+  }
+  
+  .header {
+      display: flex;
+  }
+  
+  .w-50 {
+      width: 50%;
+  }
+  
+  .w-60 {
+      width: 60%;
+  }
+  
+  .w-40 {
+      width: 40%;
+  }
+  
+  .content.order-info, .content.company-info {
+      font-family: Poppins, Lato, Serif;
+  }
+  
+  .content.subtotal {
+      display: flex;
+      align-items: center;
+      text-align: right;
+  }
+  
+  
+  .pos-receipt-container {
+      width: 100%;
+  }
+  
+  .pos-receipt.a4 {
+      width: 210mm !important;
+      /*height: 297mm;*/
+      direction: rtl !important;
+      text-align: right !important;
+  
+  }
+  
+  .pos-receipt.a4 .header {
+      padding-bottom: 0;
+      margin-bottom: 0;
+  }
+  
+  .company-logo {
+      height: 110px;
+      max-height: 110px;
+      /*padding: 5px;*/
+      display: flex;
+      justify-content: end;
+  }
+  
+  .pos-receipt.a4 .pos-receipt-logo {
+      width: 85%;
+      object-fit: contain;
+      height: 100%;
+      margin: 0 auto;
+  }
+  
+  .pos-receipt.a4 .pos-receipt-contact {
+      text-align: center !important;
+      font-size: 16px;
+  }
+  
+  .pos-section {
+      border-top: 1px solid #d2cece;
+      padding: 15px 0;
+      display: flex;
+  }
+  
+  .table-el {
+      width: 100%;
+              margin-top: 0;
+  }
+  
+  .table-el th {
+      /*letter-spacing: 2px;*/
+      color: #8d8d8d;
+      font-weight: bold;
+      font-size:20px;
+      text-transform: uppercase;
+  }
+  
+  .table-el th, .table-el td {
+      padding: 6px 5px;
+  }
+  .table-el td {
+      font-size:18px;
+  }
+  #barcode {
+      height: 90px;
+      width: 300px;
+  }
+  
+  #amount-to-text {
+      justify-content: center;
+  }
+  
+  @media print {
+      .pos .pos-receipt.a4 {
+          width: 210mm !important;
+          margin: 0 10px !important;
+          direction: rtl !important;
+          text-align: right !important;
+          padding: 0 !important;
+  
+  
+      }
+      .pos-receipt-container{
+          overflow:unset !important;
+      }
+      .table-el td {
+          font-size: 15px !important;
+      }
+      .content.order-info.w-60 {
+          margin-top: 10px;
+      }
+  }
+  .pos-receipt.a4 *,.pos-receipt.a4,.pos-receipt.a4 td,.pos-receipt.a4 th{
+      font-family:'Noto Sans Arabic' !important;
+  }
+  

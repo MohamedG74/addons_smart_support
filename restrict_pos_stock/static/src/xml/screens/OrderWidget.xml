@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="OrderWidget" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('order-container')]" position="replace">
+            <div class="order-container" t-ref="scrollable">
+                <div class="order">
+                    <t t-if="orderlinesArray.length === 0" >
+                        <div class='order-empty'>
+                            <i class='fa fa-shopping-cart' role="img" aria-label="Shopping cart"
+                            title="Shopping cart"/>
+                            <h1>This order is empty</h1>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <table border="0" class="newtab">
+                            <tbody>
+                                <tr style="background-color: palegoldenrod;">
+                                    <td style="width:120px; text-align:left;">كود الصنف</td>
+                                    <td style="width:680px;">الوصف</td>
+                                    <td style="width:55px;">الكمية</td>
+                                    <td style="width:120px; text-align:left;">سعر الوحدة</td>
+                                    <td style="width:160px; text-align:center;">الاجمالى قبل الخصم</td>
+                                    <td style="width:75px; text-align:center;">قيمة الخصم</td>
+                                    <td >نسبة الخصم</td>
+                                    <td style="width:100px;">الاجمالى بعد الخصم</td>
+                                    <td style="width:100px;">الضمان</th>
+                                    <td >ملاحظات</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul class="orderlines">
+                            <t t-foreach="orderlinesArray" t-as="orderline" t-key="orderline.id">
+                                <Orderline line="orderline" />
+                            </t>
+                        </ul>
+                        <OrderSummary order="order" />
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

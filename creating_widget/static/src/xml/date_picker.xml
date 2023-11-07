@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="FieldDate">
+        <t t-jquery="input.o_datepicker_input" t-operation="replace">
+            <input t-att-value="value" type="text" class="o_input o_datepicker_input" readonly="readonly"/>
+        </t>
+    </t>
+</templates>

@@ -12,4 +12,4 @@ from . import sales_invoice_return
 from . import item_sales_return
 #Accounting
 from . import trial_balance_sub
-from . import items_analysis
+from . import suggested_order

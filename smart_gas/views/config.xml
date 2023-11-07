@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_view_form_gas" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.gas</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quantity']" position="before">
+                <field name="thousandcubic" />
+                <field name="gasvalue" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="before">
+                <field name="thousandcubic" invisible="1"/>
+                <field name="gasvalue" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_heat" model="ir.ui.view">
+        <field name="name">settings.heat.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='default_taxes_setting_container']" position="after">
+            <h2>Heat Value</h2>
+                <div class="row mt16 o_settings_container" name="heating_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="heating">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Monthly Heat Value</span>
+                            <span class="fa fa-lg fa-building-o"/>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="heating" class="col-lg-3 o_light_label"/>
+                                    <field name = "heating"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+</record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_employee_public_target_view" model="ir.ui.view">
+        <field name="name">hr.employee.public.target.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='company_id']" position="after">   
+                              
+                    <group>
+                        <group string="المستهدف">
+                            <field name="target"/>
+                            <field name="target_period" string="دورة حساب المستهدف"/>
+                            <field name="acheived" string="المستهدف المحقق"/>
+                        </group>
+                    </group>
+                
+                    
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_defendant_data_form_view" model="ir.ui.view">
+        <field name="name">defendant.data.form</field>
+        <field name="model">defendant.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group class='mostafa'>
+                        <field name = "name"/>
+                        <field name = "identity_card"/>
+                        <field name = "identity_card_number"/>
+                        
+                        <label for="published_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="published_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="published_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="published_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "published_date"/>
+                        <field name = "published_date_hijri"/> -->
+
+                        <label for="ended_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="ended_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="ended_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="ended_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "ended_date"/>
+                        <field name = "ended_date_hijri"/> -->
+
+                        <field name = "address"/>
+                        <field name = "email"/>
+                        <field name = "phone_number"/>
+                        <field name = "commerial_register"/>
+
+                        <label for="commerial_register_start_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_start_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "commerial_register_start_date"/>
+                        <field name = "commerial_register_start_date_hijri"/> -->
+
+                        <label for="commerial_register_end_date"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="commerial_register_end_date_hijri"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        <!-- <field name = "commerial_register_end_date"/>
+                        <field name = "commerial_register_end_date_hijri"/> -->
+
+                        <field name = "commerial_register_manager"/>
+                        
+                        <field name = "notes"/>
+
+                        <field name = "lawyer_many2many_ids_defendant"/>
+                        <field name = "consultant_many2many_ids_defendant"/>
+
+
+                        <field name="document_name_lawyer" invisible="1"/>
+                        <field name="document_file_lawyer" filename="document_name_lawyer"/>
+
+                        <label for="agency_ended_date_lawyer"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="agency_ended_date_lawyer"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="agency_ended_date_hijri_lawyer"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="agency_ended_date_hijri_lawyer"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                        
+
+                        <field name="document_name_consultant" invisible="1"/>
+                        <field name="document_file_consultant" filename="document_name_consultant"/>
+
+                        <label for="agency_ended_date_consultant"/>
+                        <div class="o_row">
+                            <div class= "col-2">
+                                <field name="agency_ended_date_consultant"/>
+                            </div>
+                            <div class= "col-2" style="text-align: center;">
+                                <label for="agency_ended_date_hijri_consultant"/>
+                            </div>
+                            <div class= "col-2">
+                                <field name="agency_ended_date_hijri_consultant"/>
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                            <div class= "col-2">
+                            </div>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+</record>
+
+<record id="view_defendant_data_tree_view" model="ir.ui.view">
+        <field name="name">defendant.data.tree</field>
+        <field name="model">defendant.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <field name = "ref"/> -->
+                <field name = "name"/>
+                <field name = "identity_card"/>
+                <field name = "identity_card_number"/>
+                <!-- <field name = "published_date"/>
+                <field name = "ended_date"/> -->
+                <field name = "address"/>
+                <field name = "email"/>
+                <field name = "phone_number"/>
+                <field name = "commerial_register"/>
+                <!-- <field name = "commerial_register_start_date"/>
+                <field name = "commerial_register_end_date"/>
+                <field name = "notes"/> -->
+                <field name = "lawyer_many2many_ids_defendant" widget="many2many_tags"/>
+                <field name = "consultant_many2many_ids_defendant" widget="many2many_tags"/>
+            </tree>
+        </field>
+</record>
+
+<record id="action_defendant_data" model="ir.actions.act_window">
+        <field name="name">المُدعي عليه</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">defendant.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_defendant"
+        name="المُدعي عليه"
+        parent= "menu_clients_defendants"
+        action = "action_defendant_data"
+        sequence="2"/>
+</odoo>

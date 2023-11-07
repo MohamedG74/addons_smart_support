@@ -1,0 +1,246 @@
+<templates>
+   <t t-name="SuggestedOrderReport">
+       <div class="">
+           <div>
+               <center>
+                <h1 style="margin: 20px;">تقرير التغذية</h1>
+               </center>
+           </div>
+           <div>
+               <div class="filter_view_pr"/>
+           </div>
+           <div>
+               <div class="table_view_pr" style="width: 95%; margin: auto;"/>
+           </div>
+       </div>
+   </t>
+   <t t-name="SuggestedOrderFilterView">
+       <script src="/smart_custom_report/static/src/js/jquery.table2excel.js"></script>
+       <script src="/smart_custom_report/static/src/js/tabulator.js"></script>
+
+       
+       <div class="print-btns">
+           <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-primary" id="xlsx">
+                       Export (XLSX)
+                   </button>
+               </div>
+          
+            </div>
+
+           <div class="sub_container_right">
+               <div class="form-group">
+                    <label class="" for="date_from">تاريخ البداية :</label>
+                    <div class="input-group date" id="date_from"
+                        data-target-input="nearest">
+                        <input type="text" name="date_from"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_from"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_from"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">   
+                    <label class="" for="date_to">تاريخ الانتهاء :</label>
+                    <div class="input-group date" id="date_to"
+                        data-target-input="nearest">
+                        <input type="text" name="date_to"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_to"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_to"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="report_product">المنتج :</label>
+                    <select id="selectionproduct" class="input-group report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">All</option>
+                    </select>
+                </div>
+
+               <div class="form-group" style='display:none;'>
+                    <label class="" for="report_location">المستودع :</label>
+                    <select id="selectionw" class="input-group report_location"
+                               aria-labelledby="dropdownMenuLink"
+                               name="warehouse[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">All</option>
+                    </select>
+                </div>
+
+               <div class="form-group">
+                    <label class="" for="main_group">المجموعة الرئيسية :</label>
+                    <select id="selection_main_group" class="input-group main_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="main_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="" for="second_group">المجموعة الفرعية :</label>
+                    <select id="selection_second_group" class="input-group second_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="second_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+
+
+               <div class="apply_filter">
+                   <button type="button" id="apply_filter"
+                           class="btn btn-primary">
+                       Apply
+                   </button>
+               </div>
+
+
+               <div class="button-container" style="direction: ltr; text-align: center; display:none;">
+                    <!-- Include Tabulator CSS -->        
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
+                        <option value="" class="select-items"></option> <!-- Empty selection -->
+                        <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
+                        <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
+                        <option value="invoice_type" class="select-items" style="text-align: center;">نوع الفاتورة</option> -->
+                        <option value="product_name" class="select-items" style="text-align: center;">اسم الصنف</option>
+                        <!-- <option value="invoice_date" class="select-items" style="text-align: center;">تاريخ الفاتورة</option> -->
+                        <option value="category_name" class="select-items" style="text-align: center;">المجموعة الفرعية</option>
+                        <option value="parent_name" class="select-items" style="text-align: center;">المجموعة الرئيسية</option>
+                        <!-- <option value="partner_name" class="select-items" style="text-align: center;">اسم المورد</option>
+                        <option value="discount_percent" class="select-items" style="text-align: center;">نسبة الخصم</option> -->
+                    </select>
+                </div>
+
+           </div>
+       </div>
+   </t>
+   <t t-name="SuggestedOrderOrderTable">
+       <div>
+           <div class="table_main_view">
+               <table cellspacing="0" width="100%" id="table2excel" class="paginated table table-hover" style="direction: rtl">
+                   <thead>
+                       <tr class="table_pr_head inter">
+                            <!-- <th></th>
+                            <th></th> -->
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <t t-foreach="internal" t-as="internal_data"> 
+                                <th colspan="3">
+                                    <t t-esc="internal_data['complete_name']"/>
+                                </th>
+                            </t>
+                       </tr>
+                       <tr class="table_pr_head intertwo">
+                           <!-- <th>الفرع</th>
+                           <th>المستودع</th> -->
+                           <th>المجموعة الرئيسية</th>
+                           <th class="mon_fld">المجموعة الفرعية</th>
+                           <th class="mon_fld">كود الصنف</th>
+                           <th class="mon_fld">اسم الصنف</th>
+                           <th class="mon_fld">الوحدة</th>
+                           <th class="mon_fld">age</th>
+                           
+                            <t t-foreach="internal"> 
+                                <th>
+                                    <span>Stock</span>
+                                </th>
+                                <th>
+                                    <span>Sales</span>
+                                </th>
+                                <th>
+                                    <span>Suggested</span>
+                                </th>
+                            </t>                       
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <t t-foreach="report_lines"
+                          t-as="dynamic_updated_inventory">
+                           <tr style="border: 1.5px solid black;"
+                               class="pr-line"
+                               t-att-data-account-id="dynamic_updated_inventory['id']"
+                               t-attf-data-target=".a{{dynamic_updated_inventory['id']}}">
+                               <!-- <td>
+                                        <t t-esc="dynamic_updated_inventory['operating_unit_name']"/>
+                               </td>
+                               <td>
+                                        <t t-esc="dynamic_updated_inventory['warehouse_name']"/>
+                               </td> -->
+                               <td>
+                                    <t t-esc="dynamic_updated_inventory['parent_name']"/>
+                               </td>
+                               <td style="text-align:center;">
+                                    <t t-esc="dynamic_updated_inventory['category_name']"/>
+                               </td>
+                               <td>
+                                    <t t-esc="dynamic_updated_inventory['product_code']"/>
+                               </td>
+                               <td>
+                                    <t t-esc="dynamic_updated_inventory['product_name']"/>
+                               </td>
+                               <td>
+                                    <t t-esc="dynamic_updated_inventory['uom_name']"/>
+                               </td>
+
+
+                               <td>
+                                    <t t-esc="dynamic_updated_inventory['age']"/>
+                               </td>
+                               <t t-foreach="dynamic_updated_inventory['locations_data']" t-as="updated_inventory">
+                                    <td t-if="updated_inventory['stock_on_hand']">
+                                        <t t-esc="updated_inventory['stock_on_hand']"/>
+                                    </td>
+                                    <td t-else=" ">
+                                        0
+                                    </td>
+                                    
+                                    <td t-if="updated_inventory['sales_for_period']">
+                                        <t t-esc="updated_inventory['sales_for_period']"/>
+                                    </td>
+                                    <td t-else=" ">
+                                        0
+                                    </td>
+
+                                    <td t-if="updated_inventory['suggested_order']">
+                                        <t t-esc="updated_inventory['suggested_order']"/>
+                                    </td>
+                                    <td t-else=" ">
+                                        0
+                                    </td>
+                                </t>
+                           </tr>
+                       </t>
+                       <!--Report for order detail-->
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </t>
+</templates>

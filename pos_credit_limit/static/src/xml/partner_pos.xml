@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template id="template_partner" xml:space="preserve">
+    <t t-name="ProductItem" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//th[hasclass('partner-line-last-column-placeholder')]" position="after">
+            <th>Credit</th>
+            <th>Credit Limit</th>
+        </xpath>
+    </t>
+</template>

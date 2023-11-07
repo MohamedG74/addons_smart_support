@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderDetails" t-inherit="point_of_sale.OrderDetails" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('summary')]" position="replace">
+            <div class="summary clearfix">
+                <div class="line">
+                    <div class="entry total">
+                        <span class="badge">Total: </span>
+                        <span class="value">
+                            <t t-esc="total" />
+                        </span>
+                        <div t-if="tax" class="subentry">
+                            VAT:
+                            <span class="value">
+                                <t t-esc="tax" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

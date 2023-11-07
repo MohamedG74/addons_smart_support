@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_brand_and_model_number_form" model="ir.ui.view">
+        <field name="name">product.brand.and.modelnumber.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='taxes_id']" position="before">
+                <field name="brand"/>
+                <field name="model_number"/>
+            </xpath>
+        </field>
+</record>
+<record id="view_brand_and_model_number_tree" model="ir.ui.view">
+        <field name="name">product.template.brand.and.modelnumber.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='list_price']" position="before">
+                <field name = "brand" optional="hide"/>
+                <field name = "model_number" optional="hide"/>
+            </xpath>
+        </field>
+</record>
+
+
+<record id="view_brand_product_and_model_number_product" model="ir.ui.view">
+        <field name="name">product.brand.product.and.modelnumber.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='taxes_id']" position="before">
+                <field name="brand_product"/>
+                <field name="model_number_product"/>
+            </xpath>
+        </field>
+</record>
+
+
+<record id="view_brand_purchase" model="ir.ui.view">
+        <field name="name">purchase.order.brand.purchase.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='product_qty']" position="before">
+                <field name = "brand_purchase" optional="hide"/>
+                <field name = "model_number_purchase" optional="hide"/>
+                <field name = "cbm" optional="hide"/>
+                <field name = "status" optional="hide"/>
+            </xpath>
+        </field>
+</record>
+
+</odoo>

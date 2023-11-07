@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- <record id="view_order_form_add_new_status" model="ir.ui.view">
+    <field name="name">stock.picking.form.add.new.status</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+
+                <button name="action_in_way" string="التسليم الي السائق" type= "object" class="oe_highlight" data-hotkey="i"
+                attrs="{'invisible': [('driver_state', '=', 'x_5')]}"/>
+            </xpath>
+        </field>
+</record> -->
+<record id="view_add_default_code" model="ir.ui.view">
+        <field name="name">stock.picking.add.default.code.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']//field[@name='product_id']" position="before">
+                <field name = "default_code"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='move_ids_without_package']//field[@name='quantity_done']" position="after">
+                <field name = "actually_received"/>
+                <field name = "reminder"/>
+            </xpath>
+        </field>
+</record>
+
+
+<record id="view_one2many_tree_inherit" model="ir.ui.view">
+    <field name="name">stock.picking.tree.inherit</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//tree" position="attributes">
+            <attribute name="delete">false</attribute>
+        </xpath>
+    </field>
+</record>
+
+<record id="view_stock_picking_add_new_field" model="ir.ui.view">
+    <field name="name">stock.picking.form.add.new.field</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='origin']" position="after">
+            <field name = "stage"/>
+            <field name = "driver_state"/>
+        </xpath>
+        <xpath expr="//tree" position="inside">
+            <button name="unlink" type="object" class="btn-secondary"
+            attrs="{'invisible': [('parent.origin', '!=', False)]}"
+            icon="fa-trash-o"/>
+        </xpath>
+    </field>
+</record>
+
+
+<record id="view_stock_picking_new_field_tree" model="ir.ui.view">
+    <field name="name">stock.picking.tree.add.new.field</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.vpicktree"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='state']" position="after">
+            <field name = "stage"/>
+        </xpath>
+    </field>
+</record>
+
+<record id="action_none_stage" model="ir.actions.act_window">
+    <field name="name">None Stage</field>
+    <field name="res_model">stock.picking</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_mode">tree,kanban,form,calendar</field>
+    <field name="domain">[('stage', '=', 'x_1')]</field>
+    <field name="context">{'default_stage': 'x_1'}</field>
+</record>
+
+<record id="action_partially_stage" model="ir.actions.act_window">
+    <field name="name">Partially Stage</field>
+    <field name="res_model">stock.picking</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_mode">tree,kanban,form,calendar</field>
+    <field name="domain">[('stage', '=', 'x_2')]</field>
+    <field name="context">{'default_stage': 'x_2'}</field>
+</record>
+
+
+
+
+<record id="view_inherit_kanban" model="ir.ui.view">
+    <field name="name">stock.picking.type.inherit.kanban</field>
+    <field name="model">stock.picking.type</field>
+    <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[contains(@class, 'o_kanban_primary_right')]" position="inside">
+            <!-- <div t-if="record.count_none.raw_value &gt; 0" class="row"> -->
+                <div class="row">
+                <div class="col-12">
+                    <a name="get_action_none_stage" type="object">
+                        <field name="count_none"/> لم يتم الاستلام
+                    </a>
+                </div>
+            </div>
+            <!-- <div t-if="record.count_partially.raw_value &gt; 0" class="row"> -->
+            <div class="row">
+                <div class="col-12">
+                    <a name="get_action_partially_stage" type="object">
+                        <field name="count_partially"/> إستلام جزئي
+                    </a>
+                </div>
+            </div>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

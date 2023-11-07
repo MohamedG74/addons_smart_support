@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_demands_data_form_view" model="ir.ui.view">
+        <field name="name">demands.data.form</field>
+        <field name="model">demands.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="demands_id"/>
+                        <field name="stage_in_demands"/>
+                        <field name="demands"/>
+                        <field name="defendants_rights" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                        <field name="compensation"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                        <field name="fees"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                        <field name="total"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                        <field name="notes" attrs="{'invisible': [('demands', 'not in',  'else')]}"/>
+                        <field name="not_financial_notes" attrs="{'invisible': [('demands', 'not in',  'not_financial')]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+</record>
+
+<record id="view_demands_data_tree_view" model="ir.ui.view">
+        <field name="name">demands.data.tree</field>
+        <field name="model">demands.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="demands_id"/>
+                <field name="stage_in_demands"/>
+                <field name="demands"/>
+                <field name="defendants_rights" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="compensation"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="fees"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="total"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="notes" attrs="{'invisible': [('demands', 'not in',  'else')]}"/>
+                <field name="not_financial_notes" attrs="{'invisible': [('demands', 'not in',  'not_financial')]}"/>
+            </tree>
+        </field>
+</record>
+
+<record id="action_demands_data" model="ir.actions.act_window">
+        <field name="name">الطلبات</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">demands.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_demands"
+        name="الطلبات"
+        parent= "menu_demands_and_final_demands"
+        action = "action_demands_data"
+        sequence="80"/>
+</odoo>

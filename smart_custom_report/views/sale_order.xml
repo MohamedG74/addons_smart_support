@@ -172,25 +172,24 @@
             action="item_sales_and_returns_action" 
             groups="group_item_sales_and_returns" 
             sequence="20"/>
-<!-- 7.1111111111 -->
-
-<record id="items_analysis_action" model="ir.actions.client">
-            <field name="name">Items Analysis</field>
-            <field name="tag">i_a_r</field>
+<!-- 3.6 مصطفي -->
+        <record id="suggested_order_action" model="ir.actions.client">
+            <field name="name">Suggested Order Report</field>
+            <field name="tag">s_o_r</field>
         </record>
-        <record model="res.groups" id="group_items_analysis">
-            <field name="name">Items Analysis</field>
-            <field name="category_id" ref="base.module_category_sales_sales"/>
+
+        <record model="res.groups" id="group_suggested_order">
+            <field name="name">Suggested Order Report</field>
+            <field name="category_id" ref="base.module_category_inventory_inventory"/>
             <field name="comment">Allows access to the Custom Sales Order Report</field>
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
-        <menuitem id="menu_items_analysis"
-            name="تقرير المشتريات  "
-            parent="sale.menu_sale_report" 
-            action="items_analysis_action" 
-            groups="group_items_analysis" 
-            sequence="30"/>
-
+        <menuitem id="menu_suggested_order_action"
+            name="تقرير التغذية"
+            parent="stock.menu_warehouse_report" 
+            action="suggested_order_action" 
+            groups="group_suggested_order" 
+            sequence="5"/>
 
 <!-- 8 -->
         <record id="trial_balance_sub_action" model="ir.actions.client">

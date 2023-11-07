@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="point_of_sale.ProductScreen"  t-inherit-mode="extension" owl="1">
+     
+       <xpath expr="//div[@class='pads']" position="before">
+        <!-- <t t-set="_count" t-value="getCount()" /> -->
+            <div class="entry total" style="direction:rtl;">
+                    <b><span class="badge"   style="font-size: x-large;">عدد الاصناف: </span></b>
+                    <span class="value">
+                       <b  style="font-size: x-large;"> <t t-esc="getCount()"/></b>
+                    </span>
+             </div>
+            </div>
+    </xpath>
+    </t>
+</templates>

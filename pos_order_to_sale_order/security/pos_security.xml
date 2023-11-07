@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ForgeFlow S.L.
+     Copyright 2019 Serpent Consulting Services Pvt. Ltd.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="rule_pos_config_multi_branch" model="ir.rule">
+        <field name="name">Point Of Sale Config</field>
+        <field name="model_id" ref="model_pos_config" />
+        <field name="domain_force">['|',
+            ('operating_unit_id','=', False),
+            ('operating_unit_id','=',user.default_operating_unit_id.id)]
+        </field>
+        <field name="groups" eval="[(4, ref('point_of_sale.group_pos_user'))]"/>
+    </record>
+    <record id="rule_pos_multi_branch_order" model="ir.rule">
+        <field name="name">Point Of Sale Order From Allowed Branch</field>
+        <field name="model_id" ref="model_pos_order" />
+         <field name="domain_force">['|',
+            ('config_id.operating_unit_id','=', False),
+            ('config_id.operating_unit_id','=',user.default_operating_unit_id.id)]
+        </field>
+        <field name="groups" eval="[(4, ref('point_of_sale.group_pos_user'))]"/>
+    </record>
+
+    <record id="rule_pos_config_multi_branch_manager" model="ir.rule">
+        <field name="name">Point Of Sale Config</field>
+        <field name="model_id" ref="model_pos_config" />
+        <field name="domain_force">[
+            (1,'=',1),
+            (1,'=',1)]
+        </field>
+        <field name="groups" eval="[(4, ref('point_of_sale.group_pos_manager'))]"/>
+    </record>
+    <record id="rule_pos_multi_branch_order_manager" model="ir.rule">
+        <field name="name">Point Of Sale Order From Allowed Branch</field>
+        <field name="model_id" ref="model_pos_order" />
+         <field name="domain_force">[
+            (1,'=',1),
+            (1,'=',1)]
+        </field>
+        <field name="groups" eval="[(4, ref('point_of_sale.group_pos_manager'))]"/>
+    </record>
+</odoo>

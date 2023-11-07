@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_another_decision_form_view" model="ir.ui.view">
+        <field name="name">another.decision.form</field>
+        <field name="model">another.decision</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name = "case_id"/>
+                        <field name = "another_decision_id"/>
+
+                        <field name = "another_decision"/>
+
+                        <field name="appointment" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                        <field name="phase" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                        
+                        <!-- <label for="date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+                                <field name="date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+							</div>
+							<div class= "col-2">
+                                <field name="date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div> -->
+                        <field name="date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                        <field name="date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                        
+                        <field name = "procedure" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                        <field name = "spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+
+                        <label for="decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+                                <field name="decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="decision_date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+                                <field name="decision_date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+                        <!-- <field name = "decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                        <field name = "decision_date_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/> -->
+
+                        <label for="last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+                                <field name = "last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="last_date_for_resumption_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+                                <field name = "last_date_for_resumption_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+                        <!-- <field name = "last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                        <field name = "last_date_for_resumption_hijri" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/> -->
+
+                        <field name = "resupmtion" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                        <field name = "registration_number" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+
+                        <label for="registration_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+                                <field name = "registration_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="registration_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+                                <field name = "registration_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+                        <!-- <field name = "registration_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        <field name = "registration_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/> -->
+                        
+                        <field name = "resupmtion_circle" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        <field name = "resupmtion_verdict" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        <field name = "resupmtion_verdict_number" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        
+                        <label for="resupmtion_verdict_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+                                <field name = "resupmtion_verdict_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="resupmtion_verdict_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+                                <field name = "resupmtion_verdict_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+                        <!-- <field name = "resupmtion_verdict_date" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        <field name = "resupmtion_verdict_date_hijri" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/> -->
+                        
+                        <field name = "resupmtion_verdict_spoken" attrs="{'invisible': ['|',('another_decision', 'not in', ('إجراء إحتياطى')),('resupmtion', '!=', True)]}"/>
+                        
+
+                        <field name = "expert" widget="boolean_toggle" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+                        <field name = "expert_name" attrs="{'invisible': [('expert', 'not in', True)]}"/>
+                        <field name = "expert_address" attrs="{'invisible': [('expert', 'not in', True)]}"/>
+                        <field name = "expert_number" attrs="{'invisible': [('expert', 'not in', True)]}"/>
+                        <field name = "expert_fee" attrs="{'invisible': [('expert', 'not in', True)]}"/>
+                        <field name = "expert_result" attrs="{'invisible': [('expert', 'not in', True)]}"/>
+                        
+                        <field name = "postponement" attrs="{'invisible': [('another_decision', 'not in', ('التأجيل'))]}"/>
+                        <field name = "postponement_hijri" attrs="{'invisible': [('another_decision', 'not in', ('التأجيل'))]}"/>
+                    </group>
+
+                    <notebook>
+                        <page string ="الدفعات" name = "الدفعات" attrs="{'invisible': [('expert', 'not in', True)]}">
+                            <field name="expert_installment_ids" widget='many2many' colspan="4" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name = "installment"/>
+                                    <field name = "opponent"/>
+                                    <field name = "client"/>
+                                    <field name = "pay_date"/>
+                                    <field name = "pay_date_hijri"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name = "installment"/>
+                                        <field name = "opponent"/>
+                                        <field name = "client"/>
+                                        <field name = "pay_date"/>
+                                        <field name = "pay_date_hijri"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+</record>
+
+<record id="view_another_decision_tree_view" model="ir.ui.view">
+        <field name="name">another.decision.tree</field>
+        <field name="model">another.decision</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "case_id"/>
+                <field name = "another_decision_id"/>
+                
+                <field name = "another_decision"/>
+
+                <field name="appointment" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                <field name="phase" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                <field name="date" attrs="{'invisible': [('another_decision', 'not in', ('تبادل مذكرات'))]}"/>
+                
+                <field name = "procedure" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "decision_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "last_date_for_resumption" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                
+                <field name = "registration_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "registration_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion_circle" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion_verdict" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion_verdict_number" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion_verdict_date" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                <field name = "resupmtion_verdict_spoken" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إحتياطى'))]}"/>
+                
+
+                <field name = "expert" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+                <field name = "expert_result" attrs="{'invisible': [('another_decision', 'not in', ('إجراء إعدادى مرحلى'))]}"/>
+            </tree>
+        </field>
+</record>
+
+<record id="action_another_decision" model="ir.actions.act_window">
+        <field name="name">القرارت</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">another.decision</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_another_decision"
+        name="القرارت"
+        parent= "menu_sessions"
+        action = "action_another_decision"
+        sequence="2"/>
+</odoo>

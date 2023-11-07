@@ -5,6 +5,7 @@
         <field name="model">hotel.guest</field>
         <field name="arch" type="xml">
             <form>
+             <button name="button_show"  string="Show Rooms" type="object" class="oe_highlight"  data-hotkey="v"/>
                 <sheet>        
                     <div class = "oe_title">
                         <h1>
@@ -19,7 +20,7 @@
                         <field name = "category"/>
                         <field name = "gender"/>
                         <field name = "is_child"/>
-                        <field name = "capitalized_name"/>
+                        <field name = "room_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -42,7 +43,8 @@
                     <field name = "category"/>
                     <field name = "gender"/>
                     <field name = "is_child"/>
-                    <field name = "capitalized_name"/>
+                    <field name = "room_id"/>
+
                     
             </tree>
         </field>
@@ -90,25 +92,10 @@
         <field name="res_model">hotel.guest</field>
         <field name="view_mode">tree,form</field>
     </record>
-
     <menuitem id="menu_guest"
         name="Guest"
         parent="menu_hotel"
         action="action_hotel_guest"
         sequence="10"/>
 
-
-<!-- view rooms button -->
-    <record id="action_hotel_rooms" model="ir.actions.act_window">
-        <field name="name">View Rooms</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hotel.guest</field>
-        <field name="view_mode">form</field>
-    </record>
-
-    <menuitem id="menu_rooms"
-        name="Rooms"
-        parent="menu_hotel"
-        action="action_hotel_rooms"
-        sequence="10"/>
 </odoo>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_final_requests_form_view" model="ir.ui.view">
+		<field name="name">final.requests.form</field>
+		<field name="model">final.requests</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="stage_in_final_requests"/>
+						<field name="request_from"/>
+
+						<!-- <field name="final_request_client_many2many" widget="many2many_tags" attrs="{'invisible': [('request_from', 'not in',  ('المُدعى'))]}"/>
+						<field name="final_request_defendant_many2many" widget="many2many_tags" attrs="{'invisible': [('request_from', 'not in',  ('المُدعى عليه'))]}"/>
+						<field name="final_request_interfering_many2many" widget="many2many_tags" attrs="{'invisible': [('request_from', 'not in',  ('الجهة المتدخلة'))]}"/>
+						<field name="final_request_entries_many2many" widget="many2many_tags" attrs="{'invisible': [('request_from', 'not in',  ('الجهة المدخلة'))]}"/> -->
+						
+						<field name="request_1_client" attrs="{'invisible':[('request_from','!=','المُدعى')]}"/>
+						<field name="request_2_client" attrs="{'invisible':[('request_from','!=','المُدعى')]}"/>
+						<field name="request_3_client" attrs="{'invisible':[('request_from','!=','المُدعى')]}"/>
+						<field name="request_4_client" attrs="{'invisible':[('request_from','!=','المُدعى')]}"/>
+						
+						<field name="request_1_defendant" attrs="{'invisible':[('request_from','!=','المُدعى عليه')]}"/>
+						<field name="request_2_defendant" attrs="{'invisible':[('request_from','!=','المُدعى عليه')]}"/>
+						<field name="request_3_defendant" attrs="{'invisible':[('request_from','!=','المُدعى عليه')]}"/>
+						<field name="request_4_defendant" attrs="{'invisible':[('request_from','!=','المُدعى عليه')]}"/>
+						
+						<field name="request_1_interfering" attrs="{'invisible':[('request_from','!=','الجهة المتدخلة')]}"/>
+						<field name="request_2_interfering" attrs="{'invisible':[('request_from','!=','الجهة المتدخلة')]}"/>
+						<field name="request_3_interfering" attrs="{'invisible':[('request_from','!=','الجهة المتدخلة')]}"/>
+						<field name="request_4_interfering" attrs="{'invisible':[('request_from','!=','الجهة المتدخلة')]}"/>
+						
+						<field name="request_1_entries" attrs="{'invisible':[('request_from','!=','الجهة المدخلة')]}"/>
+						<field name="request_2_entries" attrs="{'invisible':[('request_from','!=','الجهة المدخلة')]}"/>
+						<field name="request_3_entries" attrs="{'invisible':[('request_from','!=','الجهة المدخلة')]}"/>
+						<field name="request_4_entries" attrs="{'invisible':[('request_from','!=','الجهة المدخلة')]}"/>
+
+						
+						<!-- <field name="final_request_many2many_clients" widget="many2many_tags" style="width: 1100px; overflow: scroll; display: block;"/>
+						<field name="final_request_many2many_defendants" widget="many2many_tags" style="width: 1100px; overflow: scroll; display: block;"/>
+						<field name="final_request_many2many_interfering_related" widget="many2many_tags" style="width: 1100px; overflow: scroll; display: block;"/>
+						<field name="final_request_many2many_entries_related" widget="many2many_tags" style="width: 1100px; overflow: scroll; display: block;"/> -->
+					</group>
+					<notebook>
+                        <page string ="المُدعى" name = "المُدعى" attrs="{'invisible':[('request_from','!=','المُدعى')]}">
+                            <field name="final_request_many2many_clients" widget='many2many' colspan="4" nolabel="1">
+                                <tree editable="bottom">
+                                    <button name="action_client" string ="عرض المُدعى" type= "object" class="oe_highlight" />
+
+                                    <field name = "name"/>
+                                    <field name = "identity_card" readonly="1"/>
+                                    <field name = "identity_card_number"/>
+                                    <!-- <field name = "published_date"/>
+                                    <field name = "ended_date"/> -->
+                                    <field name = "address"/>
+                                    <field name = "email"/>
+                                    <field name = "phone_number"/>
+                                    <field name = "commerial_register"/>
+                                    <!-- <field name = "commerial_register_start_date"/>
+                                    <field name = "commerial_register_end_date"/>
+                                    <field name = "notes"/> -->
+                                    <field name = "lawyer_many2many_ids"/>
+                                    <field name = "consultant_many2many_ids"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name = "name"/>
+                                        <field name = "identity_card"/>
+                                        <field name = "identity_card_number"/>
+                                        <field name = "published_date"/>
+                                        <field name = "ended_date"/>
+                                        <field name = "address"/>
+                                        <field name = "email"/>
+                                        <field name = "phone_number"/>
+                                        <field name = "commerial_register"/>
+                                        <field name = "commerial_register_start_date"/>
+                                        <field name = "commerial_register_end_date"/>
+                                        <field name = "notes"/>
+                                        <field name = "lawyer_many2many_ids"/>
+                                        <field name = "consultant_many2many_ids"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string ="المُدعى عليه" name = "المُدعى عليه" attrs="{'invisible':[('request_from','!=','المُدعى عليه')]}">
+                            <field name="final_request_many2many_defendants" widget='many2many' colspan="4" nolabel="1">
+                                <tree editable="bottom">
+                                    <button name="action_defendant" string ="عرض المُدعى عليه" type= "object" class="oe_highlight" />
+
+                                    <field name = "name"/>
+                                    <field name = "identity_card" readonly="1"/>
+                                    <field name = "identity_card_number"/>
+                                    <!-- <field name = "published_date"/>
+                                    <field name = "ended_date"/> -->
+                                    <field name = "address"/>
+                                    <field name = "email"/>
+                                    <field name = "phone_number"/>
+                                    <field name = "commerial_register"/>
+                                    <!-- <field name = "commerial_register_start_date"/>
+                                    <field name = "commerial_register_end_date"/>
+                                    <field name = "notes"/> -->
+                                    <field name = "lawyer_many2many_ids_defendant"/>
+                                    <field name = "consultant_many2many_ids_defendant"/>
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name = "name"/>
+                                        <field name = "identity_card"/>
+                                        <field name = "identity_card_number"/>
+                                        <field name = "published_date"/>
+                                        <field name = "ended_date"/>
+                                        <field name = "address"/>
+                                        <field name = "email"/>
+                                        <field name = "phone_number"/>
+                                        <field name = "commerial_register"/>
+                                        <field name = "commerial_register_start_date"/>
+                                        <field name = "commerial_register_end_date"/>
+                                        <field name = "notes"/>
+                                        <field name = "lawyer_many2many_ids_defendant"/>
+                                        <field name = "consultant_many2many_ids_defendant"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string ="الجهة المتدخلة" name = "الجهة المتدخلة" attrs="{'invisible':[('request_from','!=','الجهة المتدخلة')]}">
+                            <field name="final_request_many2many_interfering_related" widget='many2many' colspan="4" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name = "name"/>
+                                    <field name = "identity_card" readonly="1"/>
+                                    <field name = "identity_card_number"/>
+                                    <!-- <field name = "published_date"/>
+                                    <field name = "ended_date"/> -->
+                                    <field name = "address"/>
+                                    <field name = "email"/>
+                                    <field name = "phone_number"/>
+                                    <field name = "commerial_register"/>
+                                    <!-- <field name = "commerial_register_start_date"/>
+                                    <field name = "commerial_register_end_date"/>
+                                    <field name = "notes"/> -->
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name = "name"/>
+                                        <field name = "identity_card"/>
+                                        <field name = "identity_card_number"/>
+                                        <field name = "published_date"/>
+                                        <field name = "ended_date"/>
+                                        <field name = "address"/>
+                                        <field name = "email"/>
+                                        <field name = "phone_number"/>
+                                        <field name = "commerial_register"/>
+                                        <field name = "commerial_register_start_date"/>
+                                        <field name = "commerial_register_end_date"/>
+                                        <field name = "notes"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string ="الجهة المدخلة" name = "الجهة المدخلة" attrs="{'invisible':[('request_from','!=','الجهة المدخلة')]}">
+                            <field name="final_request_many2many_entries_related" widget='many2many' colspan="4" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name = "name"/>
+                                    <field name = "identity_card" readonly="1"/>
+                                    <field name = "identity_card_number"/>
+                                    <!-- <field name = "published_date"/>
+                                    <field name = "ended_date"/> -->
+                                    <field name = "address"/>
+                                    <field name = "email"/>
+                                    <field name = "phone_number"/>
+                                    <field name = "commerial_register"/>
+                                    <!-- <field name = "commerial_register_start_date"/>
+                                    <field name = "commerial_register_end_date"/>
+                                    <field name = "notes"/> -->
+                                </tree>
+                                <form>
+                                    <group col="4">
+                                        <field name = "name"/>
+                                        <field name = "identity_card"/>
+                                        <field name = "identity_card_number"/>
+                                        <field name = "published_date"/>
+                                        <field name = "ended_date"/>
+                                        <field name = "address"/>
+                                        <field name = "email"/>
+                                        <field name = "phone_number"/>
+                                        <field name = "commerial_register"/>
+                                        <field name = "commerial_register_start_date"/>
+                                        <field name = "commerial_register_end_date"/>
+                                        <field name = "notes"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="view_final_requests_tree_view" model="ir.ui.view">
+		<field name="name">final.requests.tree</field>
+		<field name="model">final.requests</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="stage_in_final_requests"/>
+				<!-- <field name="request_1"/>
+				<field name="request_2"/>
+				<field name="request_3"/>
+				<field name="request_4"/> -->
+				<field name="final_request_many2many_clients"/>
+                <field name="final_request_many2many_defendants"/>
+                <field name="final_request_many2many_interfering_related"/>
+                <field name="final_request_many2many_entries_related"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_final_requests" model="ir.actions.act_window">
+		<field name="name">الطلبات الختامية</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">final.requests</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+	<menuitem id="menu_final_requests"
+        name="الطلبات الختامية"
+        parent= "menu_demands_and_final_demands"
+        action = "action_final_requests"
+        sequence="105"/>
+</odoo>

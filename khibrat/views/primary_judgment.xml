@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_primary_judgment_form_view" model="ir.ui.view">
+		<field name="name">primary.judgment.form</field>
+		<field name="model">primary.judgment</field>
+		<field name="arch" type="xml">
+			<form create="false">
+				<sheet>
+					<group>
+						<field name="primary_judgment_stage_id" invisible="1"/>
+						<field name="primary_judgment_id" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="primary_judgment_type" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<label for="primary_judgment_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="primary_judgment_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="primary_judgment_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="primary_judgment_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="primary_judgment_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="primary_judgment_date_hijri" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/> -->
+						
+
+						<label for="received_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="received_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="received_date_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="received_date_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="received_date" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="received_date_hijri" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/> -->
+						
+
+						<label for="primary_judgment_last_date_for_resumption" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<div class="o_row">
+							<div class= "col-2">
+								<field name="primary_judgment_last_date_for_resumption" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+							</div>
+							<div class= "col-2">
+								<label for="primary_judgment_last_date_for_resumption_hijri"/>
+							</div>
+							<div class= "col-2">
+								<field name="primary_judgment_last_date_for_resumption_hijri"/>
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+							<div class= "col-2">
+							</div>
+						</div>
+						<!-- <field name="primary_judgment_last_date_for_resumption" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="primary_judgment_last_date_for_resumption_hijri" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/> -->
+						
+						<field name="primary_judgment_spoken" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="primary_judgment_attach_name" invisible="1" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+                        <field name="primary_judgment_attach_file" filename="primary_judgment_attach_name" widget="pdf_viewer" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						<field name="demands" attrs="{'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="claiming" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="expert_fees" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="compensation" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="lawyer_fees" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="total" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="notes" attrs="{'invisible': [('demands', 'not in',  'else')],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+						<field name="not_financial_notes" attrs="{'invisible': [('demands', 'not in',  'not_financial')],
+													   'readonly': [('primary_judgment_stage_id', 'in',  ('مرحلة التنفيذ','المرحلة العليا الاولى','المرحلة الإستئنافية الثانية','المرحلة العليا الثانية','المرحلة الإستئنافية الاولى'))]}"/>
+						
+					</group>
+					
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="view_primary_judgment_tree_view" model="ir.ui.view">
+		<field name="name">primary.judgment.tree</field>
+		<field name="model">primary.judgment</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="primary_judgment_id"/>
+				<field name="primary_judgment_type"/>
+				<field name="primary_judgment_date"/>
+                <field name="received_date"/>
+                <field name="primary_judgment_last_date_for_resumption"/>
+                <field name="primary_judgment_spoken"/>
+				<field name="primary_judgment_attach_name"/>
+                <field name="demands"/>
+                <field name="claiming" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="expert_fees" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="compensation" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="lawyer_fees" attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+                <field name="total"  attrs="{'invisible': [('demands', 'in',  ('not_financial','else'))]}"/>
+				<field name="notes" attrs="{'invisible': [('demands', 'not in',  'else')]}"/>
+				<field name="not_financial_notes" attrs="{'invisible': [('demands', 'not in',  'not_financial')]}"/>
+
+			</tree>
+		</field>
+	</record>
+	<record id="action_primary_judgment" model="ir.actions.act_window">
+		<field name="name">الحكم الابتدائى</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">primary.judgment</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+	<menuitem id="menu_primary_judgment"
+        name="الحكم الابتدائى"
+        parent= "menu_judgment"
+        action = "action_primary_judgment"
+        sequence="1"/>
+</odoo>

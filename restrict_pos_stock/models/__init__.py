@@ -1,0 +1,1 @@
+from . import res_config,product_template,product_product,stock_quant,pos_orderline,pos_session,stock_move_history

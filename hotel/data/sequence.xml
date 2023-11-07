@@ -8,4 +8,12 @@
             <field name="padding">5</field>  <!-- sequence size -->            
         </record>
     </data>
+    <data noupdate = "1">
+        <record id="sequence_hotel_room" model="ir.sequence">
+            <field name="name">Rooms Sequence</field>
+            <field name="code">hotel.room</field>
+            <field name="prefix">R</field>
+            <field name="padding">5</field>  <!-- sequence size -->            
+        </record>
+    </data>
 </odoo>

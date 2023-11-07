@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate = "1">
+        <record id="sequence_lawyer" model="ir.sequence">
+            <field name="name">Lawyer sequence</field>
+            <field name="code">lawyers.data</field>
+            <field name="prefix">Lawyer/</field>
+            <field name="padding">0</field>  <!-- sequence size -->
+        </record>
+    </data>
+
+    <data>
+        <record id="sequence_document" model="ir.sequence">
+            <field name="name">Document Sequence</field>
+            <field name="code">document.data</field>
+            <field name="prefix">مذكرة/ </field>
+            <field name="padding">0</field>  <!-- sequence size -->
+        </record>
+    </data>
+
+</odoo>

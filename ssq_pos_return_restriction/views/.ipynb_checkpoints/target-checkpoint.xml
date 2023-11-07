@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_team_target_view" model="ir.ui.view">
+        <field name="name">crm.team.target.view</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='company_id']" position="after">   
+                              
+                    <group>
+                        <group string="العمولات">
+                             <field name="commission_percent"/> 
+                             <field name="commission_value"/>
+                            <hr/><br/>
+                            <field name="target_period" string="دورة حساب المستهدف"/> 
+                            <field name="acheived" string="المستهدف المحقق"/>
+                        </group>
+                    </group>
+                
+                    
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

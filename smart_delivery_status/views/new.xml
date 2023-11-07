@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_view_form_gas" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.smart</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="delivery_status" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

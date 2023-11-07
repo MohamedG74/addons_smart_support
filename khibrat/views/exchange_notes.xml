@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_exchange_notes_form_view" model="ir.ui.view">
+		<field name="name">exchange.notes.form</field>
+		<field name="model">exchange.notes</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="stage_in_exchange_notes"/>
+                        <field name="appointment"/>
+                        <field name="phase"/>
+						<field name="date"/>
+						<field name="date_hijri"/>
+					</group>
+					
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="view_exchange_notes_tree_view" model="ir.ui.view">
+		<field name="name">exchange.notes.tree</field>
+		<field name="model">exchange.notes</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="stage_in_exchange_notes"/>
+                <field name="appointment"/>
+                <field name="phase"/>
+                <field name="date"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_exchange_notes" model="ir.actions.act_window">
+		<field name="name">تبادل مذكرات</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">exchange.notes</field>
+		<field name="view_mode">tree,form</field>
+		<field name="context">{}</field>
+	</record>
+	<!-- <menuitem id="menu_exchange_notes"
+        name="تبادل مذكرات"
+        parent= "menu_khibrat"
+        action = "action_exchange_notes"
+        sequence="160"/> -->
+</odoo>

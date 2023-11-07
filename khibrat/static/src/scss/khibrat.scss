@@ -1,0 +1,16 @@
+.modal .o_field_one2many {
+    width: 755px !important;
+    overflow: scroll !important;
+    display: block !important;
+}
+.o_form_view .o_form_label{
+    width: 160px !important;
+}
+
+.o_attachments {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-left: -195px;
+    margin-top: 25px;
+}
+

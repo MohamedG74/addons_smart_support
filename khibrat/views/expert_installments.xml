@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_experts_installment_form_view" model="ir.ui.view">
+        <field name="name">expert.installment.form</field>
+        <field name="model">expert.installment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name = "installment"/>
+                        <field name = "opponent"/>
+                        <field name = "client"/>
+                        <field name = "pay_date"/>
+                        <field name = "pay_date_hijri"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+</record>
+
+<record id="view_experts_installment_tree_view" model="ir.ui.view">
+        <field name="name">expert.installment.tree</field>
+        <field name="model">expert.installment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "installment"/>
+                <field name = "opponent"/>
+                <field name = "client"/>
+                <field name = "pay_date"/>
+            </tree>
+        </field>
+</record>
+
+<record id="action_experts_installment" model="ir.actions.act_window">
+        <field name="name">الدفعات</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">expert.installment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record> 
+
+    <menuitem id="menu_experts_installment"
+        name="الدفعات"
+        parent= "menu_others"
+        action = "action_experts_installment"
+        sequence="50"/>    
+</odoo>

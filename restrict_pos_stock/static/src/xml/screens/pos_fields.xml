@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!-- اجبارى العنوان -->
+<t t-name="required_address_street" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div//input[@name='street']" position="attributes">
+        <attribute name="required">1</attribute>
+    </xpath>
+
+    <xpath expr="//div//input[@name='city']" position="attributes">
+        <attribute name="required">1</attribute>
+    </xpath>
+</t>
+
+
+
+
+
+
+<!-- اخفاء الباركود ورقم الهاتف -->
+<t t-name="removing_barcode_in_pos" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//input[@name='barcode']" position="replace">
+        <!-- <attribute name="invisible">1</attribute> -->
+    </xpath>
+
+    <xpath expr="//input[@name='phone']" position="replace">
+        <!-- <attribute name="invisible">1</attribute> -->
+    </xpath>
+
+    <xpath expr="//span[contains(., 'Phone')]" position="replace">
+    </xpath>
+    
+    <xpath expr="//span[contains(., 'Barcode')]" position="replace">
+    </xpath>
+</t>
+
+<!-- <t t-name="removing_phone_in_pos" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div//input[@name='phone']" position="attributes">
+        <attribute name="invisible">1</attribute>
+    </xpath>
+</t> -->
+<!-- <t t-name="removing_barcode_in_pos" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[input[@name='barcode']]" position="replace">
+        Add your custom code here if needed
+    </xpath>
+</t>
+
+<t t-name="removing_phone_in_pos" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[input[@name='phone']]" position="replace">
+        Add your custom code here if needed
+    </xpath>
+</t> -->
+
+
+
+
+
+<!-- اضافة السجل التجارى - اضافة خانة شخصى او شركة -->
+<t t-name="adding_commercial_register_and_company_type_field" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[hasclass('partner-details-right')]" position="after">
+        <div class="partner-detail">
+            <span class="label">السجل التجارى</span>
+            <input class="detail" name="commercial_register" type="tel"
+                    t-on-change="captureChange"
+                    t-att-value="props.partner.commercial_register || ''" />
+        </div>
+
+        <div class="partner-detail">
+            <span class="label">نوع العميل</span>
+            <!-- <input class="detail" name="company" type="tel"
+                    t-on-change="captureChange"
+                    t-att-value="props.partner.company_type || ''" /> -->
+            <select class="detail partner-address-states needsclick" name="company_type"
+                        t-on-change="captureChange">
+                    <option>تحديد نوع العميل</option>
+                    <option value="company" t-att-selected="props.partner.company_type ? (props.partner.company_type == 'company') : undefined">شركة</option>
+                    <option value="person"  t-att-selected="props.partner.company_type ? (props.partner.company_type == 'person') : undefined">فردى</option>
+
+            </select>
+        </div>
+    </xpath>
+</t>
+
+</templates>

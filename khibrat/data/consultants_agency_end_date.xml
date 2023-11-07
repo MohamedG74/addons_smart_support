@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data noupdate="0">
+      <record id="consultants_agency_end_date" model="mail.template">
+         <field name="name">مواعيد إنتهاء وكالة المستشارين</field>
+         <field name="model_id" ref="khibrat.model_cases_data"/>
+         <field name="subject">Static Report {{ object.partner_id.name }}</field>
+         <field name="email_from">mostafa@smartsupport.tech</field>
+
+         <!-- <field name="email_to">{{ ', '.join([object.partner_id.email]) + ', ' + ', '.join([record.email for record in object.client_many2many_ids.consultant_many2many_ids]) }}</field> -->
+
+         <field name="email_to">{{ object.partner_id.email + ', ' + ', '.join([record.email for record in object.client_many2many_ids.consultant_many2many_ids]) if object.client_or_defendant == 'مُدعى' else object.partner_id.email + ', ' + ', '.join([record.email for record in object.defendant_many2many_ids.consultant_many2many_ids_defendant]) }}</field>
+
+
+         <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+               <tr>
+                  <td align="center">
+                     <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;">
+                        <tbody>
+                           <!-- HEADER -->
+                           <tr>
+                              <td align="center" style="min-width: 590px;">
+                                 <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr>
+                                       <td valign="middle" align="left">
+                                          <!-- <img t-attf-src="/logo.png?company={{ user.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="user.company_id.name"/>                                       </td> -->
+                                          <img t-attf-src="https://i.imgur.com/t4LwGXS.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;"/>
+                                        </td>
+                                       
+                                       <td valign="middle" align="right">
+                                          <br/>
+                                          <span style="font-size: 20px; font-weight: bold;">
+                                             <!-- <t t-out="object.client_many2many_ids.lawyer_many2many_ids.name"></t> -->
+                                             شركة خبرات للمحاماه
+                                          </span>
+                                       </td>
+                                       
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2" style="text-align:center;">
+                                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;" />
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </td>
+                           </tr>
+                           <!-- CONTENT -->
+                           <tr>
+                              <td align="center" style="min-width: 590px;">
+                                 <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr>
+                                       <td valign="top" style="font-size: 13px;">
+                                          <div dir="rtl">
+                                             موعد إنتهاء وكالة المحامين
+
+                                            <br/>
+                                            <br/>
+                                            نحيط علم سيادتكم بقرب إنتهاء موعد وكالة المحامين
+                                            <br/>
+
+                                            <div dir="rtl">
+                                                اسم العميل:
+                                                <span dir="rtl" t-field="object.partner_id"/>
+                                                <br/>
+                                                
+                                                الصفة:
+                                                <span dir="rtl" t-field="object.client_or_defendant"/>
+                                                <br/>
+
+                                                رقم الدعوى:
+                                                <span dir="rtl" t-field="object.prosecution_number"/>
+                                                <br/>
+                                                
+                                                نوع الدعوى:
+                                                <span dir="rtl" t-field="object.prosecution_type"/>
+                                                <br/>
+                                                
+                                                المرحلة:
+                                                <span dir="rtl" t-field="object.stage"/>
+                                                <br/>
+                                                
+                                                الفرع:
+                                                <span dir="rtl" t-field="object.branch"/>
+                                                <br/>
+
+
+                                             <div class="row" t-if="object.client_or_defendant == 'مُدعى'">
+                                                <div class="col-4">
+                                                   تاريخ إنتهاء الوكالة لدى المستشارين:
+                                                </div>
+
+                                                <div class="col-8">
+                                                   <div class="row">
+                                                      <div class="col-4">
+                                                         <span dir="rtl" t-field="object.client_many2many_ids.agency_ended_date_consultant"/>
+                                                         <br/>
+                                                      </div>
+                                                      
+                                                      <div class="col-6">
+                                                      هجرياً:
+                                                         <span dir="rtl" t-field="object.client_many2many_ids.agency_ended_date_hijri_consultant"/>
+                                                         <br/>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             
+                                             <div class="row" t-else="object.client_or_defendant == 'مُدعى عليه'">
+                                                <div class="col-4">
+                                                   تاريخ إنتهاء الوكالة لدى المستشارين:
+                                                </div>
+
+                                                <div class="col-8">
+                                                   <div class="row">
+                                                      <div class="col-4">
+                                                         <span dir="rtl" t-field="object.defendant_many2many_ids.agency_ended_date_consultant"/>
+                                                         <br/>
+                                                      </div>
+                                                      
+                                                      <div class="col-6">
+                                                      هجرياً:
+                                                         <span dir="rtl" t-field="object.defendant_many2many_ids.agency_ended_date_hijri_consultant"/>
+                                                         <br/>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                                
+                                                
+                                            </div>
+                                            Thanks,
+                                            <t t-if="user.signature">
+                                                <br/>
+                                                <t t-out="user.signature">
+                                                   <br/>
+                                                   Mitchell Admin
+                                                </t>
+                                            </t>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="text-align:center;">
+                                          <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </td>
+                           </tr>
+                           <!-- FOOTER -->
+                           <tr>
+                              <td align="center" style="min-width: 590px;">
+                                 <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr>
+                                       <td valign="middle" align="left">
+                                          <t t-out="user.company_id.name">YourCompany</t>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td valign="middle" align="left" style="opacity: 0.7;">
+                                          <t t-out="user.company_id.phone">+1 650-123-4567</t>
+                                          <t t-if="user.company_id.email">
+                                             |
+                                             <a t-att-href="'mailto:%s' % user.company_id.email" style="text-decoration:none; color: #454748;" t-out="user.company_id.email ">info@yourcompany.com</a>
+                                          </t>
+                                          <t t-if="user.company_id.website">
+                                             |
+                                             <a t-att-href="'%s' % user.company_id.website" style="text-decoration:none; color: #454748;" t-out="user.company_id.website ">http://www.example.com</a>
+                                          </t>
+                                       </td>
+                                    </tr>
+                                 </table>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </td>
+               </tr>
+            </table>
+         </field>
+         <field name="auto_delete" eval="True" />
+      </record>
+   </data>
+</odoo>

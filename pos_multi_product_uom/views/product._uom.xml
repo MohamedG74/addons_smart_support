@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+     
+<record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_po_id']" position="after">
+                <field name="multi_uoms"/>
+                <field name="uom_ids" widget="many2many_tags" domain="[('category_id','=', uom_id)]" />
+            </xpath>
+        </field>
+    </record> 
+
+    <record id="product_template_only_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.product.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='variants']" position="after">
+                
+                    <page name="name" string="Select UOM">
+                        <group  string="UOM">
+                            <field name="uom_ids" widget="many2many_tags"/>    
+                        </group>
+                            
+                    </page>
+                
+                
+             
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+     
+     <t t-name="OrderLinesReceipt_inhertie" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+    	<xpath expr="//t[@t-foreach='receipt.orderlines']" position="replace">
+            <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+            
+                    <div t-esc="line.product_name_wrapped[0]" />
+                    <WrappedProductNameLines line="line" />
+                    <t t-if="line.display_discount_policy == 'without_discount' and line.price != line.price_lst">
+                        <div class="pos-receipt-left-padding">
+                            <t t-esc="env.pos.format_currency_no_symbol(line.price_lst)" />
+                            ->
+                            <t t-esc="env.pos.format_currency_no_symbol(line.price)" />
+                        </div>
+                    </t>
+                    <t t-elif="line.discount !== 0">
+                        <div class="pos-receipt-left-padding">
+                            <t t-if="env.pos.config.iface_tax_included === 'total'">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_with_tax_before_discount)"/>
+                            </t>
+                            <t t-else="">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price)"/>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-if="line.discount !== 0">
+                        <div class="pos-receipt-left-padding">
+                            Discount: <t t-esc="line.discount" />%
+                        </div>
+                    </t>
+                    <div class="pos-receipt-left-padding">
+                        <t t-esc="Math.round(line.quantity * Math.pow(10, env.pos.dp['Product Unit of Measure'])) / Math.pow(10, env.pos.dp['Product Unit of Measure'])"/>
+                        <t  t-esc="line.unit_name" />
+                        x
+                        <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
+                        <span class="price_display pos-receipt-right-align">
+                            <t t-esc="env.pos.format_currency_no_symbol(line.price_display)" />
+                        </span>
+                    </div>
+                <t t-if="line.customer_note">
+                    <div class="pos-receipt-left-padding pos-receipt-customer-note">
+                        <t t-esc="line.customer_note"/>
+                    </div>
+                </t>
+                <t t-if="line.pack_lot_lines">
+                    <div class="pos-receipt-left-padding">
+                        <ul>
+                            <t t-foreach="line.pack_lot_lines" t-as="lot" t-key="lot.cid">
+                                <li>
+                                    SN <t t-esc="lot.attributes['lot_name']"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </t>
+            </t>
+    	</xpath>
+    </t> 
+    
+    
+    
+    <!-- <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ul[hasclass('info-list')]//li[hasclass('info')]" position="inside">
+            <span class="button-uom">
+                <i class="fa fa-balance-scale"></i>
+            </span>
+        </xpath>
+    </t> 
+
+ <t t-name="Orderline" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('product-name')]" position="inside">
+            <div class="button-uom">
+        </div>
+        
+        </xpath>
+    </t>  -->
+
+    <t t-name="UnitSelectionPopupWidget" owl="1">
+        <div class="modal-dialog">
+            <div class="popup popup-selection">
+                <p class="title"><t t-esc=" props.title || 'Select' " /></p>
+                <div class='selection scrollable-y touch-scrollable'>
+                    <t t-foreach="props.list || []" t-as="item">
+                        <div class="selection-item selection-unit" t-att-class="{ selected: item.selected }" t-on-click="click_item" t-att-data-item-index='item_index'>
+                            <t t-esc='item.label'/>
+                        </div>
+                    </t>
+                </div>
+                <div class="footer">
+                    <div class="button confirm" t-on-click="click_confirm" t-att-class="{ oe_hidden: !props.is_selected}">
+                        Ok
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
