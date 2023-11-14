@@ -22,6 +22,15 @@ access_dynamic_trial_balance_sub,dynamic.trial.balance.sub,model_dynamic_trial_b
 
 
 
-
+access_dynamic_invoice_report,dynamic.invoice.report,model_dynamic_invoice_report,smart_custom_report.group_invoices,1,1,1,0
 
 access_dynamic_suggested_order,dynamic.suggested.order,model_dynamic_suggested_order,smart_custom_report.group_suggested_order,1,1,1,0
+
+
+access_dynamic_re_order,dynamic.re.order,model_dynamic_re_order,smart_custom_report.group_re_order,1,1,1,0
+
+
+access_dynamic_item_sales_employee,dynamic.item.sales.employee,model_dynamic_item_sales_employee,smart_custom_report.group_item_sales_and_employees,1,1,1,0
+
+access_dynamic_pricelist_inventory_report,dynamic.pricelist.inventory.report,model_dynamic_pricelist_inventory_report,smart_custom_report.group_pricelist_manager,1,1,1,0
+

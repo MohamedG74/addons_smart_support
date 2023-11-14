@@ -14,7 +14,7 @@ except ImportError:
 
 class DynamicItemSalesReturn(models.Model):
 
-    _name = 'dynamic.item.sales.return'
+    _name = 'dynamic.item.sales.employee'
     
     purchase_report = fields.Char(string='Purchase Report')
     report_product = fields.Char(string='Report Product') 
@@ -43,7 +43,7 @@ class DynamicItemSalesReturn(models.Model):
 
     @api.model
     def purchase_report(self, option):
-        report_values = self.env['dynamic.item.sales.return'].search([('id', '=', option[0])])
+        report_values = self.env['dynamic.item.sales.employee'].search([('id', '=', option[0])])
         data = {'model': self}
         if report_values.date_from:
             data.update({'date_from': report_values.date_from})
@@ -155,9 +155,9 @@ class DynamicItemSalesReturn(models.Model):
         count = self._get_report_values(data).get('count')
         limited = self._get_report_values(data).get('limited')
         return {
-            'name': 'Item Sales Return',
+            'name': 'Item Sales Employee',
             'type': 'ir.actions.client',
-            'tag': 'i_s_r',
+            'tag': 'i_t_e',
             'orders': data,
             'locations':resul,
             'products':product_output,
@@ -180,7 +180,7 @@ class DynamicItemSalesReturn(models.Model):
 
 
     def get_filter_data(self, option):
-        r = self.env['dynamic.item.sales.return'].search([('id', '=',option[0])])
+        r = self.env['dynamic.item.sales.employee'].search([('id', '=',option[0])])
         default_filters = {}
         filter_dict = {}
         return filter_dict
@@ -314,7 +314,7 @@ class DynamicItemSalesReturn(models.Model):
                     account_move_line.product_id IS NOT NULL
                     AND account_move_line.name <> '[DISC] Discount'
                     AND account_move_line.name <> '[Discount] Discount'
-                    
+                    AND hr_employee.name IS NOT NULL
                     AND account_move.invoice_date BETWEEN '{0}' AND '{1}'
                     AND account_move_line.display_type <> 'cogs'
                     AND account_move_line.display_type <> 'epd'
@@ -341,6 +341,7 @@ class DynamicItemSalesReturn(models.Model):
                 account_move_line.product_id IS NOT NULL
                 AND account_move_line.name <> '[DISC] Discount'
                 AND account_move_line.name <> '[Discount] Discount'
+                AND hr_employee.name IS NOT NULL
                 AND account_move.invoice_date BETWEEN '{0}' AND '{1}'
                 AND account_move_line.display_type <> 'cogs'
                 AND account_move_line.display_type <> 'epd'
@@ -404,7 +405,7 @@ class DynamicItemSalesReturn(models.Model):
                     AND account_move_line.product_id IS NOT NULL
                     AND account_move_line.name <> '[DISC] Discount'
                     AND account_move_line.name <> '[Discount] Discount'
-             
+                    AND hr_employee.name IS NOT NULL
 
                     AND account_move_line.display_type <> 'cogs'
                     AND account_move_line.display_type <> 'epd'

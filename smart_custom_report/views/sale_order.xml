@@ -124,13 +124,6 @@
             sequence="20"/>
 
 
-
-
-
-
-
-
-
 <!-- 6 -->
         <record id="sales_invoices_and_returns_action" model="ir.actions.client">
             <field name="name">Sales Invoices and Returns Report</field>
@@ -148,13 +141,7 @@
             action="sales_invoices_and_returns_action" 
             groups="group_sales_invoices_and_returns" 
             sequence="10"/>
-    
-   
 
-
-
-
-   
 <!-- 7 -->
         <record id="item_sales_and_returns_action" model="ir.actions.client">
             <field name="name">Item Sales and Returns</field>
@@ -172,6 +159,28 @@
             action="item_sales_and_returns_action" 
             groups="group_item_sales_and_returns" 
             sequence="20"/>
+
+
+
+<!-- duplicate sales return -->
+        <record id="item_sales_and_employees_action" model="ir.actions.client">
+            <field name="name">Item Employee</field>
+            <field name="tag">i_t_e</field>
+        </record>
+        <record model="res.groups" id="group_item_sales_and_employees">
+            <field name="name">Item Sales And Employees</field>
+            <field name="category_id" ref="base.module_category_sales_sales"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_item_sales_and_employees_report"
+            name=" تقرير مبيعات المندوبين "
+            parent="sale.menu_sale_report" 
+            action="item_sales_and_employees_action" 
+            groups="group_item_sales_and_employees" 
+            sequence="50"/>
+     
+
 <!-- 3.6 مصطفي -->
         <record id="suggested_order_action" model="ir.actions.client">
             <field name="name">Suggested Order Report</field>
@@ -190,7 +199,65 @@
             action="suggested_order_action" 
             groups="group_suggested_order" 
             sequence="5"/>
+<!--  3.7 جيمى طلبية  -->
+            <record id="reorder_action" model="ir.actions.client">
+            <field name="name">ReOrder Report</field>
+            <field name="tag">r_o_r</field>
+            </record>
 
+        <record model="res.groups" id="group_re_order">
+            <field name="name">ReOrder Report</field>
+            <field name="category_id" ref="base.module_category_inventory_inventory"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_re_order_action"
+            name="تقرير الطلبية"
+            parent="stock.menu_warehouse_report" 
+            action="reorder_action" 
+            groups="group_re_order" 
+            sequence="6"/>
+
+
+<!-- تكلفة  -->
+        <record id="updated_pricelist_report_action" model="ir.actions.client">
+            <field name="name">Pricelist Inventory Report</field>
+            <field name="tag">pl_i_r</field>
+        </record>
+
+        <record model="res.groups" id="group_pricelist_manager">
+            <field name="name">Pricelist Inventory Report</field>
+            <field name="category_id" ref="base.module_category_inventory_inventory"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_updated_pricelist_report_action"
+            name="تحليل المخزون المسعر"
+            parent="stock.menu_warehouse_report" 
+            action="updated_pricelist_report_action" 
+            groups="group_pricelist_manager" 
+            sequence="4"/>
+
+
+
+            <!-- 3.899 gemmmmmmmmmmmy -->
+             <record id="invoice_action" model="ir.actions.client">
+            <field name="name">Employee Report</field>
+            <field name="tag">i_e_r</field>
+            </record>
+
+        <record model="res.groups" id="group_invoices">
+            <field name="name">Employee Report</field>
+            <field name="category_id" ref="base.module_category_sales_sales"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_invoices_action"
+            name="تقرير المندوبين"
+            parent="sale.menu_sale_report" 
+            action="invoice_action" 
+            groups="group_invoices" 
+            sequence="7"/>
 <!-- 8 -->
         <record id="trial_balance_sub_action" model="ir.actions.client">
             <field name="name">Trial Balance Sub</field>
