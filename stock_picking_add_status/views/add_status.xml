@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!-- <record id="view_order_form_add_new_status" model="ir.ui.view">
+<record id="view_order_form_add_new_status" model="ir.ui.view">
     <field name="name">stock.picking.form.add.new.status</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form"/>
     <field name="arch" type="xml">
         <xpath expr="//header" position="inside">
-
-                <button name="action_in_way" string="التسليم الي السائق" type= "object" class="oe_highlight" data-hotkey="i"
-                attrs="{'invisible': [('driver_state', '=', 'x_5')]}"/>
-            </xpath>
-        </field>
-</record> -->
+            <field name = "driver_state" invisible="1"/>
+            <button name="action_in_way" string="التسليم الي السائق" type= "object" class="oe_highlight" data-hotkey="i"
+            attrs="{'invisible': [('driver_state', '=', 'x_5')]}"/>
+            
+            <button name="action_pass_value" string="تحديث الكميات" type= "object" class="oe_highlight" data-hotkey="i"
+            attrs="{'invisible': [('state', 'not in', 'done')]}"/>
+        </xpath>
+    </field>
+</record>
 <record id="view_add_default_code" model="ir.ui.view">
         <field name="name">stock.picking.add.default.code.form</field>
         <field name="model">stock.picking</field>
@@ -29,11 +32,33 @@
 </record>
 
 
+<!-- <record id="view_one2many_tree_inherit" model="ir.ui.view">
+    <field name="name">stock.picking.tree.inherit</field>
+    <field name="model">stock.picking</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='move_ids_without_package']" position="attributes">
+        <attribute name="attrs">{'invisible': [('parent.origin','=','x')]}</attribute>
+            <attribute name="string">My Tree</attribute>
+            <attribute name="editable">bottom</attribute>
+            <attribute name="create" attrs="{'invisible': [('origin','=','x')]}">0</attribute>
+            <attribute name="delete">false</attribute>
+            <attribute name="attrs">{'readonly': [('origin', '=', 'x')], 'can_create': [('origin', '!=', 'x')]} </attribute>
+            <attribute name="attrs">{'readonly': [('origin', '=', 'x')], 'can_create': [('origin', '!=', 'x')]}</attribute>
+        </xpath>
+    </field>
+</record> -->
+
 <record id="view_one2many_tree_inherit" model="ir.ui.view">
     <field name="name">stock.picking.tree.inherit</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form"/>
     <field name="arch" type="xml">
+        <!-- <xpath expr="//tree" position="inside">
+             <control>
+                <create name="add_line_control" string=" "/>
+            </control>
+        </xpath> -->
         <xpath expr="//tree" position="attributes">
             <attribute name="delete">false</attribute>
         </xpath>
@@ -46,16 +71,55 @@
     <field name="inherit_id" ref="stock.view_picking_form"/>
     <field name="arch" type="xml">
         <xpath expr="//field[@name='origin']" position="after">
+            <field name = "first_user"/>
+            
             <field name = "stage"/>
             <field name = "driver_state"/>
+
+            <!-- <field name = "user_id"/> -->
+            <field name = "user_name"/>
+            
+            
+            <!-- <field name = "user_create_id"/> -->
+            <field name = "user_create_name"/>
         </xpath>
         <xpath expr="//tree" position="inside">
             <button name="unlink" type="object" class="btn-secondary"
             attrs="{'invisible': [('parent.origin', '!=', False)]}"
             icon="fa-trash-o"/>
         </xpath>
+            <!-- <field name = "counts"/> -->
+
+
+        <xpath expr="//field[@name='picking_type_id']" position="after">
+            <field name="document_name" invisible="1"/>
+            <field name="upload_file" filename="document_name"/>
+        </xpath>
     </field>
 </record>
+
+
+
+<record id="view_upload_button_excel" model="ir.ui.view">
+    <field name="name">upload.excel.button</field>
+    <field name="inherit_id" ref="stock.view_picking_form"/>
+    <field name="model">stock.picking</field>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='move_ids_without_package']" position="before">
+                <button name="action_upload" string="Add From File" type= "object" class="btn-secondary"/>
+        </xpath>
+    </field>
+</record>
+
+
+
+
+
+
+
+
+
+
 
 
 <record id="view_stock_picking_new_field_tree" model="ir.ui.view">
@@ -113,7 +177,14 @@
                 </div>
             </div>
         </xpath>
+        <!-- <xpath expr="//div[contains(@class, 'o_kanban_card_manage_section')]" position="inside">
+            <div role="menuitem">
+                <a name="get_action_none_stage" type="object">None</a>
+            </div>
+            <div role="menuitem">
+                <a name="get_action_partially_stage" type="object">Partially</a>
+            </div>
+        </xpath> -->
     </field>
 </record>
-
 </odoo>

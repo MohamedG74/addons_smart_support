@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_add_default_code_in_purchase" model="ir.ui.view">
+        <field name="name">purchase.order.add.default.code.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//field[@name='product_id']" position="before">
+                <field name = "default_code"/>
+            </xpath>
+        </field>
+</record>
+
+
+<record id="view_purchase_order_add_new_field" model="ir.ui.view">
+    <field name="name">purchase.order.form.add.new.field</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_ref']" position="after">
+            <field name="document_name" invisible="1"/>
+            <field name="upload_file" filename="document_name"/>
+        </xpath>
+    </field>
+</record>
+
+
+
+<record id="view_upload_button_excel_in_purchase" model="ir.ui.view">
+    <field name="name">upload.excel.button.in.purchase</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="model">purchase.order</field>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='order_line']" position="before">
+                <button name="action_upload" string="Add From File" type= "object" class="btn-primary"/>
+        </xpath>
+    </field>
+</record>
+</odoo>

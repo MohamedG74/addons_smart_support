@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_default_code_sale" model="ir.ui.view">
+        <field name="name">default.code.sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_qty']" position="before">
+                <field name = "default_code"/>
+            </xpath>
+        </field>
+</record>
+
+
+<record id="view_sale_order_add_new_field" model="ir.ui.view">
+    <field name="name">sale.order.form.add.new.field</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+            <field name="document_name" invisible="1"/>
+            <field name="upload_file" filename="document_name"/>
+        </xpath>
+    </field>
+</record>
+
+
+
+<record id="view_upload_button_excel_in_sale" model="ir.ui.view">
+    <field name="name">upload.excel.button.in.purchase</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="model">sale.order</field>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='order_line']" position="before">
+                <button name="action_upload" string="Add From File" type= "object" class="btn-primary"/>
+        </xpath>
+    </field>
+</record>
+</odoo>
