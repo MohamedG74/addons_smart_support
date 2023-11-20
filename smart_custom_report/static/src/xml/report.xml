@@ -56,7 +56,7 @@
                         data-target-input="nearest">
                         <input type="text" name="date_to"
                                 class="form-control datetimepicker-input"
-                                data-target="#date_to"
+                                data-target="#date_to" value="20-10-2023"
                                 t-att-name="prefix"/>
                         <div class="input-group-append"
                             data-target="#date_to"
@@ -162,9 +162,9 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; text-align: center;">
+               <div class="button-container" style="direction: ltr; text-align: center;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>

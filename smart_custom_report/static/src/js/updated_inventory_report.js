@@ -28,6 +28,8 @@ odoo.define('smart_custom_report.updated_inventory_report', function(require) {
  
  start: function() {
   $("head").append("<link href='/smart_custom_report/static/src/css/main.css' type='text/css' rel='stylesheet' />");
+  $("head").append("<link href='/smart_custom_report/static/src/css/tabulator.css' type='text/css' rel='stylesheet'/>");
+
    var self = this;
    self.initial_render = true;
    rpc.query({
@@ -386,20 +388,23 @@ odoo.define('smart_custom_report.updated_inventory_report', function(require) {
               //   resizableRows:true,
               //   layout:"fitData",
               layout:"fitDataFill",
+              groupStartOpen:false,
               movableRows: true,
                 columns: [
                     { title: "اسم الصنف", field: "product_name", widthGrow:1 },
                     { title: "المجموعة الفرعية", field: "category_name", widthGrow:1 },
                     { title: "المجموعة الرئيسية", field: "parent_name", widthGrow:1 },
 
-                    { title: "رصيد اول المدة", field: "opening_stock", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "أذون إضافة", field: "incoming_from_vendors", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "مرتجع المشتريات", field: "outgoing_returned_to_vendors", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "مترجع العملاء", field: "incoming_from_customers", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "أذون تحويل اليه", field: "incoming_internal", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "أذون صرف", field: "outgoing_to_customers", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    { title: "أذون تحويل منه", field: "outgoing_internal", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
-                    // { title: "رصيد نهاية المدة", field: "price_subtotal", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "الرصيد الافتتاحى", field: "opening_stock", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "اجمالى الاضافة", field: "total_in", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "اجمالى الصرف", field: "total_out", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "مرتجع المبيعات", field: "return_from_customer", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "المبيعات", field: "sales_to_customer", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "مرتجع المشتريات", field: "return_from_supplier", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "المشتريات", field: "purchase_from_supplier", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "تحويل منه", field: "transfer_outgoing_location", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "تحويل اليه", field: "transfer_incoming_location", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
+                    { title: "الرصيد النهائى", field: "current_stock", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
                 ],
             });
         }

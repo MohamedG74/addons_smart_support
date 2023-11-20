@@ -23,8 +23,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -171,9 +171,9 @@
                    </button>
                </div>
 
-               <div class="button-container" style="direction: ltr; text-align: center;">
+               <div class="button-container" style="direction: ltr; text-align: center;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <option value="pick_name" class="select-items" style="text-align: center;">رقم السند</option>

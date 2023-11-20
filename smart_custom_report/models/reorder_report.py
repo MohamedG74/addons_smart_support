@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -- coding: utf-8 --
+# -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
@@ -46,11 +46,15 @@ class DynamicSuggestedOrderReport(models.Model):
             data.update({'main_group': report_values.main_group})    
         if report_values.second_group:
             data.update({'second_group': report_values.second_group})    
-        if report_values.minimum_reorder_months:
-            data.update({'minimum_reorder_months': report_values.minimum_reorder_months})    
-        if report_values.reorder_months:
-            data.update({'reorder_months': report_values.reorder_months})    
         
+        if report_values.minimum_reorder_months:
+            data.update({'minimum_reorder_months': report_values.minimum_reorder_months})
+        else:
+            data.update({'minimum_reorder_months': 1})
+        if report_values.reorder_months:
+            data.update({'reorder_months': report_values.reorder_months})
+        else:
+            data.update({'reorder_months': 1})
 
         filters = self.get_filter(option)
         lines = self._get_report_values(data).get('PURCHASE')
@@ -83,8 +87,7 @@ class DynamicSuggestedOrderReport(models.Model):
         group = self._cr.execute(main_group)
         main_group_output = self._cr.dictfetchall() 
         
-        minimum_reorder_months = self._get_report_values(data).get('minimum_reorder_months')
-        reorder_months = self._get_report_values(data).get('reorder_months')
+       
        
         return {
             'name': 'Reorder Report',
@@ -94,8 +97,6 @@ class DynamicSuggestedOrderReport(models.Model):
             'locations':resul,
             'products':product_output,
             'groups':main_group_output,
-            'minimum_reorder_months':minimum_reorder_months,
-            'reorder_months':reorder_months,
             'filters': filters,
             'report_lines': lines,
             }
@@ -146,7 +147,7 @@ class DynamicSuggestedOrderReport(models.Model):
             return 0
         return (sales / age_days) * 30 if age_days else 0
 
-    def generate_report(self,date_from,date_to,report_product, main_group, second_group, minimum_reorder_months):
+    def generate_report(self,date_from,date_to,report_product, main_group, second_group, minimum_reorder_months, reorder_months):
         Product = self.env['product.product']
         filterlist = []
         if report_product != 'all':
@@ -168,10 +169,10 @@ class DynamicSuggestedOrderReport(models.Model):
             reorder_qty = self._calculate_reorder_qty(average_monthly_sales, minimum_reorder_months)
             current_stock = product.qty_available
             forecasted_stock = product.virtual_available
-            total_stock = (current_stock + forecasted_stock )*minimum_reorder_months
+            total_stock = current_stock + forecasted_stock
             age_days = self._get_age_of_first_entry(product.id)
             actual_monthly_sales = self._calculate_actual_monthly_sales(sales, age_days)
-            extended_reorder_qty = actual_monthly_sales * self.reorder_months
+            extended_reorder_qty = actual_monthly_sales * reorder_months
 
             suggested_reorder_qty = reorder_qty + extended_reorder_qty - total_stock
             suggested_reorder_qty = max(suggested_reorder_qty, 0)  # Ensure the value is not negative
@@ -191,8 +192,7 @@ class DynamicSuggestedOrderReport(models.Model):
                 'age_days': age_days,
                 'actual_monthly_sales': actual_monthly_sales,
                 'extended_reorder_qty': extended_reorder_qty,
-                'suggested_reorder_qty': suggested_reorder_qty,
-                
+                'suggested_reorder_qty': suggested_reorder_qty
             })
 
         # You would then use report_lines to generate your report,
@@ -226,13 +226,10 @@ class DynamicSuggestedOrderReport(models.Model):
         new_filter = None
         query = ""
         filters=""
-        minimum_reorder_months = data.get('minimum_reorder_months')
-        
-    
 
         # if data.get('date_from') and data.get('date_to') and data.get('report_location')!='all':
         if data.get('date_from') and data.get('date_to'):
-            return [self.generate_report(data.get('date_from'), data.get('date_to'), data.get('report_product'), data.get('main_group'), data.get('second_group'), data.get('minimum_reorder_months'))]
+            return [self.generate_report(data.get('date_from'), data.get('date_to'), data.get('report_product'), data.get('main_group'), data.get('second_group'), data.get('minimum_reorder_months'), data.get('reorder_months'))]
         
         return []
 

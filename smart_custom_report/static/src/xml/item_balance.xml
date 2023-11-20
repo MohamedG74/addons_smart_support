@@ -22,8 +22,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -122,9 +122,9 @@
                    </button>
                </div>
 
-               <div class="button-container" style="direction: ltr; text-align: center;">
+               <div class="button-container" style="direction: ltr; text-align: center;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
@@ -157,8 +157,8 @@
                            <th class="mon_fld">اسم الصنف</th>
                            <th class="mon_fld">الوحدة</th>
                            <th class="mon_fld">الكمية</th>
-                           <th class="mon_fld">تاريخ إنشاء الصنف</th>
-                           <th class="mon_fld">عمر الصنف</th>
+                           <!-- <th class="mon_fld">تاريخ إنشاء الصنف</th>
+                           <th class="mon_fld">عمر الصنف</th> -->
                        </tr>
                    </thead>
                    <tbody>
@@ -209,16 +209,12 @@
                                    <!-- </span> -->
                                </td>
 
-                               <td style="text-align:center;">
-                                   <!-- <span> -->
+                               <!-- <td style="text-align:center;">
                                        <t t-esc="dynamic_item_balance['create_date']"/>
-                                   <!-- </span> -->
                                </td>
                                <td style="text-align:center;">
-                                   <!-- <span> -->
                                        <t t-esc="dynamic_item_balance['age']"/>
-                                   <!-- </span> -->
-                               </td>
+                               </td> -->
                            </tr>
                        </t>
                    </tbody>

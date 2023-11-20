@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -- coding: utf-8 --
+# -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
@@ -113,6 +113,7 @@ class DynamicInvoiceReport(models.Model):
         self.env.cr.execute("""
             SELECT 
                 he.name as employee_name,
+                hr_department.name as department_id,
                 COUNT(CASE WHEN am.move_type = 'out_invoice' THEN 1 ELSE NULL END) AS invoice_count,
                 SUM(CASE WHEN am.move_type = 'out_invoice' THEN am.amount_total ELSE 0 END) AS total_sales,
                 SUM(CASE WHEN am.move_type = 'out_refund' THEN am.amount_total ELSE 0 END) AS total_returns,
@@ -130,10 +131,10 @@ class DynamicInvoiceReport(models.Model):
             WHERE 
                 am.x_studio_employee IS NOT NULL
                 AND he.department_id IS NOT NULL
-         
+                AND hr_department.name='المندوبين'
                 AND am.date >= %s AND am.date <= %s
             GROUP BY 
-                am.x_studio_employee, he.name;
+                am.x_studio_employee, he.name, hr_department.name;
             """, ( date_from, date_to))
 
         result = self.env.cr.fetchall()
@@ -141,12 +142,13 @@ class DynamicInvoiceReport(models.Model):
         for row in result:
             report_lines_vals.append({
                 'employee_name': row[0],
-                'invoice_count': row[1],
-                'total_sales': row[2],
-                'total_returns': row[3],
-                'net_sales': row[4],
-                'total_paid': row[5],
-                'not_paid': row[6],
+                'department_id': row[1],
+                'invoice_count': row[2],
+                'total_sales': row[3],
+                'total_returns': row[4],
+                'net_sales': row[5],
+                'total_paid': row[6],
+                'not_paid': row[7],
                 
             })
 

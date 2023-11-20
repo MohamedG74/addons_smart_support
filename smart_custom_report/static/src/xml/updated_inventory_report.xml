@@ -3,7 +3,7 @@
        <div class="">
            <div>
                <center>
-                <h1 style="margin: 20px;">تحديث تقرير المخزون</h1>
+                <h1 style="margin: 20px;">تحليل مخزون المحدث</h1>
                </center>
            </div>
            <div>
@@ -23,8 +23,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -162,13 +162,13 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; text-align: center;">
+               <div class="button-container" style="direction: ltr; text-align: center;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
-                        <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
-                        <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
+                        <option value="warehouse_name" class="select-items" style="text-align: center;">المستودع</option>
+                        <!-- <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
                         <option value="invoice_type" class="select-items" style="text-align: center;">نوع الفاتورة</option> -->
                         <option value="product_name" class="select-items" style="text-align: center;">اسم الصنف</option>
                         <!-- <option value="invoice_date" class="select-items" style="text-align: center;">تاريخ الفاتورة</option> -->
@@ -204,16 +204,16 @@
                            <th class="mon_fld">أذون تحويل منه</th>
                            <th class="mon_fld">رصيد نهاية المدة</th> -->
                            
-                           <th class="mon_fld">opening_stock</th>
-                           <th class="mon_fld">total_in</th>
-                           <th class="mon_fld">total_out</th>
-                           <th class="mon_fld">return_from_customer</th>
-                           <th class="mon_fld">sales_to_customer</th>
-                           <th class="mon_fld">return_from_supplier</th>
-                           <th class="mon_fld">purchase_from_supplier</th>
-                           <th class="mon_fld">transfer_outgoing_location</th>
-                           <th class="mon_fld">transfer_incoming_location</th>
-                           <th class="mon_fld">current_stock</th>
+                           <th class="mon_fld">الرصيد الافتتاحى</th>
+                           <th class="mon_fld">اجمالى الاضافة</th>
+                           <th class="mon_fld">اجمالى الصرف</th>
+                           <th class="mon_fld">مرتجع المبيعات</th>
+                           <th class="mon_fld">المبيعات</th>
+                           <th class="mon_fld">مرتجع المشتريات</th>
+                           <th class="mon_fld">المشتريات</th>
+                           <th class="mon_fld">تحويل منه</th>
+                           <th class="mon_fld">تحويل اليه</th>
+                           <th class="mon_fld">الرصيد النهائى</th>
                        </tr>
                    </thead>
                    <tbody>

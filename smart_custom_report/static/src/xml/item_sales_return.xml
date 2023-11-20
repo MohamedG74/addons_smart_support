@@ -36,20 +36,20 @@
             </div> -->
 
             <div class="sub_container_left"
-                style="width: 285px; margin-left: 36px;">
+                style="width: 236px;margin-left: 16px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="download-xlsx">
-                       Export Grouping (XLSX)
+                   <button type="button" class="btn btn-danger" id="download-xlsx">
+                       EXPORT GROUPING (XLSX)
                    </button>
                </div>
             </div>
 
 
            <div class="sub_container_left"
-                style="width: 285px; margin-left: 36px;">
+                style="">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -161,6 +161,24 @@
                        <span id="report_res_location"/>
                    </div>
                </div> -->
+
+
+               <div class="form-group">
+                    <label class="" for="report_area">المنطقة :</label>
+                    <select id="selection_area" class="input-group report_area"
+                               aria-labelledby="dropdownMenuLink"
+                               name="report_area[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">الكل</option>
+                                <option value="الجنوبية">الجنوبية</option>
+                                <option value="الرياض">الرياض</option>
+                                <option value="الشرقية">الشرقية</option>
+                                <option value="الشمالية">الشمالية</option>
+                                <option value="الغربية">الغربية</option>
+                                <option value="القصيم">القصيم</option>
+                    </select>
+                </div>
+
 
                <div class="form-group">
                     <label class="" for="invoice_type">نوع الفاتورة :</label>
@@ -285,7 +303,7 @@
                </div> -->
 
                
-               <div class="search-Result-Selection" style="width: 100px;">
+               <div class="search-Result-Selection" style="width: 150px;">
                     <label class="" for="invoice_number">رقم الفاتورة :</label>
                    <input type="text" class="form-control invoice_number" 
                     placeholder="رقم الفاتورة" 
@@ -294,7 +312,7 @@
                </div>
 
                <div class="sub_container_right"
-                    style="width: 220px; margin-left: 28px;">
+                    style="width: 200px; margin-left: 28px;">
                     <div id="totalRowCount"></div>
                 </div>
 
@@ -374,9 +392,9 @@
                
 
 
-                <div class="button-container" style="direction: ltr; width: 14%;text-align: center;">
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 35%; height: 50px; margin-top: -85px;">Group by</button>
-                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 50%;">
+                <div class="button-container" style="direction: ltr; width: 22%;text-align: center;">
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: 50px; margin-top: -85px;">Group by</button>
+                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 65%;">
                         <option value="" class="select-items"></option>
                         <option value="report_location" class="select-items" style="text-align: center;">الفرع</option>
                         <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
@@ -410,6 +428,7 @@
                         <th>نوع الفاتورة</th>
                         <th>تاريخ الفاتورة</th>
                         <th class="mon_fld">الفرع</th>
+                        <th class="mon_fld">المنطقة</th>
                         <th class="mon_fld">البائع</th>
                         <th class="mon_fld">مندوب المبيعات</th>
                         <th class="mon_fld">اسم العميل</th>
@@ -481,6 +500,13 @@
                                        <t t-esc="dynamic_item_balance['branch_name']"/>
                                    <!-- </span> -->
                                </td>
+
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['report_area']"/>
+                                    <!-- </span> -->
+                               </td>
+
                                <td style="text-align:center;">
                                    <!-- <span> -->
                                        <t t-esc="dynamic_item_balance['user_name']"/>

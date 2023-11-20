@@ -24,19 +24,19 @@
 
        
             <div class="sub_container_left"
-                style="width: 285px; margin-left: 36px;">
+                style="width: 262px;">
                 <div class="report_print">
-                    <button type="button" class="btn btn-primary" id="download-xlsx">
-                        Export Grouping (XLSX)
+                    <button type="button" class="btn btn-danger" id="download-xlsx">
+                        EXPORT GROUPING (XLSX)
                     </button>
                 </div>
             </div>
 
            <div class="sub_container_left"
-                style="width: 285px; margin-left: 36px;">
+                style="">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
             </div>
@@ -317,7 +317,7 @@
                </div>
                
                <div class="sub_container_right"
-                    style="width: 220px; margin-left: 28px;">
+                    style="width: 200px; margin-left: 28px;">
                     <div id="totalRowCount"></div>
                 </div>
 
@@ -346,10 +346,10 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; width: 15%; text-align: center;">
+               <div class="button-container" style="direction: ltr; width: 18%;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 40%; height: 50px; margin-top: -85px;">Group by</button>
-                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 50%;">
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: 50px; margin-top: -85px;">Group by</button>
+                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 60%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
                         <option value="invoice_type" class="select-items" style="text-align: center;">نوع الفاتورة</option>

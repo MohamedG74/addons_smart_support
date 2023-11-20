@@ -28,6 +28,8 @@ odoo.define('smart_custom_report.bond_details', function(require) {
   
   start: function() {
    $("head").append("<link href='/smart_custom_report/static/src/css/main.css' type='text/css' rel='stylesheet' />");
+   $("head").append("<link href='/smart_custom_report/static/src/css/tabulator.css' type='text/css' rel='stylesheet'/>");
+
     var self = this;
     self.initial_render = true;
     rpc.query({

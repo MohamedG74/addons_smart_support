@@ -407,7 +407,19 @@ odoo.define('smart_custom_report.reorder_report', function(require) {
         //     }
         //  }
 
+         if ($(".reorder_months").val().length > 0) {
+               var report_res = $(".reorder_months").val();
+               filter_data_selected.reorder_months = report_res;
+            }else{
+               filter_data_selected.reorder_months = "all";
+            }
          
+            if ($(".minimum_reorder_months").val().length > 0) {
+               var report_res = $(".minimum_reorder_months").val();
+               filter_data_selected.minimum_reorder_months = report_res;
+            }else{
+               filter_data_selected.minimum_reorder_months = "all";
+            }
 
 
          if ($(".report_location").length) {
@@ -443,16 +455,6 @@ odoo.define('smart_custom_report.reorder_report', function(require) {
            console.log('main group:', filter_data_selected.main_group)
            console.log('second group:', filter_data_selected.second_group)
         }
-        if ($(".minimum_reorder_months").val()) {
-         var report_res = $(".minimum_reorder_months").val();
-         filter_data_selected.minimum_reorder_months = report_res;
-      }
-      //   if ($(".reorder_months").val().length > 0) {
-      //    var report_res = $(".reorder_months").val();
-      //    filter_data_selected.reorder_months = report_res;
-      // }else{
-      //    filter_data_selected.reorder_months = "all";
-      // }
         
          rpc.query({
             model: 'dynamic.re.order',

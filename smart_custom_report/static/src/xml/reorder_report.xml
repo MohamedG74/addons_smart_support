@@ -23,8 +23,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -107,13 +107,26 @@
                         <option value="all">الكل</option>
                     </select>
                 </div>
+
+                
+
+
                 <div class="search-Result-Selection">
-                    <label class="" for="minimum_reorder_months">متوسط مبيعات شهرية</label>
+                    <label class="" for="minimum_reorder_months">أقل عدد الشهور</label>
                    <input type="text" class="form-control minimum_reorder_months" 
-                    placeholder="For Export Data" 
-                    data-target="#minimum_reorder_months" 
+                    placeholder="أدخل عدد الشهور" 
+                    data-target="#minimum_reorder_months" value="1"
                     t-att-name="minimum_reorder_months"/>
-               </div>
+                </div>
+                
+                <div class="search-Result-Selection">
+                    <label class="" for="reorder_months">عدد الشهور</label>
+                   <input type="text" class="form-control reorder_months" 
+                    placeholder="أدخل عدد الشهور" 
+                    data-target="#reorder_months" value="1"
+                    t-att-name="reorder_months"/>
+                </div>
+
 
                <div class="apply_filter">
                    <button type="button" id="apply_filter"
@@ -123,9 +136,9 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; text-align: center; display:none;">
+               <div class="button-container" style="direction: ltr; text-align: center; display:none;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
@@ -226,7 +239,6 @@
                                <td>
                                     <t t-esc="dynamic_update_inventory['suggested_reorder_qty']"/>
                                </td>
-                               
                                
                             
                            </tr>

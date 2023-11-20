@@ -287,7 +287,7 @@ odoo.define('smart_custom_report.item_sales_employee', function(require) {
         var $pager = $('<div class="pager"></div>');
 
         var total_rows = parseInt(datas['count'].total_rows)
-        var buttonElement = '<button type="button" class="btn btn-secondary" disabled style="font-size: 15px; color: #000; font-weight: bold;">عدد الصفوف الكلي: ' + total_rows + '</button>';
+        var buttonElement = '<button type="button" class="btn btn-secondary" disabled style="font-size: 14px; color: #000; font-weight: bold;">عدد الصفوف الكلي: ' + total_rows + '</button>';
         $('#totalRowCount').html(buttonElement);
 
         

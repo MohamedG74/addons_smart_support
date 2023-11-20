@@ -149,6 +149,11 @@ odoo.define('smart_custom_report.item_sales_return', function(require) {
                placeholder: ' Invoice type...',
             });
 
+            $('.report_area').select2('destroy'); 
+            $('.report_area').select2({
+               placeholder: ' Area...',
+            });
+
 
              if(datas['branch']){
                $('.report_location').select2('destroy'); 
@@ -287,7 +292,7 @@ odoo.define('smart_custom_report.item_sales_return', function(require) {
          var $pager = $('<div class="pager"></div>');
 
          var total_rows = parseInt(datas['count'].total_rows)
-         var buttonElement = '<button type="button" class="btn btn-secondary" disabled style="font-size: 15px; color: #000; font-weight: bold;">عدد الصفوف الكلي: ' + total_rows + '</button>';
+         var buttonElement = '<button type="button" class="btn btn-secondary" disabled style="font-size: 14px; color: #000; font-weight: bold;">عدد الصفوف الكلي: ' + total_rows + '</button>';
          $('#totalRowCount').html(buttonElement);
 
          
@@ -503,6 +508,7 @@ odoo.define('smart_custom_report.item_sales_return', function(require) {
                      { title: "المجموعة الفرعية", field: "second_group", widthGrow:1 },
                      { title: "المجموعة الرئيسية", field: "main_group", widthGrow:1 },
                      { title: "البائع", field: "user_name", widthGrow:1 },
+                     { title: "المنطقة", field: "report_area", widthGrow:1 },
 
                      { title: "اجمالى الفاتورة", field: "amount_total", widthGrow:1, bottomCalc:"sum", bottomCalcParams:{precision:3,}},
                      { title: "الكمية", field: "quantity", widthGrow:1,  bottomCalc:"sum", bottomCalcParams:{precision:3,}},
@@ -647,6 +653,18 @@ odoo.define('smart_custom_report.item_sales_return', function(require) {
             //    report_res.innerHTML = "None";
             // }
          }
+
+
+         if ($(".report_area").length) {
+            // var report_res = document.getElementById("report_res_invoice_type");
+            filter_data_selected.report_area = $(".report_area option:selected").val();
+            // report_res.value =  $(".report_area option:selected").val();
+            // report_res.innerHTML =  $(".report_area option:selected").text();
+            // if ($(".report_area option:selected").val() == "") {
+            //    report_res.innerHTML = "None";
+            // }
+         }
+         
 
 
          if ($(".invoice_number").val().length > 0) {

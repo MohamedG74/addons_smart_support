@@ -3,7 +3,6 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
-# from sqlalchemy import create_engine, text
 import io
 import json
 try:
@@ -12,27 +11,24 @@ except ImportError:
     import xlsxwriter
 
 
-class DynamicItemSalesReturn(models.Model):
+class DynamicSalesInvoiceAreas(models.Model):
 
-    _name = 'dynamic.item.sales.return'
+    _name = 'dynamic.sales.invoice.areas'
     
     purchase_report = fields.Char(string='Purchase Report')
     report_product = fields.Char(string='Report Product') 
     invoice_number=fields.Char(string='Invoice Number')
     invoice_type=fields.Selection([('all','all'),('out_invoice','Customer Invoice'),
                                     ('out_refund','Customer Credit Note'),],string='Invoice Type')
-
-    report_area=fields.Selection([('all','all'),('الجنوبية','الجنوبية'),('الرياض','الرياض'),('الشرقية','الشرقية'),
-                                ('الشمالية','الشمالية'),('الغربية','الغربية'),('القصيم','القصيم'),],string='المنطقة')
+    
+    report_area=fields.Selection([('all','all'),('الجنوبية','الجنوبية'),('الرياض','الرياض'),
+                                    ('الشرقية','الشرقية'),('الشمالية','الشمالية'),('الغربية','الغربية'),('القصيم','القصيم'),],string='المنطقة')
     report_location = fields.Char(string='Report Location')
 
     res_user=fields.Char(string='User')
     res_partner=fields.Char(string='Partner')
-    main_group=fields.Char(string='Group')
-    second_group=fields.Char(string='Second Group')
     hr_employee=fields.Char(string='Employee')
     counting=fields.Char(string='Counting')
-    
 
     limited=fields.Integer(string='Limited')
 
@@ -44,9 +40,10 @@ class DynamicItemSalesReturn(models.Model):
     #                                'Report By Product')],
     #                                default='report_by_order')
 
+
     @api.model
     def purchase_report(self, option):
-        report_values = self.env['dynamic.item.sales.return'].search([('id', '=', option[0])])
+        report_values = self.env['dynamic.sales.invoice.areas'].search([('id', '=', option[0])])
         data = {'model': self}
         if report_values.date_from:
             data.update({'date_from': report_values.date_from})
@@ -56,26 +53,22 @@ class DynamicItemSalesReturn(models.Model):
             data.update({'report_location': report_values.report_location})
         if report_values.report_product:
             data.update({'report_product': report_values.report_product})
-        
+
         if report_values.invoice_number:
             data.update({'invoice_number': report_values.invoice_number})
         else:
             data.update({'invoice_number': "all"})
 
         if report_values.invoice_type:
-            data.update({'invoice_type': report_values.invoice_type})      
+            data.update({'invoice_type': report_values.invoice_type})        
         
         if report_values.report_area:
             data.update({'report_area': report_values.report_area})        
-
+        
         if report_values.res_user:
             data.update({'res_user': report_values.res_user})
         if report_values.res_partner:
-            data.update({'res_partner': report_values.res_partner})    
-        if report_values.main_group:
-            data.update({'main_group': report_values.main_group})    
-        if report_values.second_group:
-            data.update({'second_group': report_values.second_group})    
+            data.update({'res_partner': report_values.res_partner})
         if report_values.hr_employee:
             data.update({'hr_employee': report_values.hr_employee})
         
@@ -111,7 +104,16 @@ class DynamicItemSalesReturn(models.Model):
         product_output = self._cr.dictfetchall()
         
 
-
+        product_name = '''
+            SELECT
+                product_product.id, product_product.default_code, product_template.name->>'en_US' AS name
+            FROM
+                product_product
+            LEFT JOIN product_template ON product_product.id = product_template.id;
+        '''
+        prod = self._cr.execute(product_name)
+        product_output = self._cr.dictfetchall()
+        
 
         branch_name = '''
             SELECT
@@ -139,19 +141,11 @@ class DynamicItemSalesReturn(models.Model):
                 res_partner.id, res_partner.name
             FROM
                 res_partner
-            WHERE supplier_rank > 0;
+            WHERE customer_rank > 0;
         '''
         partner = self._cr.execute(res_partner)
         res_partner_output = self._cr.dictfetchall() 
 
-        main_group = '''
-            SELECT
-                id,name->>'en_US' as name ,x_studio_name_in_ar as namear
-            FROM
-                pos_category
-        '''
-        group = self._cr.execute(main_group)
-        main_group_output = self._cr.dictfetchall() 
 
         hr_employee = '''
             SELECT
@@ -165,24 +159,23 @@ class DynamicItemSalesReturn(models.Model):
 
         count = self._get_report_values(data).get('count')
         limited = self._get_report_values(data).get('limited')
+
         return {
-            'name': 'Item Sales Return',
+            'name': 'Sales Invoice Areas',
             'type': 'ir.actions.client',
-            'tag': 'i_s_r',
+            'tag': 's_i_a',
             'orders': data,
             'locations':resul,
             'products':product_output,
             'branch': branch_output,
             'user': res_user_output,
             'partner':res_partner_output,
-            'groups':main_group_output,
             'employee':hr_employee_output,
             'filters': filters,
             'report_lines': lines,
             'count': count,
             'limited': limited,
             }
-
 
     def get_filter(self, option):
         data = self.get_filter_data(option)
@@ -191,7 +184,7 @@ class DynamicItemSalesReturn(models.Model):
 
 
     def get_filter_data(self, option):
-        r = self.env['dynamic.item.sales.return'].search([('id', '=',option[0])])
+        r = self.env['dynamic.sales.invoice.areas'].search([('id', '=',option[0])])
         default_filters = {}
         filter_dict = {}
         return filter_dict
@@ -234,6 +227,7 @@ class DynamicItemSalesReturn(models.Model):
                 filters = filters + """
                 AND account_move.move_type IN ('out_invoice', 'out_refund')
                 """               
+            
 
 
             if(data.get('report_area')):
@@ -251,189 +245,166 @@ class DynamicItemSalesReturn(models.Model):
                 """               
 
 
+
+
             if(data.get('invoice_number')!='all'):
                 filters = filters + """
                 AND account_move.name = '{0}'
                 """.format(data.get('invoice_number'))
             
-            if(data.get('res_user') !='all'):
+            if(data.get('res_user') !='all'):#المستخدم
                 filters = filters + """
                 AND res_partner_user.name = '{0}'
                 """.format(data.get('res_user'))
              
-
-            if(data.get('res_partner')!= 'all'):
+            if(data.get('res_partner')!= 'all'):#العميل
                 filters = filters + """
                 AND res_partner.name = '{0}'
                 """.format(data.get('res_partner'))
             
-            if(data.get('report_location')!= 'all'):
+
+            if(data.get('report_location')!= 'all'):#المستودع
                 filters = filters + """
                 AND operating_unit.name = '{0}'
                 """.format(data.get('report_location'))
-            
+
             if(data.get('hr_employee')!= 'all'):#مندوب المبيعات
                 filters = filters + """
                 AND hr_employee.name = '{0}'
                 """.format(data.get('hr_employee'))
-
-            if(data.get('report_product')!= 'all'):
-                filters = filters + """
-                AND product_template.name->>'en_US' = '{0}'
-                """.format(data.get('report_product'))
-            
-            if(data.get('second_group')!= 'all'):
-                filters = filters + """
-                AND pc1.x_studio_name_in_ar = '{0}'
-                """.format(data.get('second_group'))
-
-            if(data.get('main_group')!= 'all'):
-                filters = filters + """
-                AND pc2.name->>'en_US' = '{0}'
-                """.format(data.get('main_group'))
 
 
             query = \
                 '''
                 SELECT 
                     res_partner.name AS partner_name, 
-                    hr_employee.name AS employee_name, 
                     account_move.name,
-                    operating_unit.name AS branch_name,
-                    operating_unit.report_area AS report_area,
+                    hr_employee.name AS employee_name, 
+                    operating_unit.name AS branch_name, 
+                    operating_unit.report_area AS report_area, 
                     res_partner_user.name AS user_name,
                     CASE 
                         WHEN account_move.move_type = 'out_invoice' THEN 'بيع'
                         WHEN account_move.move_type = 'out_refund' THEN 'مرتجع بيع'
                     END AS move_type,
-                    account_move.invoice_date,
-                    account_move.amount_total,
-                    account_move_line.product_id,
-                    account_move_line.price_unit,
-                    account_move_line.quantity,
-                    uom_uom.name->>'en_US' AS product_uom_name,
-                    (account_move_line.price_subtotal+(account_move_line.discount * account_move_line.price_subtotal) / 100) AS before_discount,
-                    ((account_move_line.discount * account_move_line.price_subtotal) / 100) AS discount_value,
-                    account_move_line.discount AS discount_percent,
-                    account_move_line.price_subtotal,
-                    (account_move_line.price_total - account_move_line.price_subtotal) AS price_tax,
-                    account_move_line.price_total,
-                    pc1.x_studio_name_in_ar AS category_name,
-                    pc2.name->>'en_US' AS parent_category_name,
-                    product_template.default_code,
-	                product_template.name->>'en_US' as prodcut_name,
-
-                    cast(product_template.create_date as date),
-                    EXTRACT(DAY FROM now() - product_template.create_date) AS age
+                    account_move.invoice_date, 
+                    COALESCE(account_move.stot_disc_before,account_move.amount_untaxed) as stot_disc_before, 
+                    COALESCE(account_move.stot_disc,0) as stot_disc, 
+                    account_move.amount_untaxed, 
+                    account_move.amount_tax, 
+                    account_move.amount_total
                 FROM 
                     account_move 
-                    JOIN res_partner ON res_partner.id = account_move.partner_id 
-                    LEFT JOIN hr_employee ON hr_employee.id = account_move.x_studio_employee 
-                    JOIN operating_unit ON operating_unit.id = account_move.x_studio_branch 
-                    JOIN res_users ON res_users.id = account_move.invoice_user_id 
-                    JOIN res_partner AS res_partner_user ON res_partner_user.id = res_users.partner_id
-                    JOIN account_move_line ON account_move_line.move_id = account_move.id
-                    JOIN uom_uom ON uom_uom.id = account_move_line.product_uom_id
-                    LEFT JOIN product_product ON product_product.id = account_move_line.product_id
-                    LEFT JOIN product_template ON product_template.id = product_product.product_tmpl_id
-                    LEFT JOIN pos_category pc1 ON product_template.pos_categ_id = pc1.id
-                    LEFT JOIN pos_category pc2 ON pc1.parent_id = pc2.id
+                LEFT JOIN 
+                    res_partner 
+                ON 
+                    res_partner.id = account_move.partner_id 
+                LEFT JOIN 
+                    hr_employee 
+                ON 
+                    hr_employee.id = account_move.x_studio_employee 
+                LEFT JOIN 
+                    operating_unit 
+                ON 
+                    operating_unit.id = account_move.x_studio_branch 
+                LEFT JOIN 
+                    res_users 
+                ON 
+                    res_users.id = account_move.invoice_user_id 
+                LEFT JOIN
+                    res_partner AS res_partner_user
+                ON 
+                    res_partner_user.id = res_users.partner_id
                 WHERE 
-                    account_move_line.product_id IS NOT NULL
-                    AND account_move_line.name <> '[DISC] Discount'
-                    AND account_move_line.name <> '[Discount] Discount'
-                    AND account_move.invoice_date BETWEEN '{0}' AND '{1}'
-                    AND account_move_line.display_type <> 'cogs'
-                    AND account_move_line.display_type <> 'epd'
+                    account_move.invoice_date BETWEEN '{0}' AND '{1}'
                     {2}
-                    LIMIT {3} OFFSET {4};
+                    AND state  = 'posted'
+                ORDER BY invoice_date DESC
+                LIMIT {3} OFFSET {4};
                 '''.format(date_from,date_to,filters,limited,counting)
             
+
             querycount =  '''
             SELECT COUNT(*) AS total_rows
             FROM 
-                account_move 
-                JOIN res_partner ON res_partner.id = account_move.partner_id 
-                LEFT JOIN hr_employee ON hr_employee.id = account_move.x_studio_employee 
-                JOIN operating_unit ON operating_unit.id = account_move.x_studio_branch 
-                JOIN res_users ON res_users.id = account_move.invoice_user_id 
-                JOIN res_partner AS res_partner_user ON res_partner_user.id = res_users.partner_id
-                JOIN account_move_line ON account_move_line.move_id = account_move.id
-                JOIN uom_uom ON uom_uom.id = account_move_line.product_uom_id
-                LEFT JOIN product_product ON product_product.id = account_move_line.product_id
-                LEFT JOIN product_template ON product_template.id = product_product.product_tmpl_id
-                LEFT JOIN pos_category pc1 ON product_template.pos_categ_id = pc1.id
-                LEFT JOIN pos_category pc2 ON pc1.parent_id = pc2.id
-            WHERE 
-                account_move_line.product_id IS NOT NULL
-                AND account_move_line.name <> '[DISC] Discount'
-                AND account_move_line.name <> '[Discount] Discount'
-                AND account_move.invoice_date BETWEEN '{0}' AND '{1}'
-                AND account_move_line.display_type <> 'cogs'
-                AND account_move_line.display_type <> 'epd'
-                {2};
+                    account_move 
+                LEFT JOIN 
+                    res_partner 
+                ON 
+                    res_partner.id = account_move.partner_id 
+                LEFT JOIN 
+                    hr_employee 
+                ON 
+                    hr_employee.id = account_move.x_studio_employee 
+                LEFT JOIN 
+                    operating_unit 
+                ON 
+                    operating_unit.id = account_move.x_studio_branch 
+                LEFT JOIN 
+                    res_users 
+                ON 
+                    res_users.id = account_move.invoice_user_id 
+                LEFT JOIN
+                    res_partner AS res_partner_user
+                ON 
+                    res_partner_user.id = res_users.partner_id
+                WHERE 
+                    account_move.invoice_date BETWEEN '{0}' AND '{1}'
+                    {2}
+                    AND state  = 'posted'
             '''.format(date_from,date_to,filters)
             
             self._cr.execute(querycount)
             report_number_pages = self._cr.dictfetchall()[0]
             report_sub_lines.append(report_number_pages)
 
-
             
         else:
             query = \
                 '''
                 SELECT 
-                    res_partner.name AS partner_name,
+                    res_partner.name AS partner_name, 
                     hr_employee.name AS employee_name,
-                    account_move.name,
-                    operating_unit.name AS branch_name,
-                    operating_unit.report_area AS report_area,
+                    account_move.name, 
+                    operating_unit.name AS branch_name, 
+                    operating_unit.report_area AS report_area, 
                     res_partner_user.name AS user_name,
                     CASE 
                         WHEN account_move.move_type = 'out_invoice' THEN 'بيع'
                         WHEN account_move.move_type = 'out_refund' THEN 'مرتجع بيع'
                     END AS move_type,
-                    account_move.invoice_date,
-                    account_move.amount_total,
-                    account_move_line.product_id,
-                    account_move_line.price_unit,
-                    account_move_line.quantity,
-                    uom_uom.name->>'en_US' AS product_uom_name,
-                    (account_move_line.price_subtotal+(account_move_line.discount * account_move_line.price_subtotal) / 100) AS before_discount,
-                    ((account_move_line.discount * account_move_line.price_subtotal) / 100) AS discount_value,
-                    account_move_line.discount AS discount_percent,
-                    account_move_line.price_subtotal,
-                    (account_move_line.price_total - account_move_line.price_subtotal) AS price_tax,
-                    account_move_line.price_total,
-                    pc1.x_studio_name_in_ar AS category_name,
-                    pc2.name->>'en_US' AS parent_category_name,
-                    product_template.default_code,
-	                product_template.name->>'en_US' as prodcut_name,
-
-                    cast(product_template.create_date as date),
-                    EXTRACT(DAY FROM now() - product_template.create_date) AS age
-
+                    account_move.invoice_date, 
+                    COALESCE(account_move.stot_disc_before,account_move.amount_untaxed) as stot_disc_before, 
+                    COALESCE(account_move.stot_disc,0) as stot_disc, 
+                    account_move.amount_untaxed, 
+                    account_move.amount_tax, 
+                    account_move.amount_total
                 FROM 
                     account_move 
-                    JOIN res_partner ON res_partner.id = account_move.partner_id 
-                    LEFT JOIN hr_employee ON hr_employee.id = account_move.x_studio_employee 
-                    JOIN operating_unit ON operating_unit.id = account_move.x_studio_branch 
-                    JOIN res_users ON res_users.id = account_move.invoice_user_id 
-                    JOIN res_partner AS res_partner_user ON res_partner_user.id = res_users.partner_id
-                    JOIN account_move_line ON account_move_line.move_id = account_move.id
-                    JOIN uom_uom ON uom_uom.id = account_move_line.product_uom_id
-                    LEFT JOIN product_product ON product_product.id = account_move_line.product_id
-                    LEFT JOIN product_template ON product_template.id = product_product.product_tmpl_id
-                    LEFT JOIN pos_category pc1 ON product_template.pos_categ_id = pc1.id
-                    LEFT JOIN pos_category pc2 ON pc1.parent_id = pc2.id
+                LEFT JOIN 
+                    res_partner 
+                ON 
+                    res_partner.id = account_move.partner_id 
+                LEFT JOIN 
+                    hr_employee 
+                ON 
+                    hr_employee.id = account_move.x_studio_employee 
+                LEFT JOIN 
+                    operating_unit 
+                ON 
+                    operating_unit.id = account_move.x_studio_branch 
+                LEFT JOIN 
+                    res_users 
+                ON 
+                    res_users.id = account_move.invoice_user_id 
+                LEFT JOIN
+                    res_partner AS res_partner_user
+                ON 
+                    res_partner_user.id = res_users.partner_id
                 WHERE 
                     account_move.move_type IN ('out_invoice', 'out_refund')
-                    AND account_move_line.product_id IS NOT NULL
-                    AND account_move_line.name <> '[DISC] Discount'
-                    AND account_move_line.name <> '[Discount] Discount'
-                    AND account_move_line.display_type <> 'cogs'
-                    AND account_move_line.display_type <> 'epd'
+                    AND state  = 'posted'
+                    ORDER BY invoice_date DESC
                 LIMIT {0} OFFSET {1};
                 '''.format(limited,counting)
             
@@ -448,9 +419,9 @@ class DynamicItemSalesReturn(models.Model):
             '''
             self._cr.execute(querycount)
             report_number_pages = self._cr.dictfetchall()[0]
-            report_sub_lines.append(report_number_pages)
+            report_sub_lines.append(report_number_pages)               
 
-       
+
         if(query != ""):
             self._cr.execute(query)
             report_by_order = self._cr.dictfetchall()
@@ -463,11 +434,24 @@ class DynamicItemSalesReturn(models.Model):
         docs = data['model']
         date_from = data.get('date_from')
         date_to = data.get('date_to')
+        # if data['report_type'] == 'report_by_order_detail':
+        #     report = ['Report By Order Detail']
+        # elif data['report_type'] == 'report_by_product':
+        #     report = ['Report By Product']
+        # elif data['report_type'] == 'report_by_categories':
+        #     report = ['Report By Categories']
+        # elif data['report_type'] == 'report_by_purchase_representative':
+        #     report = ['Report By Purchase Representative']
+        # elif data['report_type'] == 'report_by_state':
+        #     report = ['Report By State']
+        # else:
+        #     report = ['Report By Order']
+        # if data.get('report_type'):
         report_res = self._get_report_sub_lines(data,date_from, date_to)
         
         # if(len(report_res) > 0):
         #     report_res = report_res[0]
-
+        
         if(len(report_res) == 2):
             return {'doc_ids': self.ids, 'docs': docs, 'PURCHASE': report_res[1], 'count': report_res[0], 'limited': data.get('limited')}
         else:

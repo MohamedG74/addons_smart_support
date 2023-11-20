@@ -23,8 +23,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -128,15 +128,15 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; text-align: center; display:none;">
+               <div class="button-container" style="direction: ltr; text-align: center; display:none;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 41%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <!-- <option value="report_location" class="select-items" style="text-align: center;">المستودع</option>
                         <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>
                         <option value="invoice_type" class="select-items" style="text-align: center;">نوع الفاتورة</option> -->
-                        <!-- <option value="department_id" class="select-items" style="text-align: center;">القسم</option> -->
+                        <option value="product_name" class="select-items" style="text-align: center;">اسم الصنف</option>
                         <!-- <option value="invoice_date" class="select-items" style="text-align: center;">تاريخ الفاتورة</option> -->
                         <!-- <option value="category_name" class="select-items" style="text-align: center;">المجموعة الفرعية</option>
                         <option value="parent_name" class="select-items" style="text-align: center;">المجموعة الرئيسية</option> -->
@@ -161,14 +161,13 @@
                            <th class="mon_fld">كود الصنف</th>
                            <th class="mon_fld">اسم الصنف</th> -->
                            <th class="mon_fld">المندوبين</th>
+                           <th class="mon_fld">القسم</th>
                            <th class="mon_fld">عدد الفواتير </th>
                            <th class="mon_fld">قيمة الفواتير </th>
                            <th class="mon_fld">قيمة المرتجعات </th>
                            <th class="mon_fld">صافي المبيعات </th>
                            <th class="mon_fld">اجمالى المسدد </th>
                            <th class="mon_fld">الباقي </th>
-                           <th class="mon_fld">القسم </th>
-
                            <!-- <th class="mon_fld">Actual Monthly Salary </th>
                            <th class="mon_fld">Extended Reorder Qty </th>
                            <th class="mon_fld">Suggested Reorder QTY </th> -->
@@ -196,6 +195,9 @@
                                <td>
                                     <t t-esc="dynamic_update_inventory['employee_name']"/>
                                </td>
+                               <td>
+                                    <t t-esc="dynamic_update_inventory['department_id']"/>
+                               </td>
                                
                                <td>
                                     <t t-esc="dynamic_update_inventory['invoice_count']"/>
@@ -216,9 +218,6 @@
                                
                                <td>
                                     <t t-esc="dynamic_update_inventory['not_paid']"/>
-                               </td>
-                               <td>
-                                    <t t-esc="dynamic_update_inventory['deaprtment']"/>
                                </td>
 <!--                                
                                <td>

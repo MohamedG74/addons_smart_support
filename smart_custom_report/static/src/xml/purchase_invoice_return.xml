@@ -25,8 +25,8 @@
             <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="download-xlsx">
-                       Export Grouping (XLSX)
+                   <button type="button" class="btn btn-danger" id="download-xlsx">
+                       EXPORT GROUPING (XLSX)
                    </button>
                </div>
             </div>
@@ -35,8 +35,8 @@
            <div class="sub_container_left"
                 style="width: 285px; margin-left: 36px;">
                <div class="report_print">
-                   <button type="button" class="btn btn-primary" id="xlsx">
-                       Export (XLSX)
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
                    </button>
                </div>
           
@@ -267,9 +267,9 @@
                </div>
 
 
-               <div class="button-container" style="direction: ltr; width: 16%;text-align: center;">
+               <div class="button-container" style="direction: ltr; width: 16%;text-align: center;width:300px;">
                     <!-- Include Tabulator CSS -->        
-                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 40%; height: 50px; margin-top: -85px;">Group by</button>
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: 50px; margin-top: -85px;">Group by</button>
                     <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 45%;">
                         <option value="" class="select-items"></option> <!-- Empty selection -->
                         <option value="invoice_number" class="select-items" style="text-align: center;">رقم الفاتورة</option>

@@ -63,7 +63,8 @@ class DynamicPricelistInventoryReport(models.Model):
                 product_product.id, product_product.default_code, product_template.name->>'en_US' AS name
             FROM
                 product_product
-            LEFT JOIN product_template ON product_product.product_tmpl_id = product_template.id;
+            LEFT JOIN product_template ON product_product.product_tmpl_id = product_template.id
+            WHERE product_template.active = True
         '''
         prod = self._cr.execute(product_name)
         product_output = self._cr.dictfetchall()
@@ -122,17 +123,18 @@ class DynamicPricelistInventoryReport(models.Model):
         if data.get('date_from') and data.get('date_to') and data.get('report_location')!='all':
             if(data.get('report_product')!= 'all'):
                 filters = filters + """
-                WHERE product_product.id = '{0}'
+                AND product_product.id = '{0}'
                 """.format(data.get('report_product'))
+                 
             
             if(data.get('second_group')!= 'all'):
                 filters = filters + """
-                WHERE pos_category.x_studio_name_in_ar = '{0}'
+                AND pos_category.x_studio_name_in_ar = '{0}'
                 """.format(data.get('second_group'))
 
             if(data.get('main_group')!= 'all'):
                 filters = filters + """
-                WHERE parent_category.name->>'en_US' = '{0}'
+                AND parent_category.name->>'en_US' = '{0}'
                 """.format(data.get('main_group'))
 
             query = \
@@ -144,14 +146,14 @@ class DynamicPricelistInventoryReport(models.Model):
                     product_id,
                     SUM(qty_done) AS opening_stock
                 FROM
-                    stock_move_line
+                    stock_move_line 
                 WHERE
                     reference = 'Product Quantity Updated'
                     AND location_id = 14
                     AND location_dest_id = '{3}'
                     AND date <= '{0}'
                     GROUP BY
-                        product_id, date
+                        product_id,date
                     ORDER BY date DESC
                     LIMIT 1
                 ),
@@ -218,6 +220,7 @@ class DynamicPricelistInventoryReport(models.Model):
                         ON sm.location_dest_id = sl_dest.id
                     WHERE
                         date >= '{0}' AND date <= '{1}'
+
                     GROUP BY
                         product_id
                 )
@@ -230,11 +233,11 @@ class DynamicPricelistInventoryReport(models.Model):
 
                     uom_uom.name->>'en_US' AS uom_name,
                     product_template.list_price AS list_price,
-                
                     product_template.inherit_standard_price AS inherit_standard_price,
 
                     pos_category.x_studio_name_in_ar as category_name,
                     parent_category.name->>'en_US' as parent_name,
+                    
 
 
                     (
@@ -252,7 +255,7 @@ class DynamicPricelistInventoryReport(models.Model):
                         WHERE sl.id = {3}
                     ) AS operating_unit_name,
 
-
+                
                     COALESCE(opening_stock, 0) AS opening_stock,
                     COALESCE(total_in, 0) AS total_in,
                     COALESCE(total_out, 0) AS total_out,
@@ -267,7 +270,12 @@ class DynamicPricelistInventoryReport(models.Model):
                         COALESCE(total_in, 0) -
                         COALESCE(total_out, 0),
                         0
-                    ) AS current_stock
+                    ) AS current_stock,
+
+                    (COALESCE(COALESCE(opening_stock, 0) + COALESCE(total_in, 0) - COALESCE(total_out, 0),0) * COALESCE(product_template.list_price, 0)) AS current_sales_stock,
+                    (COALESCE(COALESCE(opening_stock, 0) + COALESCE(total_in, 0) - COALESCE(total_out, 0),0) * COALESCE(product_template.inherit_standard_price, 0)) AS current_cost_stock
+
+
                 FROM
                     product_product
                 LEFT JOIN product_template ON product_product.product_tmpl_id = product_template.id
@@ -280,18 +288,17 @@ class DynamicPricelistInventoryReport(models.Model):
                 LEFT JOIN TotalIn ON product_product.id = TotalIn.product_id
                 LEFT JOIN TotalOut ON product_product.id = TotalOut.product_id
                 LEFT JOIN UsageSummary ON product_product.id = UsageSummary.product_id
+                WHERE product_template.active = True
                 {2};
-
-
-
                 '''.format(date_from,date_to,filters,report_location)
 
         if(query != ""):
-            # print(query)
-            self._cr.execute(query)
-            report_by_order = self._cr.dictfetchall()
-            report_sub_lines.append(report_by_order)
-        
+            try:
+                self._cr.execute(query)
+                report_by_order = self._cr.dictfetchall()
+                report_sub_lines.append(report_by_order)
+            except Exception as e:
+                print("Error executing query:", str(e))
         return report_sub_lines
 
 
@@ -322,10 +329,7 @@ class DynamicPricelistInventoryReport(models.Model):
 
 
 
-
-
 class AddCostField(models.Model):
-    _inherit='product.template'
+    _inherit= 'product.template'
 
-
-    inherit_standard_price=fields.Float(related="product_variant_id.standard_price",string="Inherit Standard Price",store=True)
+    inherit_standard_price = fields.Float(related='product_variant_id.standard_price' ,string='standard price', store=True)
