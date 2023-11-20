@@ -3,7 +3,6 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
-from odoo.exceptions import ValidationError
 import io
 import json
 try:
@@ -136,10 +135,7 @@ class DynamicPurchaseReport(models.Model):
                 filters = filters + """
                 WHERE parent_category.name->>'en_US' = '{0}'
                 """.format(data.get('main_group'))
-            
-            def check_date_to(self):
-                if date_to and date_to >= "20-10-2023":
-                    raise ValidationError("You should enter a date after 21-10-2023")
+       
             query = \
                 '''
                 SELECT 

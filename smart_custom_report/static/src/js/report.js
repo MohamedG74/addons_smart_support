@@ -480,15 +480,21 @@ odoo.define('smart_custom_report.purchase_report', function(require) {
          var filter_data_selected = {};
          if (this.$el.find('.datetimepicker-input[name="date_from"]').val()) {
             filter_data_selected.date_from = moment(this.$el.find('.datetimepicker-input[name="date_from"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
-         }
-         if (this.$el.find('.datetimepicker-input[name="date_to"]').val()) {
+        }
+    
+        if (this.$el.find('.datetimepicker-input[name="date_to"]').val()) {
             var selectedDateTo = moment(this.$el.find('.datetimepicker-input[name="date_to"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
+            if (filter_data_selected.date_from && moment(selectedDateTo).isBefore(filter_data_selected.date_from)) {
+                alert("تاريخ البداية خطأ (يجب ان يكون قبل 20-10-2023)");
+                return;
+            }
             if (moment(selectedDateTo).isAfter("2023-10-20")) {
-               alert("You should enter a date on or before 20-10-2023");
-               return;
+                alert("تاريخ الانتهاء خطأ (يجب ان يكون قبل 20-10-2023)");
+                return;
             }
             filter_data_selected.date_to = selectedDateTo;
         }
+    
         //  if ($(".report_type").length) {
         //     console.log()
         //     var report_res = document.getElementById("report_res")

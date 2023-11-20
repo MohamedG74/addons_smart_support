@@ -37,7 +37,7 @@
                         data-target-input="nearest">
                         <input type="text" name="date_from"
                                 class="form-control datetimepicker-input"
-                                data-target="#date_from"
+                                data-target="#date_from" value="21-10-2023"
                                 t-att-name="prefix"/>
                         <div class="input-group-append"
                             data-target="#date_from"

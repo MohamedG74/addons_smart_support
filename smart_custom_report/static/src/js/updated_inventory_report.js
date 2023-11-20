@@ -484,11 +484,27 @@ odoo.define('smart_custom_report.updated_inventory_report', function(require) {
          self.initial_render = false;
          var filter_data_selected = {};
          if (this.$el.find('.datetimepicker-input[name="date_from"]').val()) {
-            filter_data_selected.date_from = moment(this.$el.find('.datetimepicker-input[name="date_from"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
-         }
-         if (this.$el.find('.datetimepicker-input[name="date_to"]').val()) {
-            filter_data_selected.date_to = moment(this.$el.find('.datetimepicker-input[name="date_to"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
-         }
+            var selectedDateFrom = moment(this.$el.find('.datetimepicker-input[name="date_from"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
+            if (moment(selectedDateFrom).isBefore("2023-10-21")) {
+                alert("تاريخ البداية خطأ (يجب ادخال تاريخ بعد 21-10-2023)");
+                return;
+            }
+            filter_data_selected.date_from = selectedDateFrom;
+        }
+    
+        // Check if date_to is selected
+        if (this.$el.find('.datetimepicker-input[name="date_to"]').val()) {
+            var selectedDateTo = moment(this.$el.find('.datetimepicker-input[name="date_to"]').val(), "DD-MM-YYYY").locale('en').format('YYYY-MM-DD');
+            
+            // Check if date_to is before date_from
+            if (filter_data_selected.date_from && moment(selectedDateTo).isBefore(filter_data_selected.date_from)) {
+                alert("تاريخ الانتهاء خطأ");
+                return;
+            }
+    
+            filter_data_selected.date_to = selectedDateTo;
+        }
+    
         //  if ($(".report_type").length) {
         //     console.log()
         //     var report_res = document.getElementById("report_res")
