@@ -1,0 +1,347 @@
+<templates>
+   <t t-name="BondDetails">
+       <div class="">
+           <div>
+               <center>
+                <h1 style="margin: 20px;">تقرير تفاصيل السندات</h1>
+               </center>
+           </div>
+           <div>
+               <div class="filter_view_pr"/>
+           </div>
+           <div>
+               <div class="table_view_pr" style="width: 95%; margin: auto;"/>
+           </div>
+       </div>
+   </t>
+   <t t-name="BondDetailsFilterView">
+       <script src="/smart_custom_report/static/src/js/jquery.table2excel.js"></script>
+       <script src="/smart_custom_report/static/src/js/tabulator.js"></script>
+
+
+       <div class="print-btns">
+           <div class="sub_container_left"
+                style="width: 285px; margin-left: 36px;">
+               <div class="report_print">
+                   <button type="button" class="btn btn-danger" id="xlsx">
+                       EXPORT (XLSX)
+                   </button>
+               </div>
+          
+            </div>
+
+           <div class="sub_container_right">
+               <div class="form-group">
+                    <label class="" for="date_from">تاريخ البداية :</label>
+                    <div class="input-group date" id="date_from"
+                        data-target-input="nearest">
+                        <input type="text" name="date_from"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_from"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_from"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">   
+                    <label class="" for="date_to">تاريخ الانتهاء :</label>
+                    <div class="input-group date" id="date_to"
+                        data-target-input="nearest">
+                        <input type="text" name="date_to"
+                                class="form-control datetimepicker-input"
+                                data-target="#date_to"
+                                t-att-name="prefix"/>
+                        <div class="input-group-append"
+                            data-target="#date_to"
+                            data-toggle="datetimepicker" style="pointer-events: none;">
+                            <span class="input-group-text">
+                                <span class="fa fa-calendar" role="img"
+                                        aria-label="Calendar"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="" for="report_product">المنتج:</label>
+                    <select id="selectionproduct" class="input-group report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                            <div role="separator" class="dropdown-divider"/>
+                            <option value="all">All</option>
+                    </select>
+                </div>
+
+               <!-- <div class="search-Result-Selection">
+                   <div class="dropdown">
+                       <a class="btn btn-secondary dropdown-togglereport-type"
+                          href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                           <span class="fa fa-book"/>
+                           <span class="low_case dropdown-toggle">Product :</span>
+                       </a>
+                       <select id="selectionproduct" class="dropdown-menu report_product"
+                               aria-labelledby="dropdownMenuLink"
+                               name="product[]">
+                           <div role="separator" class="dropdown-divider"/>
+                           <option value="report_by_order" selected="">Report
+                               By
+                               Order
+                           </option>
+                           <option value="report_by_order_detail">Report By
+                               Order
+                               Detail
+                           </option>
+                           <option value="report_by_product">Report By
+                               Product
+                           </option>
+                       </select>
+                       <span id="report_res_product"/>
+                   </div>
+               </div> -->
+
+               <div class="form-group">
+                    <label class="" for="second_group">المجموعة الفرعية :</label>
+                    <select id="selection_second_group" class="input-group second_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="second_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="" for="main_group">المجموعة الرئيسية :</label>
+                    <select id="selection_main_group" class="input-group main_group"
+                               aria-labelledby="dropdownMenuLink"
+                               name="main_group[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+
+
+                <div class="sub_container_right"
+                    style="width: 220px; margin-left: 28px;">
+                    <div id="totalRowCount"></div>
+                </div>
+
+
+                <div class="search-Result-Selection" style="width:85px; display:none;">
+                    <label for="invoice_number">page number :</label>
+                   <input type="text" class="form-control pgnum" style="width:50px; !important"
+                    placeholder="" value="0"
+                    />
+               </div>
+
+                <div class="search-Result-Selection">
+                    <label class="" for="limited">عدد الصفوف في الصفحة</label>
+                   <input type="text" class="form-control limited" 
+                    placeholder="For Export Data" 
+                    data-target="#limited" value="25"
+                    t-att-name="limited"/>
+               </div>
+            
+
+                <div class="form-group">
+                    <label class="" for="exports_from">صادر من :</label>
+                    <select id="selection_exports_from" class="input-group exports_from"
+                               aria-labelledby="dropdownMenuLink"
+                               name="exports_from[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="" for="imports_to">وارد الي :</label>
+                    <select id="selection_imports_to" class="input-group imports_to"
+                               aria-labelledby="dropdownMenuLink"
+                               name="imports_to[]">
+                        <div role="separator" class="dropdown-divider"/>
+                        <option value="all">الكل</option>
+                    </select>
+                </div>
+                
+
+                <div class="form-group">
+                    <label class="" for="bond_type">نوع السند :</label>
+                    <select id="selection_bond_type" class="input-group bond_type"
+                               aria-labelledby="dropdownMenuLink"
+                               name="bond_type[]">
+                            <div role="separator" class="dropdown-divider"/>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="" for="bond_type_sales">نوع سند المبيعات :</label>
+                    <select id="selection_bond_type_sales" class="input-group bond_type_sales"
+                               aria-labelledby="dropdownMenuLink"
+                               name="bond_type_sales[]">
+                            <div role="separator" class="dropdown-divider"/>
+                                <option value="all">الكل
+                                </option>
+                                <option value="outgoing">مبيعات
+                                </option>
+                                <option value="incoming">مرتجعات 
+                                </option>
+                       </select>
+                </div>
+
+                <div class="search-Result-Selection">
+                    <label class="" for="bond_number">رقم السند :</label>
+                   <input type="text" class="form-control bond_number" 
+                    placeholder="رقم السند" 
+                    data-target="#bond_number" 
+                    t-att-name="bond_number"/>
+               </div>
+
+
+               <div class="apply_filter">
+                   <button type="button" id="apply_filter"
+                           class="btn btn-primary">
+                       Apply
+                   </button>
+               </div>
+
+               <div class="button-container" style="direction: ltr; text-align: center;width:300px;">
+                    <!-- Include Tabulator CSS -->        
+                    <button id="groupButton" class="btn btn-primary" style="display: inline; position: relative; width: 30%; height: -webkit-fill-available; margin-top: -85px;">Group by</button>
+                    <select id="groupFields" multiple="multiple" style="display: inline; position: relative; width: 56%;">
+                        <option value="" class="select-items"></option> <!-- Empty selection -->
+                        <option value="pick_name" class="select-items" style="text-align: center;">رقم السند</option>
+                        <option value="picking_type_name" class="select-items" style="text-align: center;">نوع السند</option>
+                        <option value="date" class="select-items" style="text-align: center;">تاريخ السند</option>
+                        <option value="warehouse_id_name" class="select-items" style="text-align: center;">صادر من</option>
+                        <option value="warehouse_dest_id_name" class="select-items" style="text-align: center;">وارد الي</option>
+                        <option value="pos_category_parent_name" class="select-items" style="text-align: center;">المجموعة الرئيسية</option>
+                        <option value="pos_category_name" class="select-items" style="text-align: center;">المجموعة الفرعية</option>
+                        <option value="file_name" class="select-items" style="text-align: center;">اسم الصنف</option>
+                    </select>
+                </div>
+
+           </div>
+       </div>
+   </t>
+   <t t-name="BondDetailsOrderTable">
+       <div>
+           <div class="table_main_view">
+               <table cellspacing="0" width="100%" id="table2excel" class="paginated table table-hover" style="direction: rtl">
+                   <thead>
+                       <tr class="table_pr_head">
+                           <th>رقم السند</th>
+                           
+                           <th>نوع السند</th>
+                           <th> نوع سند المبيعات </th>
+                           <th>المرجع</th>
+                           <th class="mon_fld">تاريخ السند</th>
+                           <th class="mon_fld">صادر من</th>
+                           <th class="mon_fld">وارد الي</th>
+                           <th class="mon_fld">المجموعة الرئيسية</th>
+                           <th class="mon_fld">المجموعة الفرعية</th>
+                           <th class="mon_fld">كود الصنف</th>
+                           <th class="mon_fld">اسم الصنف</th>
+                           <th class="mon_fld">الوحدة</th>
+                           <th class="mon_fld">الكمية</th>
+
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <t t-foreach="report_lines"
+                          t-as="dynamic_item_balance">
+                           <tr style="border: 1.5px solid black;"
+                               class="pr-line"
+                               t-att-data-account-id="dynamic_item_balance['id']"
+                               t-attf-data-target=".a{{dynamic_item_balance['id']}}">
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['pick_name']"/>
+                                    <!-- </span> -->
+                               </td>
+                              
+                               <td>
+                                <span t-if="dynamic_item_balance['picking_type_name']">
+                                    <t t-esc="dynamic_item_balance['picking_type_name']"/>
+                                </span>
+
+                               </td>
+                                <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['code']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['origin']"/>
+                                    <!-- </span> -->
+                               </td>
+                               <td>
+                                   <!-- <span> -->
+                                        <t t-esc="dynamic_item_balance['date']"/>
+                                    <!-- </span> -->
+                               </td>
+
+
+                               
+                               <td style="text-align:center;">
+                                    <span t-if="dynamic_item_balance['warehouse_id_name']">
+                                            <t t-esc="dynamic_item_balance['warehouse_id_name']"/>
+                                    </span>
+
+                                    <span t-else="dynamic_item_balance['location_id_name']">
+                                       <t t-esc="dynamic_item_balance['location_id_name']"/>
+                                   </span>
+                               </td>
+
+                               <td style="text-align:center;">
+                                   <span t-if="dynamic_item_balance['warehouse_dest_id_name']">
+                                       <t t-esc="dynamic_item_balance['warehouse_dest_id_name']"/>
+                                   </span>
+                                   <span t-else="dynamic_item_balance['location_dest_id_name']">
+                                       <t t-esc="dynamic_item_balance['location_dest_id_name']"/>
+                                   </span>
+                               </td>
+
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                      <t t-esc="dynamic_item_balance['pos_category_parent_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                      <t t-esc="dynamic_item_balance['pos_category_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['product_code']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['file_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['product_uom_name']"/>
+                                   <!-- </span> -->
+                               </td>
+                               <td style="text-align:center;">
+                                   <!-- <span> -->
+                                       <t t-esc="dynamic_item_balance['qty_done']"/>
+                                   <!-- </span> -->
+                               </td>
+                           </tr>
+                       </t>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </t>
+</templates>
