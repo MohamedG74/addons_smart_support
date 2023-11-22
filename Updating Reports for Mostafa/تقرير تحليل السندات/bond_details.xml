@@ -176,22 +176,11 @@
                                aria-labelledby="dropdownMenuLink"
                                name="bond_type[]">
                             <div role="separator" class="dropdown-divider"/>
+                            <option value="مرتجعات المشتريات">مرتجعات المشتريات</option>
+                            <option value="مرتجعات نقطة البيع">مرتجعات نقطة البيع</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="" for="bond_type_sales">نوع سند المبيعات :</label>
-                    <select id="selection_bond_type_sales" class="input-group bond_type_sales"
-                               aria-labelledby="dropdownMenuLink"
-                               name="bond_type_sales[]">
-                            <div role="separator" class="dropdown-divider"/>
-                                <option value="all">الكل
-                                </option>
-                                <option value="outgoing">مبيعات
-                                </option>
-                                <option value="incoming">مرتجعات 
-                                </option>
-                       </select>
-                </div>
+               
 
                 <div class="search-Result-Selection">
                     <label class="" for="bond_number">رقم السند :</label>
@@ -235,9 +224,7 @@
                    <thead>
                        <tr class="table_pr_head">
                            <th>رقم السند</th>
-                           
                            <th>نوع السند</th>
-                           <th> نوع سند المبيعات </th>
                            <th>المرجع</th>
                            <th class="mon_fld">تاريخ السند</th>
                            <th class="mon_fld">صادر من</th>
@@ -270,11 +257,7 @@
                                 </span>
 
                                </td>
-                                <td>
-                                   <!-- <span> -->
-                                        <t t-esc="dynamic_item_balance['code']"/>
-                                    <!-- </span> -->
-                               </td>
+                         
                                <td>
                                    <!-- <span> -->
                                         <t t-esc="dynamic_item_balance['origin']"/>

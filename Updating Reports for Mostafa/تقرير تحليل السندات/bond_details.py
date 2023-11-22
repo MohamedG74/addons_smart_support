@@ -26,10 +26,8 @@ class DynamicBondDetails(models.Model):
     exports_from=fields.Char(string='Exports from')
     imports_to=fields.Char(string='Imports To')
     bond_type=fields.Char(string='Bond Type')
-    bond_type_sales=fields.Selection([('all','all'),('incoming','incoming'),
-                                    ('outgoing','outgoing'),],string='Bond Sales')
-    
-
+    bond_s_type=fields.Selection([('all','all'),('مرتجعات المشتريات','مرتجعات المشتريات'),
+                                    ('مرتجعات نقطة البيع','مرتجعات نقطة البيع'),],string='Bond Sales')
     counting=fields.Char(string='counting')
     limited=fields.Integer(string='Limited')
 
@@ -80,13 +78,12 @@ class DynamicBondDetails(models.Model):
             data.update({'bond_type': report_values.bond_type})
         else:
             data.update({'bond_type': "all"})
-        
-        if report_values.bond_type_sales:
-            data.update({'bond_type_sales': report_values.bond_type_sales})   
-        else:     
-            data.update({'bond_type_sales': "all"})   
 
-        
+        if report_values.bond_s_type:
+            data.update({'bond_s_type': report_values.bond_s_type})
+        else:
+            data.update({'bond_s_type': "all"})
+ 
 
         if report_values.counting:
             data.update({'counting': report_values.counting})
@@ -192,9 +189,12 @@ class DynamicBondDetails(models.Model):
 
         counting = 0
         limited = 25
+        bond_s_type=""
 
         if(data.get('counting')):
             counting = data.get('counting')
+        if(data.get('bond_s_type')):
+            bond_s_type = data.get('bond_s_type')
         
         if(data.get('limited')):
             limited = data.get('limited')
@@ -217,26 +217,21 @@ class DynamicBondDetails(models.Model):
                     stock_picking.origin,
                     stock_picking.picking_type_id,
                     stock_picking_type.name->>'ar_001' AS picking_type_name,
-                    stock_picking_type.code,
+
                     pos_cat1.x_studio_name_in_ar AS pos_category_name,
                     pos_cat2.name->>'en_US' AS pos_category_parent_name,
-                       CASE 
-						WHEN loc1.id = 4 AND loc2.id <> 4   THEN 'مرتجعات'
-						ELSE 'مبيعات'
-					END AS code,
-
-                    
+                    CASE 
+                        WHEN loc1.id = 4 AND loc2.id <> 4 THEN 'مرتجعات المشتريات'
+                        WHEN loc1.id = 5 AND loc2.id <> 5 THEN 'مرتجعات نقطة البيع'
+                        ELSE stock_picking_type.name->>'ar_001'
+                    END AS picking_type_name,
+ 
                     CASE 
 						WHEN loc1.id = 14 THEN 'جرد'
 						ELSE wh1.name 
 					END AS warehouse_id_name,
                     
-                    CASE 
-						WHEN  stock_picking_type. = 14 THEN 'جرد'
-						ELSE wh1.name 
-					END AS warehouse_id_name,
                     
-                   
                     CASE 
 						WHEN loc2.id = 14 THEN 'عجز المخزون'
 						ELSE wh2.name 
@@ -255,6 +250,9 @@ class DynamicBondDetails(models.Model):
                     JOIN stock_move_line ON stock_move.id = stock_move_line.move_id 
                     WHERE stock_move.picking_id IS NOT NULL
                         AND stock_move.date BETWEEN '{0}' AND '{1}'
+                    
+
+   
                 ) AS subq
                 JOIN stock_picking ON subq.picking_id = stock_picking.id
                 JOIN stock_location AS loc1 ON subq.location_id = loc1.id
@@ -268,6 +266,7 @@ class DynamicBondDetails(models.Model):
                 LEFT JOIN stock_warehouse AS wh1 ON loc1.warehouse_id = wh1.id
                 LEFT JOIN stock_warehouse AS wh2 ON loc2.warehouse_id = wh2.id
                 WHERE subq.product_id = {2}
+
                 LIMIT {3} OFFSET {4};
                 '''.format(date_from,date_to,report_product,limited,counting)
 
@@ -301,8 +300,8 @@ class DynamicBondDetails(models.Model):
                 LEFT JOIN pos_category AS pos_cat2 ON pos_cat1.parent_id = pos_cat2.id
                 LEFT JOIN stock_warehouse AS wh1 ON loc1.warehouse_id = wh1.id
                 LEFT JOIN stock_warehouse AS wh2 ON loc2.warehouse_id = wh2.id
-            ;
-            '''.format(date_from,date_to)
+                {2};
+            '''.format(date_from,date_to,filters)
             self._cr.execute(querycount)
             report_number_pages = self._cr.dictfetchall()[0]
             report_sub_lines.append(report_number_pages)   
@@ -338,23 +337,26 @@ class DynamicBondDetails(models.Model):
             
             if(data.get('bond_type')):
                 if(data.get('bond_type')!= 'all'):
-                    filters = filters + """
-                    AND stock_picking_type.name->>'ar_001' = '{0}'
-                    """.format(data.get('bond_type'))
-            if(data.get('bond_type_sales')):
-                if(data.get('bond_type_sales') == "all"):
-                    filters = filters + """
-                    AND stock_picking_type.code IN ('incoming', 'outgoing')
-                    """               
-                else:
-                    filters = filters + """
-                    AND stock_picking_type.code = '{0}'
-                    """.format(data.get('bond_type_sales'))
-            else:
-                filters = filters + """
-                AND stock_picking_type.code IN ('incoming', 'outgoing')
-                """               
+                    if data.get('bond_type') == 'مرتجعات المشتريات':
+                        filters = filters + " AND loc1.id = 4 "
+                    elif data.get('bond_type') == 'مرتجعات نقطة البيع':
+                        filters = filters + " AND loc1.id = 5 "
+                    else:
+                        filters = filters + """
+                        AND stock_picking_type.name->>'ar_001' = '{0}'
+                        """.format(data.get('bond_type'))
 
+            
+
+           
+            # if(data.get('bond_s_type')):
+            #     if(data.get('bond_s_type')!= 'all'):
+            #         filters = filters + """
+            #         AND loc1.id = 4
+            #         """.format(data.get('bond_s_type'))
+                
+           
+            
             trimmed_filters = filters.lstrip()
 
             if trimmed_filters.startswith("AND"):
@@ -376,7 +378,7 @@ class DynamicBondDetails(models.Model):
                     stock_picking.origin,
                     stock_picking.picking_type_id,
                     stock_picking_type.name->>'ar_001' AS picking_type_name,
-                    stock_picking_type.code,
+                    
                     pos_cat1.x_studio_name_in_ar AS pos_category_name,
                     pos_cat2.name->>'en_US' AS pos_category_parent_name,
                     CASE 
@@ -384,11 +386,14 @@ class DynamicBondDetails(models.Model):
 						ELSE wh1.name 
 					END AS warehouse_id_name,
 
+                    
                     CASE 
-						WHEN loc1.id = 4 AND loc2.id <> 4   THEN 'مرتجعات'
-						ELSE 'مبيعات'
-					END AS code,
-
+                        WHEN loc1.id = 4 AND loc2.id <> 4 THEN 'مرتجعات المشتريات'
+                        WHEN loc1.id = 5 AND loc2.id <> 5 THEN 'مرتجعات نقطة البيع'
+                        ELSE stock_picking_type.name->>'ar_001'
+                    END AS picking_type_name,
+ 
+                  
                     CASE 
 						WHEN loc2.id = 14 THEN 'عجز المخزون'
 						ELSE wh2.name 
@@ -407,6 +412,9 @@ class DynamicBondDetails(models.Model):
                     JOIN stock_move_line ON stock_move.id = stock_move_line.move_id 
                     WHERE stock_move.picking_id IS NOT NULL
                         AND stock_move.date BETWEEN '{0}' AND '{1}'
+                
+                       
+                       
                 ) AS subq
                 JOIN stock_picking ON subq.picking_id = stock_picking.id
                 JOIN stock_location AS loc1 ON subq.location_id = loc1.id
@@ -429,6 +437,7 @@ class DynamicBondDetails(models.Model):
                 (
                     SELECT stock_move.name AS file_name,
                         stock_move.picking_id,
+                       
                         stock_move.reference,
                         stock_move_line.product_id,
                         stock_move_line.product_uom_id,
@@ -452,8 +461,8 @@ class DynamicBondDetails(models.Model):
                 LEFT JOIN pos_category AS pos_cat2 ON pos_cat1.parent_id = pos_cat2.id
                 LEFT JOIN stock_warehouse AS wh1 ON loc1.warehouse_id = wh1.id
                 LEFT JOIN stock_warehouse AS wh2 ON loc2.warehouse_id = wh2.id
-            ;
-            '''.format(date_from,date_to)
+                {2};
+            '''.format(date_from,date_to,filters)
             self._cr.execute(querycount)
             report_number_pages = self._cr.dictfetchall()[0]
             report_sub_lines.append(report_number_pages)   
@@ -494,3 +503,8 @@ class DynamicBondDetails(models.Model):
         #     report_res = self._get_report_sub_lines(data, date_from, date_to)
         
         # return {'doc_ids': self.ids, 'docs': docs, 'PURCHASE': report_res}
+
+
+
+
+    

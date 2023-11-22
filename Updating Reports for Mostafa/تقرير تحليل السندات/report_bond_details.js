@@ -130,6 +130,8 @@ odoo.define('smart_custom_report.bond_details', function(require) {
               $('.bond_type').select2('destroy'); 
               var elms = "";
               elms = elms + "<option value='all'>الكل</option>"; 
+              elms = elms + "<option value='مرتجعات المشتريات'>مرتجعات المشتريات</option>"; 
+              elms = elms + "<option value='مرتجعات نقطة البيع'>مرتجعات نقطة البيع</option>"; 
               datas['bond'].forEach(item => {
                  if(item.nameara){
                     elms = elms + "<option value='"+item.nameara+"'>"+item.nameara+"</option>";            
@@ -142,10 +144,7 @@ odoo.define('smart_custom_report.bond_details', function(require) {
               });
             }
            
-            $('.bond_type_sales').select2('destroy'); 
-            $('.bond_type_sales').select2({
-              placeholder: ' code...',
-           });
+          
            //  $('.bond_type').select2('destroy'); 
            //  $('.bond_type').select2({
            //    placeholder: ' Bond Type...',
@@ -441,7 +440,7 @@ odoo.define('smart_custom_report.bond_details', function(require) {
               movableRows: true,
                 columns: [
                     { title: "رقم السند", field: "pick_name", widthGrow:1 },
-                    { title: "نوع الفاتورة", field: "bond_type_sales", widthGrow:1 },
+                    { title: "نوع سند المبيعات", field: "bond_sales_type", widthGrow:1 },
 
                     { title: "نوع السند", field: "picking_type_name", widthGrow:1 },
                     { title: "تاريخ السند", field: "date", widthGrow:1 },
@@ -561,15 +560,7 @@ odoo.define('smart_custom_report.bond_details', function(require) {
         }else{
            filter_data_selected.bond_number = "all";
         }
-        if ($(".bond_type_sales").length) {
-         // var report_res = document.getElementById("report_res_bond_type_sales");
-         filter_data_selected.bond_type_sales = $(".bond_type_sales option:selected").val();
-         // report_res.value =  $(".bond_type_sales option:selected").val();
-         // report_res.innerHTML =  $(".bond_type_sales option:selected").text();
-         // if ($(".bond_type_sales option:selected").val() == "") {
-         //    report_res.innerHTML = "None";
-         // }
-      }
+        
 
         if ($(".limited").val().length > 0) {
            var report_res = $(".limited").val();
