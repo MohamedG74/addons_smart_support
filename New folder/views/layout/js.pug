@@ -1,0 +1,42 @@
+script(type='text/javascript', src='/adminlte/plugins/jquery/jquery.min.js')
+script(type='text/javascript', src='/adminlte/plugins/jquery-ui/jquery-ui.min.js')
+script.
+	$.widget.bridge('uibutton', $.ui.button)
+script(type='text/javascript', src='/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')
+script(type='text/javascript', src='/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')
+script(type='text/javascript', src='/adminlte/dist/js/adminlte.min.js')
+
+script.
+		//- Set menu items as active, checking if href value exists in the url
+		var curURL = window.location.pathname;
+		$('.main-sidebar .nav-link').each(function(){
+			if (curURL.indexOf($(this).attr('href')) >= 0){
+				$(this).addClass('active');
+
+				//- Check if its inside in a dropdown and open it
+				if ($(this).parents('.nav-treeview')){
+					$(this).parents('.nav-treeview').prev().addClass('active').parent().addClass('menu-open')
+				}
+			}
+		});
+
+		//- Modal autofocus on open
+		$('.modal').on('shown.bs.modal', function () {
+			$('.close').trigger('focus');
+		});
+
+		//- Open confirmation modal 
+		$('.js-show-confirmation-modal').on('click', function(e){
+			var form = $(this).closest('form');
+
+			e.preventDefault();
+			$('.confirmation-modal').modal();
+			$('.confirmation-modal').on('click', '.js-confirm', function(e) {
+				form.trigger('submit');
+			});	
+			
+			$('.js-cancel').on('click', function(e){
+			 e.preventDefault();
+			 $('.confirmation-modal').modal.model('hide');
+			});
+		});

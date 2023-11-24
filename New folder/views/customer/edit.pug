@@ -1,0 +1,53 @@
+extends ../layout/base 
+
+block content 
+	div.content-header
+		div.container-fluid
+			div.row.mb-2.mt-3
+				div.col-12
+					h1.m-0
+						| Edit customer
+	section.content
+		div.card
+			div.card-body
+				- if (messages.msg_error) 
+					.alert.alert-danger.alert-dismissable 
+						button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+							| ×
+						h4
+							i.icon.fa.fa-ban
+							| Alert! 
+						| !{messages.msg_error}
+				- if (messages.msg_info) 
+					.alert.alert-success.alert-dismissable 
+						button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+							| ×
+						h4
+							i.icon.fa.fa-ban
+							| Success! 
+						| !{messages.msg_info}
+				form(role='form',method='post' action='/customers/edit/' + (id==undefined) ? data.id : id)
+					div.row
+						div.col-12
+							.form-group
+								label
+									| Name
+								input(type='text',value=data.name,name='name',placeholder='Enter Name', autofocus).form-control
+							.form-group
+								label
+									| Address
+								input(type='text',value=(address == undefined) ? data.address : address,name='address',placeholder='Enter address').form-control
+							.form-group
+								label
+									| Email
+								input(type='text',value=(email == undefined) ? data.email : email,name='email',placeholder='Enter Address').form-control
+							.form-group
+								label
+									| Phone
+								input(type='text',value=(phone == undefined) ? data.phone : phone,name='phone',placeholder='Enter Phone').form-control
+						div.col-12.d-flex.justify-content-between
+							a(href='/customers').btn.btn-link
+								| Back
+							input(type="hidden",name="_method", value="PUT")
+							button.btn.btn-primary(type='submit')
+								| Save

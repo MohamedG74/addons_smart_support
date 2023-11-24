@@ -1,0 +1,87 @@
+extends ../layout/base-datatables.pug
+
+block content 
+	div.content-header
+		div.container-fluid
+			div.row.mb-2.mt-3
+				div.col-12.d-flex.justify-content-between
+					h1.m-0
+						| Users
+					a(href='users/add').btn.btn-primary
+						i.fa.fa-plus 
+						|  Add user	
+
+	section.content 
+		div.container-fluid
+			div.row
+				div.col-12
+					div.card
+						div.card-body
+							div#table_wrapper.dataTables_wrapper.dt-bootstrap4
+								div.row
+									- if(messages.msg_info)
+										div.col-12
+											.alert.alert-success.alert-dismissable
+												button.close(type='button', data-dismiss='alert', aria-hidden='true')
+													| ×
+												h4
+													i.icon.fa.fa-check
+													| Success!
+												| !{messages.msg_info}
+									- if(messages.msg_error)
+										div.col-12
+											.alert.alert-danger.alert-dismissable
+												button.close(type='button', data-dismiss='alert', aria-hidden='true')
+													| ×
+												h4
+													i.icon.fa.fa-ban
+													| Alert!
+												| !{messages.msg_error}
+
+								div.row
+										div.col-12
+											table#table.table.table-hover.dataTable.dtr-inline(role="grid")
+												thead
+													tr
+														th
+															| Id
+														th
+															| Email
+														th(width='80')
+															| Action
+												for row, index in data 
+													tr
+														td #{row.id}
+														td #{row.email}
+														td
+															div(style='display:inline-block')
+																a(href='/users/edit/' + row.id).btn.btn-sm.btn-primary
+																		i.fa.fa-edit
+															| 
+															div(style='display:inline-block')
+																form(method='post', action='/users/delete/' + row.id)
+																	input(type="hidden",name="_method", value="DELETE")
+																	button.btn.btn-sm.btn-danger.js-show-confirmation-modal(type='submit')
+																		i.fas.fa-trash-alt
+								div.row
+										div.col-12.col-md-6
+											div#table_info.dataTables_info(role="status")
+												//- Total entries and pagination text added by JS
+
+	.modal.confirmation-modal(role="dialog",tabindex="-1")
+		.modal-dialog(role="document")
+			.modal-content
+				.modal-header
+					h5.modal-title
+						| Delete user
+					button.close(type="button",data-dismiss="modal",arial-label="Close")
+						span(aria-hidden="true")
+							| &times;
+				.modal-body 
+					p 
+						| Are you sure? 
+				.modal-footer 
+					button.btn.btn-secondary.js-cancel(data-dismiss="modal")
+						| Cancel
+					button.btn.btn-danger.js-confirm
+						| Continue

@@ -1,0 +1,43 @@
+extends ../layout/base
+
+block content
+  h1= title
+
+  // Your HTML form goes here
+  form(role='form', action='/invoice_search', method='post', id='invoiceSearchForm')
+    // Form fields go here
+    .form-group
+      label(for='invoiceNumber') Invoice Number:
+      input#invoiceNumber.form-control(type='text', name='invoiceNumber', placeholder='Enter invoice number', required)
+
+    button.btn.btn-primary(type='submit', id='searchButton') Search
+
+  // Display results container
+  div#searchResults
+
+  script(src="https://code.jquery.com/jquery-3.6.4.min.js").
+  script.
+    $(document).ready(function() {
+      $('#invoiceSearchForm').submit(function(event) {
+        event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+        // Make an API request
+        $.ajax({
+          type: 'POST',
+          url: '/invoice_search',
+          success: function(data) {
+            // Display the static message in the #searchResults div
+            displayResults(data);
+          },
+          error: function(error) {
+            console.error('API request failed:', error);
+            // Handle error, show a message, etc.
+          }
+        });
+      });
+
+      function displayResults(data) {
+        // Display the results in the #searchResults div
+        $('#searchResults').html('<p>' + data + '</p>');
+      }
+    });

@@ -1,0 +1,42 @@
+extends ../layout/base 
+
+block content 
+	div.content-header
+		div.container-fluid
+			div.row.mb-2.mt-3
+				div.col-12
+					h1.m-0
+						| Add customer
+	section.content
+		div.card
+			div.card-body
+				- if (messages.msg_error) 
+					.alert.alert-danger.alert-dismissable 
+						button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+							| ×
+						h4
+							i.icon.fa.fa-ban
+							| Alert! 
+						| !{messages.msg_error}
+				form(role='form',method='post',action='/customers/add')
+					div.row
+						div.col-12
+							div.form-group
+								label
+									| Name
+								input.form-control(type='text',value='',name='name',placeholder='Enter Name', autofocus)
+							div.form-group
+								label
+									| Address
+								input.form-control.form-group(type='text',name='address',placeholder='Enter address')
+							div.form-group
+								label
+									| Email
+								input.form-control(type='text',value='',name='email',placeholder='Enter Address')
+							div.form-group
+								label
+									| Phone
+								input.form-control(type='text',name='phone',placeholder='Enter Phone')
+						div.col-12.text-right
+							button.btn.btn-primary(type='submit')
+								| Add customer
