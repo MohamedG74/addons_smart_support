@@ -1,0 +1,9 @@
+2023-09-20 15:47:15,227 10490 INFO seveneight odoo.modules.registry: At least one model cache has been invalidated, signaling through the database. 
+2023-09-20 15:47:15,230 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:15] "GET /web HTTP/1.1" 200 - 141 2.931 6.319
+2023-09-20 15:47:15,404 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:15] "GET /web/assets/21021-21a1bb5/web.assets_backend.min.css HTTP/1.1" 200 - 6 0.002 0.006
+2023-09-20 15:47:15,409 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:15] "GET /web/assets/21022-21a1bb5/web.assets_backend.min.js HTTP/1.1" 200 - 4 0.001 0.004
+2023-09-20 15:47:20,229 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:20] "GET /web/image?model=res.users&field=avatar_128&id=2 HTTP/1.1" 304 - 20 0.011 0.020
+2023-09-20 15:47:20,469 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:20] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 4 0.003 0.005
+2023-09-20 15:47:20,490 10490 INFO ? werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:20] "GET /mail/static/src/audio/ting.ogg HTTP/1.1" 206 - 0 0.000 0.002
+2023-09-20 15:47:20,512 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:20] "POST /mail/init_messaging HTTP/1.1" 200 - 48 0.030 0.028
+2023-09-20 15:47:20,702 10490 INFO seveneight werkzeug: 156.204.58.61 - - [20/Sep/2023 15:47:20] "POST /mail/load_message_failures HTTP/1.1" 200 - 12 0.008 0.011
