@@ -1,0 +1,38 @@
+extends ../layout/base 
+
+block content 
+	div.content-header
+		div.container-fluid
+			div.row.mb-2.mt-3
+				div.col-12
+					h1.m-0
+						| Add user
+	section.content
+		div.card
+			div.card-body
+				- if (messages.msg_error) 
+					.alert.alert-danger.alert-dismissable 
+						button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+							| ×
+						h4
+							i.icon.fa.fa-ban
+							| Alert! 
+						| !{messages.msg_error}
+				form(role='form',method='post',action='/users/add')
+					div.row
+						div.col-12
+							div.form-group
+								label
+									| Email
+								input.form-control(type='text',value='',name='email',placeholder='Enter Address')
+							div.form-group
+								label
+									| Password
+								input.form-control(type='password',name='password',placeholder='Enter password')
+							div.form-group
+								label
+									| Confirm password
+								input.form-control(type='password',name='confirm',placeholder='Confirm your password')
+						div.col-12.text-right
+							button.btn.btn-primary(type='submit')
+								| Add user

@@ -1,0 +1,55 @@
+doctype html
+html
+	head 
+		title
+			| Login
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback')
+		link(rel='stylesheet', href='/adminlte/plugins/fontawesome-free/css/all.min.css')
+		link(rel='stylesheet', href='/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')
+		link(rel='stylesheet', href='/adminlte/dist/css/adminlte.min.css')
+	body.hold-transition.login-page
+		.login-box 
+			.card.card-outline.card-primary
+				.card-header.text-center
+					a(href="/")
+						h1 
+							| AdminLTE
+				.card-body
+					- if (messages.msg_error) 
+						.alert.alert-danger.alert-dismissable 
+							button.close(type='button', data-dismiss='alert', aria-hidden='true') 
+								| ×
+							h4
+								i.icon.fa.fa-ban
+								| Alert! 
+							| !{messages.msg_error}
+					p 
+						| Log in to start your session 
+					form(action="/login/",method="post")
+						.input-group.mb-3
+							input.form-control(type="text",placeholder="Email",name="txtEmail")
+							.input-group-append
+								.input-group-text
+									span.fas.fa-envelope
+						.input-group.mb-3
+							input.form-control(type="password",placeholder="Password",name="txtPassword")
+							.input-group-append
+								.input-group-text
+									span.fas.fa-lock
+						.row 
+							.col-8 
+								.icheck-primary
+									input#remember(type="checkbox")
+									label(for="remember")
+										| Remember me 
+							.col-4
+								button.btn.btn-primary.btn-block(type="submit")
+									| Sign in
+					p.mb-1
+						a(href="/forgot-password")
+							| I forgot my password 
+					p.mb-0 
+						a(href="/register")
+							| Register
+
+	include ../layout/js.pug
