@@ -1,0 +1,38 @@
+  <record model="res.groups" id="group_pricelist_manager">
+            <field name="name">Pricelist Inventory Report</field>
+            <field name="category_id" ref="base.module_category_inventory_inventory"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_updated_pricelist_report_action"
+            name="تحليل المخزون المسعر"
+            parent="stock.menu_warehouse_report" 
+            action="updated_pricelist_report_action" 
+            groups="group_pricelist_manager" 
+            sequence="4"/>
+
+        <record id="pricelist_report_action" model="ir.actions.client">
+            <field name="name">Updated Pricelist Inventory Report</field>
+            <field name="tag">pl_u_r</field>
+        </record>
+
+        <record model="res.groups" id="group_updated_pricelist_manager">
+            <field name="name">Updated Pricelist Inventory Report</field>
+            <field name="category_id" ref="base.module_category_inventory_inventory"/>
+            <field name="comment">Allows access to the Custom Sales Order Report</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        <menuitem id="menu_pricelist_report_action"
+            name="تحليل المخزون المسعر المحدث" 
+            parent="stock.menu_warehouse_report" 
+            action="pricelist_report_action" 
+            groups="group_updated_pricelist_manager" 
+            sequence="4"/>
+
+
+
+
+security:
+
+
+access_dynamic_pricelist_updated_report,dynamic.pricelist.updated.report,model_dynamic_pricelist_updated_report,smart_custom_report.group_updated_pricelist_manager,1,1,1,0
